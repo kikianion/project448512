@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MitraVerMaster extends MY_Controller {
+class MitraVerMaster extends CI_Controller {
 
 	public function __construct()
 	{
@@ -13,7 +13,7 @@ class MitraVerMaster extends MY_Controller {
 
 	public function index()
 	{
-		$this->load->view('mitra/mitravermaster');
+		$this->load->view('operator/oprmaster');
 	}
 
 }

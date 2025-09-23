@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class OprInputData extends MY_Controller {
+class OprInputData extends CI_Controller {
 
 	public function __construct()
 	{

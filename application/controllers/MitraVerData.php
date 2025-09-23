@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MitraVerData extends MY_Controller {
+class MitraVerData extends CI_Controller {
 
 	public function __construct()
 	{
@@ -14,10 +14,19 @@ class MitraVerData extends MY_Controller {
 	public function index()
 	{
 		// $this->load->view('admin/oprmaster');
-		$this->load->view('mitra/mitraverdata');
+		$this->load->view('operator/oprmaster');
 		// return $this->users();
 	}
 
+	public function users()
+	{
+		$data['title'] = 'Master Operator';
+		$data['user'] = $this->session->userdata();
+		// Assuming operator users are those with role = 'operator' in table `user`
+		$this->db->where('role', 'operator');
+		$data['users'] = $this->db->get('user')->result();
+		$this->load->view('operator/master', $data);
+	}
 }
 
 

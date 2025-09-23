@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AdmData extends MY_Controller {
+class AdmData extends CI_Controller {
 
     public function __construct()
     {
