@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AdmData extends CI_Controller {
+class AdmData extends MY_Controller {
 
     public function __construct()
     {
@@ -25,7 +25,7 @@ class AdmData extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('admin/admdata_dashboard');
+        $this->load->view('administrator/admdata');
         // redirect('admdata/dashboard');
     }
 

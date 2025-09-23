@@ -78,7 +78,10 @@ $route['oprmaster/users/create'] = 'oprmaster/create_user';
 $route['oprmaster/users/edit/(:num)'] = 'oprmaster/edit_user/$1';
 $route['oprmaster/users/delete/(:num)'] = 'oprmaster/delete_user/$1';
 
-$route['oprinputdata'] = 'oprMaster';
+$route['oprinputdata'] = 'oprInputData';
+
+$route['mitravermaster'] = 'mitraVerMaster';
+$route['mitraverdata'] = 'mitraVerData';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

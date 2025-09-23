@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AdmSistem extends CI_Controller {
+class AdmSistem extends MY_Controller {
 
     public function __construct()
     {
@@ -10,6 +10,7 @@ class AdmSistem extends CI_Controller {
         $this->load->helper('url');
         $this->load->model('User_model');
         $this->load->model('Admin_model');
+    $this->load->model('Visi_model');
         
         // Check if user is logged in and has admin privileges
         if (!$this->session->userdata('logged_in')) {
@@ -25,6 +26,8 @@ class AdmSistem extends CI_Controller {
     public function index()
     {
         $data['title'] = 'Administrasi Sistem';
+        // load visi list for the view
+        $data['visi_list'] = $this->Visi_model->get_all();
         // $data['user'] = $this->session->userdata();
         
         // Get system statistics
@@ -33,7 +36,38 @@ class AdmSistem extends CI_Controller {
         // $data['system_logs'] = $this->Admin_model->get_recent_logs(10);
         
         // $this->load->view('admin/dashboard', $data);
-        $this->load->view('admin/dashboard', $data);
+        $this->load->view('administrator/admsistem', $data);
+    }
+
+    /**
+     * Handle POST to save visi
+     */
+    public function save_visi()
+    {
+        if ($this->input->method() !== 'post') {
+            show_error('Method not allowed', 405);
+            return;
+        }
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('visi', 'Visi', 'required|max_length[500]');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->session->set_flashdata('error', validation_errors());
+            redirect('admsistem');
+            return;
+        }
+
+        $visi_text = $this->input->post('visi');
+        $inserted = $this->Visi_model->insert($visi_text);
+
+        if ($inserted) {
+            $this->session->set_flashdata('success', 'Visi berhasil disimpan.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menyimpan visi.');
+        }
+
+        redirect('admsistem');
     }
 
     public function users()

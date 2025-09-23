@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class OprMaster extends CI_Controller {
+class OprMaster extends MY_Controller {
 
 	public function __construct()
 	{
@@ -13,7 +13,8 @@ class OprMaster extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/oprmaster');
+		// $this->load->view('admin/oprmaster');
+		$this->load->view('operator/oprmaster');
 		// return $this->users();
 	}
 
@@ -24,7 +25,7 @@ class OprMaster extends CI_Controller {
 		// Assuming operator users are those with role = 'operator' in table `user`
 		$this->db->where('role', 'operator');
 		$data['users'] = $this->db->get('user')->result();
-		$this->load->view('operator/master_users', $data);
+		$this->load->view('operator/master', $data);
 	}
 }
 
