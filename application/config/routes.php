@@ -62,6 +62,19 @@ $route['admsistem/users/edit/(:num)'] = 'admsistem/edit_user/$1';
 $route['admsistem/users/delete/(:num)'] = 'admsistem/delete_user/$1';
 $route['admsistem/settings'] = 'admsistem/settings';
 $route['admsistem/logs'] = 'admsistem/logs';
+// Route for saving visi from the Master Visi form
+$route['admsistem/save_visi'] = 'admSistem/save_visi';
+// Master user CRUD (table `user`)
+$route['admsistem/save_master_user'] = 'admSistem/save_master_user';
+$route['admsistem/edit_master_user/(:any)'] = 'admSistem/edit_master_user/$1';
+$route['admsistem/delete_master_user/(:any)'] = 'admSistem/delete_master_user/$1';
+// Master mitra CRUD (table `mitra`)
+$route['admsistem/save_master_mitra'] = 'admSistem/save_master_mitra';
+$route['admsistem/edit_master_mitra/(:num)'] = 'admSistem/edit_master_mitra/$1';
+$route['admsistem/delete_master_mitra/(:num)'] = 'admSistem/delete_master_mitra/$1';
+// Branding CRUD
+$route['admsistem/save_branding'] = 'admSistem/save_branding';
+$route['admsistem/delete_branding/(:any)'] = 'admSistem/delete_branding/$1';
 
 $route['admdata'] = 'admData';
 $route['admdata/dashboard'] = 'admdata/dashboard';
