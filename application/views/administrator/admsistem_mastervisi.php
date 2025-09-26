@@ -19,7 +19,7 @@
         <div class="form-group row">
             <label for="visi" class="col-sm-2 col-form-label">Visi</label>
             <div class="col-sm-10">
-                <textarea class="form-control" id="visi" name="visi" rows="3" placeholder="Visi Bupati"></textarea>
+                <textarea class="form-control" id="visi" name="visi" rows="3" placeholder="Visi Bupati"><?php echo htmlspecialchars($this->session->flashdata('old_visi') ?: ''); ?></textarea>
             </div>
         </div>
         <div class="form-group row">
