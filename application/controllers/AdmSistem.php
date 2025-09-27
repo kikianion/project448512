@@ -293,27 +293,28 @@ class AdmSistem extends MY_Controller
                 $this->form_validation->set_rules('nama', 'Nama', 'required|max_length[255]');
                 if ($this->form_validation->run() === FALSE) {
                     $this->session->set_flashdata('error', validation_errors());
+                    // $this->session->set_flashdata('error'."-".$form, validation_errors());
                     redirect('admsistem');
                     return;
                 }
                 $data = ['nama' => $this->input->post('nama')];
                 $ok = $this->Master_branding_model->update_by_id($branding_id, $data);
                 if ($ok) $this->session->set_flashdata('success', 'Nama branding updated.');
-                else $this->session->set_flashdata('error', 'Failed to update nama.');
+                else $this->session->set_flashdata('error'."-".$form, 'Failed to update nama.');
                 break;
 
             case 'form_subnote':
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('subnote', 'Subnote', 'required|max_length[255]');
                 if ($this->form_validation->run() === FALSE) {
-                    $this->session->set_flashdata('error', validation_errors());
+                    $this->session->set_flashdata('error'."-".$form, validation_errors());
                     redirect('admsistem');
                     return;
                 }
                 $data = ['subnote' => $this->input->post('subnote')];
                 $ok = $this->Master_branding_model->update_by_id($branding_id, $data);
                 if ($ok) $this->session->set_flashdata('success', 'Subnote updated.');
-                else $this->session->set_flashdata('error', 'Failed to update subnote.');
+                else $this->session->set_flashdata('error'."-".$form, 'Failed to update subnote.');
                 break;
 
             case 'form_background':
@@ -329,14 +330,14 @@ class AdmSistem extends MY_Controller
                 $this->upload->initialize($config);
 
                 if (!isset($_FILES[$field]) || empty($_FILES[$field]['name'])) {
-                    $this->session->set_flashdata('error', 'No file uploaded for ' . $field . '.');
+                    $this->session->set_flashdata('error'."-".$form, 'No file uploaded for ' . $field . '.');
                     redirect('admsistem');
                     return;
                 }
 
                 if (!$this->upload->do_upload($field)) {
                     $err = $this->upload->display_errors('', '');
-                    $this->session->set_flashdata('error', 'Upload failed: ' . $err);
+                    $this->session->set_flashdata('error'."-".$form, 'Upload failed: ' . $err);
                     redirect('admsistem');
                     return;
                 }
@@ -358,11 +359,11 @@ class AdmSistem extends MY_Controller
                 $data = [$field => $new_path];
                 $ok = $this->Master_branding_model->update_by_id($branding_id, $data);
                 if ($ok) $this->session->set_flashdata('success', ucfirst($field) . ' updated.');
-                else $this->session->set_flashdata('error', 'Failed to update ' . $field . '.');
+                else $this->session->set_flashdata('error'."-".$form, 'Failed to update ' . $field . '.');
                 break;
 
             default:
-                $this->session->set_flashdata('error', 'Unknown form submitted.');
+                $this->session->set_flashdata('error'."-".$form, 'Unknown form submitted.');
                 break;
         }
 

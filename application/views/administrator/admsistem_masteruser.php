@@ -1,4 +1,4 @@
-<div class="card card-info card-outline xcollapsed-card">
+<div class="card card-info card-outline collapsed-card">
   <div class="card-header" data-card-widget="collapse">
     <h5 class="card-title m-0"><b>Master User</b></h5>
     <div class="card-tools">

@@ -1,4 +1,4 @@
-<div class="card card-info card-outline xcollapsed-card">
+<div class="card card-info card-outline collapsed-card">
     <div class="card-header" data-card-widget="collapse">
         <h5 class="card-title m-0"><b>Master Visi</b></h5>
         <div class="card-tools">
@@ -15,23 +15,23 @@
             <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
         <?php endif; ?>
 
-    <form method="post" action="<?php echo site_url('admsistem/save_visi'); ?>">
-        <div class="form-group row">
-            <label for="visi" class="col-sm-2 col-form-label">Visi</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="visi" name="visi" rows="3" placeholder="Visi Bupati"><?php echo htmlspecialchars($this->session->flashdata('old_visi') ?: ''); ?></textarea>
+        <form method="post" action="<?php echo site_url('admsistem/save_visi'); ?>">
+            <div class="form-group row">
+                <label for="visi" class="col-sm-2 col-form-label">Visi</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="visi" name="visi" rows="3" placeholder="Visi Bupati"><?php echo htmlspecialchars($this->session->flashdata('old_visi') ?: ''); ?></textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2">
-                <a href="<?php echo site_url('admsistem'); ?>" class="btn btn-default float-right">Cancel</a>
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <a href="<?php echo site_url('admsistem'); ?>" class="btn btn-default float-right">Cancel</a>
+                </div>
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
             </div>
-            <div class="col-sm-8">
-            </div>
-            <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-        </div>
         </form>
 
         <hr class="hr hr-blurry">

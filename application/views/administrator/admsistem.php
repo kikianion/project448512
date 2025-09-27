@@ -17,12 +17,19 @@
   <!-- Main content -->
   <div class="content">
     <div class="container-fluid">
-        <?php if ($this->session->flashdata('success')): ?>
+
+
+    
+        <!-- <?php if ($this->session->flashdata('success')): ?>
           <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
         <?php endif; ?>
         <?php if ($this->session->flashdata('error')): ?>
           <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
-        <?php endif; ?>
+        <?php endif; ?> -->
+
+
+
+
       <div class="row">
         <div class="col-lg-4  ">
           <?php $this->load->view('administrator/admsistem_masteruser'); ?>
