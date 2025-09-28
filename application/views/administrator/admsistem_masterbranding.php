@@ -1,19 +1,22 @@
-<div class="card card-info card-outline xcollapsed-card">
+<?php
+$tag1 = "form_masterbranding";
+?>
+<div class="card card-info card-outline collapsed-card" id="branding">
   <div class="card-header" data-card-widget="collapse">
-    <h5 class="card-title m-0"><b>Master 2 Branding</b></h5>
+    <h5 class="card-title m-0"><b>Master Branding</b></h5>
     <div class="card-tools">
+      <button type="button" class="btn btn-tool btn-fs" xdata-card-widget="collapse">
+        [&nbsp;&nbsp;]
+      </button>
+
       <button type="button" class="btn btn-tool" data-card-widget="collapse">
         <i class="fas fa-plus"></i>
       </button>
     </div>
   </div>
   <div class="card-body">
-    <?php if (!empty($this->session->flashdata('success'))): ?>
-      <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
-    <?php endif; ?>
-    <?php if (!empty($this->session->flashdata('error'))): ?>
-      <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
-    <?php endif; ?>
+
+    <?= widget_flash($tag1) ?>
 
     <table class="table table-bordered table-responsive">
       <thead>
@@ -26,20 +29,22 @@
       </thead>
       <tbody>
         <!--  #region form nama  -->
-        <?php echo form_open('admsistem/save_branding', ['name' => 'form_nama']); ?>
+        <?php echo form_open('admsistem/save_branding'); ?>
         <tr>
-          <td><b>Nama</b></td>
+          <td>
+            <b>Nama</b>
+          </td>
           <td>
             <?php
             echo isset($master_branding) && count($master_branding) ? htmlspecialchars($master_branding[0]->nama) : '-';
             ?>
           </td>
           <td>
-            <input type="hidden" name="original_nama" value="<?php echo isset($master_branding[0]->nama) ? htmlspecialchars($master_branding[0]->nama) : ''; ?>">
-            <input type="hidden" name="form_name" value="form_nama">
             <input type="text" name="nama" class="form-control" id="nama-aplikasi" placeholder="Nama Aplikasi">
           </td>
           <td>
+            <input type="hidden" name="tag1" value="<?= $tag1 ?>">
+            <input type="hidden" name="form_name" value="form_nama">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </td>
         </tr>
@@ -47,7 +52,7 @@
         <!--  #endregion  -->
 
         <!-- #region form subnote -->
-        <?php echo form_open('admsistem/save_branding', ['name' => 'form_subnote']); ?>
+        <?php echo form_open('admsistem/save_branding'); ?>
         <tr>
           <td><b>Subnote</b></td>
           <td>
@@ -56,11 +61,11 @@
             ?>
           </td>
           <td>
-            <input type="hidden" name="original_nama" value="<?php echo isset($master_branding[0]->nama) ? htmlspecialchars($master_branding[0]->nama) : ''; ?>">
-            <input type="hidden" name="form_name" value="form_subnote">
             <input type="text" name="subnote" class="form-control" id="subnote" placeholder="Subnote Aplikasi">
           </td>
           <td>
+            <input type="hidden" name="tag1" value="<?= $tag1 ?>">
+            <input type="hidden" name="form_name" value="form_subnote">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </td>
         </tr>
@@ -69,7 +74,7 @@
         <!--  #endregion  -->
 
         <!--  #region form background -->
-        <?php echo form_open_multipart('admsistem/save_branding', ['name' => 'form_background']); ?>
+        <?php echo form_open_multipart('admsistem/save_branding'); ?>
         <tr>
           <td><b>Background</b></td>
           <td>
@@ -80,12 +85,11 @@
             <?php endif; ?>
           </td>
           <td>
-            <input type="hidden" name="original_nama" value="<?php echo isset($master_branding[0]->nama) ? htmlspecialchars($master_branding[0]->nama) : ''; ?>">
-            <input type="hidden" name="form_name" value="form_background">
-            <input type="hidden" name="nama" value="<?php echo isset($master_branding[0]->nama) ? htmlspecialchars($master_branding[0]->nama) : ''; ?>">
             <input class="form-control" type="file" name="background" id="background" accept="image/*">
           </td>
           <td>
+            <input type="hidden" name="tag1" value="<?= $tag1 ?>">
+            <input type="hidden" name="form_name" value="form_background">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </td>
         </tr>
@@ -94,7 +98,7 @@
         <!--  #endregion  -->
 
         <!-- #region form logo -->
-        <?php echo form_open_multipart('admsistem/save_branding', ['name' => 'form_logo']); ?>
+        <?php echo form_open_multipart('admsistem/save_branding'); ?>
         <tr>
           <td><b>Logo</b></td>
           <td>
@@ -105,12 +109,11 @@
             <?php endif; ?>
           </td>
           <td>
-            <input type="hidden" name="original_nama" value="<?php echo isset($master_branding[0]->nama) ? htmlspecialchars($master_branding[0]->nama) : ''; ?>">
-            <input type="hidden" name="form_name" value="form_logo">
-            <input type="hidden" name="nama" value="<?php echo isset($master_branding[0]->nama) ? htmlspecialchars($master_branding[0]->nama) : ''; ?>">
             <input class="form-control" type="file" name="logo" id="logo" accept="image/*">
           </td>
           <td>
+            <input type="hidden" name="form_name" value="form_logo">
+            <input type="hidden" name="tag1" value="<?= $tag1 ?>">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </td>
         </tr>
@@ -119,7 +122,7 @@
         <!--  #endregion  -->
 
         <!--  #region form fav  -->
-        <?php echo form_open_multipart('admsistem/save_branding', ['name' => 'form_favicon']); ?>
+        <?php echo form_open_multipart('admsistem/save_branding'); ?>
         <tr>
           <td><b>favicon</b></td>
           <td>
@@ -130,12 +133,11 @@
             <?php endif; ?>
           </td>
           <td>
-            <input type="hidden" name="original_nama" value="<?php echo isset($master_branding[0]->nama) ? htmlspecialchars($master_branding[0]->nama) : ''; ?>">
-            <input type="hidden" name="form_name" value="form_favicon">
-            <input type="hidden" name="nama" value="<?php echo isset($master_branding[0]->nama) ? htmlspecialchars($master_branding[0]->nama) : ''; ?>">
             <input class="form-control" type="file" name="favicon" id="favicon" accept="image/*">
           </td>
           <td>
+            <input type="hidden" name="tag1" value="<?= $tag1 ?>">
+            <input type="hidden" name="form_name" value="form_favicon">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </td>
         </tr>

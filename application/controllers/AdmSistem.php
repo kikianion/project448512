@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
+
 class AdmSistem extends MY_Controller
 {
 
@@ -13,6 +15,7 @@ class AdmSistem extends MY_Controller
         $this->load->model('Admin_model');
         $this->load->model('Master_user_model');
         $this->load->model('Master_mitra_model');
+        $this->load->model('Master_opd_model');
         $this->load->model('Master_branding_model');
         $this->load->model('Visi_model');
 
@@ -36,6 +39,8 @@ class AdmSistem extends MY_Controller
         $data['master_users'] = $this->Master_user_model->get_all();
         // load master mitra for the view
         $data['master_mitra'] = $this->Master_mitra_model->get_all();
+        // load master opd for the view
+        $data['master_opd'] = $this->Master_opd_model->get_all();
         // load branding data
         $data['master_branding'] = $this->Master_branding_model->get_all();
         // $data['user'] = $this->session->userdata();
@@ -49,6 +54,33 @@ class AdmSistem extends MY_Controller
         $this->load->view('administrator/admsistem', $data);
     }
 
+
+    public function mitraById($id)
+    {
+        // 1. Get the ID from the URL query string (e.g., ?id=123)
+        // $id = $this->input->get('id');
+
+        // Check if an ID was provided
+        if (!$id) {
+            // Handle the case where no ID is provided (e.g., return an error or empty array)
+            $mitra = ['error' => 'Mitra ID is required.'];
+            $status_code = 400; // Bad Request
+        } else {
+            // 2. Call a new model method (you must create this!) to get a single record by ID
+            $mitra = $this->Master_mitra_model->get($id);
+            $status_code = 200;
+        }
+
+        $res = [
+            'status' => 'success',
+            'data' => $mitra
+        ];
+        // 3. Set the JSON response
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($status_code)
+            ->set_output(json_encode($res));
+    }
     /**
      * Create or update a master user (table `user`)
      */
@@ -199,9 +231,10 @@ class AdmSistem extends MY_Controller
         $this->form_validation->set_rules('status', 'Status', 'max_length[50]');
 
         $id = $this->input->post('id'); // optional for update
+        $tag1 = $this->input->post('tag1');
 
         if ($this->form_validation->run() === FALSE) {
-            $this->session->set_flashdata('error', validation_errors());
+            $this->session->set_flashdata('error-' . $tag1, validation_errors());
             redirect('admsistem');
             return;
         }
@@ -219,16 +252,16 @@ class AdmSistem extends MY_Controller
         if ($id) {
             $ok = $this->Master_mitra_model->update($id, $data);
             if ($ok) {
-                $this->session->set_flashdata('success', 'Mitra updated.');
+                $this->session->set_flashdata('success-' . $tag1, 'Mitra updated.');
             } else {
-                $this->session->set_flashdata('error', 'Failed to update mitra.');
+                $this->session->set_flashdata('error-' . $tag1, 'Failed to update mitra.');
             }
         } else {
             $ok = $this->Master_mitra_model->insert($data);
             if ($ok) {
-                $this->session->set_flashdata('success', 'Mitra created.');
+                $this->session->set_flashdata('success-' . $tag1, 'Mitra created.');
             } else {
-                $this->session->set_flashdata('error', 'Failed to create mitra.');
+                $this->session->set_flashdata('error-' . $tag1, 'Failed to create mitra.');
             }
         }
 
@@ -249,12 +282,118 @@ class AdmSistem extends MY_Controller
         $this->load->view('administrator/admsistem', $data);
     }
 
-    public function delete_master_mitra($id)
+    public function delete_master_mitra($id, $tag1)
     {
         if ($this->Master_mitra_model->delete($id)) {
-            $this->session->set_flashdata('success', 'Mitra deleted.');
+            $this->session->set_flashdata('success-' . $tag1, 'Mitra deleted.');
         } else {
-            $this->session->set_flashdata('error', 'Failed to delete mitra.');
+            $this->session->set_flashdata('error-' . $tag1, 'Failed to delete mitra.');
+        }
+        redirect('admsistem');
+    }
+
+    /* Master OPD CRUD */
+    public function opdById($id)
+    {
+        // Check if an ID was provided
+        if (!$id) {
+            // Handle the case where no ID is provided (e.g., return an error or empty array)
+            $opd = ['error' => 'OPD ID is required.'];
+            $status_code = 400; // Bad Request
+        } else {
+            // Call the model method to get a single record by ID
+            $opd = $this->Master_opd_model->get($id);
+            $status_code = 200;
+        }
+
+        $res = [
+            'status' => 'success',
+            'data' => $opd
+        ];
+        // Set the JSON response
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($status_code)
+            ->set_output(json_encode($res));
+    }
+
+    public function save_master_opd()
+    {
+        if ($this->input->method() !== 'post') {
+            show_error('Method not allowed', 405);
+            return;
+        }
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('namaopd', 'Nama OPD', 'required|max_length[50]');
+        $this->form_validation->set_rules('urut', 'Urut', 'integer');
+        $this->form_validation->set_rules('mitra_id', 'Mitra', 'required|integer');
+        $this->form_validation->set_rules('kepala', 'Kepala', 'max_length[50]');
+        $this->form_validation->set_rules('nipkepala', 'NIP Kepala', 'max_length[50]');
+        $this->form_validation->set_rules('pangkepala', 'Pangkat Kepala', 'max_length[50]');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'max_length[50]');
+        $this->form_validation->set_rules('status', 'Status', 'max_length[50]');
+
+        $id = $this->input->post('id'); // optional for update
+        $tag1 = $this->input->post('tag1');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->session->set_flashdata('error-' . $tag1, validation_errors());
+            redirect('admsistem');
+            return;
+        }
+
+        $data = array(
+            'urut' => $this->input->post('urut'),
+            'namaopd' => $this->input->post('namaopd'),
+            'mitra' => $this->input->post('mitra_id'),
+            'kepala' => $this->input->post('kepala'),
+            'nipkepala' => $this->input->post('nipkepala'),
+            'pangkepala' => $this->input->post('pangkepala'),
+            'jabatan' => $this->input->post('jabatan'),
+            'status' => $this->input->post('status') ?: 'Aktif'
+        );
+
+        if ($id) {
+            $ok = $this->Master_opd_model->update($id, $data);
+            if ($ok) {
+                $this->session->set_flashdata('success-' . $tag1, 'OPD updated.');
+            } else {
+                $this->session->set_flashdata('error-' . $tag1, 'Failed to update OPD.');
+            }
+        } else {
+            $ok = $this->Master_opd_model->insert($data);
+            if ($ok) {
+                $this->session->set_flashdata('success-' . $tag1, 'OPD created.');
+            } else {
+                $this->session->set_flashdata('error-' . $tag1, 'Failed to create OPD.');
+            }
+        }
+
+        redirect('admsistem');
+    }
+
+    public function edit_master_opd($id)
+    {
+        $data['title'] = 'Administrasi Sistem';
+        $data['visi_list'] = $this->Visi_model->get_all();
+        $data['master_users'] = $this->Master_user_model->get_all();
+        $data['master_mitra'] = $this->Master_mitra_model->get_all();
+        $data['master_opd'] = $this->Master_opd_model->get_all();
+        $data['edit_master_opd'] = $this->Master_opd_model->get($id);
+        if (!$data['edit_master_opd']) {
+            show_404();
+            return;
+        }
+        $this->load->view('administrator/admsistem', $data);
+    }
+
+    public function delete_master_opd($id, $tag1)
+    {
+        if ($this->Master_opd_model->delete($id)) {
+            $this->session->set_flashdata('success-' . $tag1, 'OPD deleted.');
+        } else {
+            $this->session->set_flashdata('error-' . $tag1, 'Failed to delete OPD.');
         }
         redirect('admsistem');
     }
@@ -268,13 +407,14 @@ class AdmSistem extends MY_Controller
         }
 
         // Determine which form was submitted
+        $tag1 = $this->input->post('tag1');
         $form = $this->input->post('form_name');
 
         // Always operate on row id = 1
         $branding_id = 1;
         $existing = $this->Master_branding_model->get_by_id($branding_id);
         if (!$existing) {
-            $this->session->set_flashdata('error', 'Branding record (id=1) not found. Cannot update.');
+            $this->session->set_flashdata('error-' . $tag1, 'Branding record (id=1) not found. Cannot update.');
             redirect('admsistem');
             return;
         }
@@ -282,6 +422,7 @@ class AdmSistem extends MY_Controller
         // Ensure upload directory exists for file forms
         $upload_rel = 'assets/img/branding';
         $upload_path = FCPATH . $upload_rel;
+
         if (!is_dir($upload_path)) {
             @mkdir($upload_path, 0755, TRUE);
         }
@@ -292,29 +433,32 @@ class AdmSistem extends MY_Controller
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('nama', 'Nama', 'required|max_length[255]');
                 if ($this->form_validation->run() === FALSE) {
-                    $this->session->set_flashdata('error', validation_errors());
-                    // $this->session->set_flashdata('error'."-".$form, validation_errors());
+                    $this->session->set_flashdata('error-' . $tag1, validation_errors());
                     redirect('admsistem');
                     return;
                 }
                 $data = ['nama' => $this->input->post('nama')];
                 $ok = $this->Master_branding_model->update_by_id($branding_id, $data);
-                if ($ok) $this->session->set_flashdata('success', 'Nama branding updated.');
-                else $this->session->set_flashdata('error'."-".$form, 'Failed to update nama.');
+                if ($ok)
+                    $this->session->set_flashdata('success-' . $tag1, 'Nama branding updated.');
+                else
+                    $this->session->set_flashdata('error-' . $tag1, 'Failed to update nama.');
                 break;
 
             case 'form_subnote':
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('subnote', 'Subnote', 'required|max_length[255]');
                 if ($this->form_validation->run() === FALSE) {
-                    $this->session->set_flashdata('error'."-".$form, validation_errors());
+                    $this->session->set_flashdata('error-' . $tag1, validation_errors());
                     redirect('admsistem');
                     return;
                 }
                 $data = ['subnote' => $this->input->post('subnote')];
                 $ok = $this->Master_branding_model->update_by_id($branding_id, $data);
-                if ($ok) $this->session->set_flashdata('success', 'Subnote updated.');
-                else $this->session->set_flashdata('error'."-".$form, 'Failed to update subnote.');
+                if ($ok)
+                    $this->session->set_flashdata('success-' . $tag1, 'Subnote updated.');
+                else
+                    $this->session->set_flashdata('error-' . $tag1, 'Failed to update subnote.');
                 break;
 
             case 'form_background':
@@ -330,14 +474,14 @@ class AdmSistem extends MY_Controller
                 $this->upload->initialize($config);
 
                 if (!isset($_FILES[$field]) || empty($_FILES[$field]['name'])) {
-                    $this->session->set_flashdata('error'."-".$form, 'No file uploaded for ' . $field . '.');
+                    $this->session->set_flashdata('error-' . $tag1, 'No file uploaded for ' . $field . '.');
                     redirect('admsistem');
                     return;
                 }
 
                 if (!$this->upload->do_upload($field)) {
                     $err = $this->upload->display_errors('', '');
-                    $this->session->set_flashdata('error'."-".$form, 'Upload failed: ' . $err);
+                    $this->session->set_flashdata('error-' . $tag1, 'Upload failed: ' . $err);
                     redirect('admsistem');
                     return;
                 }
@@ -358,12 +502,14 @@ class AdmSistem extends MY_Controller
 
                 $data = [$field => $new_path];
                 $ok = $this->Master_branding_model->update_by_id($branding_id, $data);
-                if ($ok) $this->session->set_flashdata('success', ucfirst($field) . ' updated.');
-                else $this->session->set_flashdata('error'."-".$form, 'Failed to update ' . $field . '.');
+                if ($ok)
+                    $this->session->set_flashdata('success-' . $tag1, ucfirst($field) . ' updated.');
+                else
+                    $this->session->set_flashdata('error-' . $tag1, 'Failed to update ' . $field . '.');
                 break;
 
             default:
-                $this->session->set_flashdata('error'."-".$form, 'Unknown form submitted.');
+                $this->session->set_flashdata('error-' . $tag1, 'Unknown form submitted.');
                 break;
         }
 

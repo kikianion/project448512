@@ -71,7 +71,13 @@ $route['admsistem/delete_master_user/(:any)'] = 'admSistem/delete_master_user/$1
 // Master mitra CRUD (table `mitra`)
 $route['admsistem/save_master_mitra'] = 'admSistem/save_master_mitra';
 $route['admsistem/edit_master_mitra/(:num)'] = 'admSistem/edit_master_mitra/$1';
-$route['admsistem/delete_master_mitra/(:num)'] = 'admSistem/delete_master_mitra/$1';
+$route['admsistem/delete_master_mitra/(:num)/(:any)'] = 'admSistem/delete_master_mitra/$1/$2';
+$route['admsistem/mitraById/(:num)'] = 'admSistem/mitraById/$1';
+// Master opd CRUD 
+$route['admsistem/save_master_opd'] = 'admSistem/save_master_opd';
+$route['admsistem/edit_master_opd/(:num)'] = 'admSistem/edit_master_opd/$1';
+$route['admsistem/delete_master_opd/(:num)/(:any)'] = 'admSistem/delete_master_opd/$1/$2';
+$route['admsistem/opdById/(:num)'] = 'admSistem/opdById/$1';
 // Branding CRUD
 $route['admsistem/save_branding'] = 'admSistem/save_branding';
 $route['admsistem/delete_branding/(:any)'] = 'admSistem/delete_branding/$1';
