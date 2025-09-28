@@ -1,10 +1,19 @@
 <?php
-$tag1 = "form_mastermitra";
+$params = [
+	"tag1"=> "xxx", 
+	"title"=> "xxx", 
+	"save_url"=> "xxx", 
+	"cancel_url"=> "xxx", 
+	"form_fields"=> "xxx", 
+
+];
+
+$tag1 = "xxx";
 ?>
 
 <div class="card card-info card-outline collapsed-card">
 	<div class="card-header" data-card-widget="collapse">
-		<h5 class="card-title m-0"><b>Master Mitra</b></h5>
+		<h5 class="card-title m-0"><b>xxxx</b></h5>
 		<div class="card-tools">
 			<button type="button" class="btn btn-tool btn-fs" xdata-card-widget="collapse">
 				[&nbsp;&nbsp;]

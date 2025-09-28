@@ -73,6 +73,7 @@ $route['admsistem/save_master_mitra'] = 'admSistem/save_master_mitra';
 $route['admsistem/edit_master_mitra/(:num)'] = 'admSistem/edit_master_mitra/$1';
 $route['admsistem/delete_master_mitra/(:num)/(:any)'] = 'admSistem/delete_master_mitra/$1/$2';
 $route['admsistem/mitraById/(:num)'] = 'admSistem/mitraById/$1';
+$route['admsistem/setStatus_mitra/(:num)'] = 'admSistem/setStatus_mitra/$1';
 // Master opd CRUD 
 $route['admsistem/save_master_opd'] = 'admSistem/save_master_opd';
 $route['admsistem/edit_master_opd/(:num)'] = 'admSistem/edit_master_opd/$1';

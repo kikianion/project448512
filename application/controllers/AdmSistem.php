@@ -268,6 +268,32 @@ class AdmSistem extends MY_Controller
         redirect('admsistem');
     }
 
+
+	public function setStatus_mitra($id)
+	{
+	    // Get the tag1 from POST or GET for flashdata grouping (optional)
+	    $tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+
+	    // Fetch the mitra record
+	    $mitra = $this->Master_mitra_model->get($id);
+	    if (!$mitra) {
+	        $this->session->set_flashdata('error-' . $tag1, 'Mitra not found.');
+	        redirect('admsistem');
+	        return;
+	    }
+
+	    // Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
+	    $new_status = (strtolower($mitra->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
+
+	    $ok = $this->Master_mitra_model->update($id, ['status' => $new_status]);
+	    if ($ok) {
+	        $this->session->set_flashdata('success-' . $tag1, 'Status mitra berhasil diubah menjadi "' . $new_status . '".');
+	    } else {
+	        $this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status mitra.');
+	    }
+
+	    redirect('admsistem');
+	}
     public function edit_master_mitra($id)
     {
         $data['title'] = 'Administrasi Sistem';
