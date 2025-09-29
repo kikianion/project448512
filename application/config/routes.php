@@ -64,10 +64,14 @@ $route['admsistem/settings'] = 'admsistem/settings';
 $route['admsistem/logs'] = 'admsistem/logs';
 // Route for saving visi from the Master Visi form
 $route['admsistem/save_visi'] = 'admSistem/save_visi';
+
 // Master user CRUD (table `user`)
 $route['admsistem/save_master_user'] = 'admSistem/save_master_user';
 $route['admsistem/edit_master_user/(:any)'] = 'admSistem/edit_master_user/$1';
 $route['admsistem/delete_master_user/(:any)'] = 'admSistem/delete_master_user/$1';
+$route['admsistem/userById/(:num)'] = 'admSistem/userById/$1';
+$route['admsistem/setStatus_user/(:num)'] = 'admSistem/setStatus_user/$1';
+
 // Master mitra CRUD (table `mitra`)
 $route['admsistem/save_master_mitra'] = 'admSistem/save_master_mitra';
 $route['admsistem/edit_master_mitra/(:num)'] = 'admSistem/edit_master_mitra/$1';
@@ -79,6 +83,7 @@ $route['admsistem/save_master_opd'] = 'admSistem/save_master_opd';
 $route['admsistem/edit_master_opd/(:num)'] = 'admSistem/edit_master_opd/$1';
 $route['admsistem/delete_master_opd/(:num)/(:any)'] = 'admSistem/delete_master_opd/$1/$2';
 $route['admsistem/opdById/(:num)'] = 'admSistem/opdById/$1';
+$route['admsistem/setStatus_opd/(:num)'] = 'admSistem/setStatus_opd/$1';
 // Branding CRUD
 $route['admsistem/save_branding'] = 'admSistem/save_branding';
 $route['admsistem/delete_branding/(:any)'] = 'admSistem/delete_branding/$1';

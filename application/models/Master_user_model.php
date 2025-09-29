@@ -16,9 +16,15 @@ class Master_user_model extends CI_Model {
         return $this->db->get($this->table)->result();
     }
 
-    public function get($username)
+    public function getByUsername($username)
     {
         $this->db->where('username', $username);
+        return $this->db->get($this->table)->row();
+    }
+
+	public function get($id)
+    {
+        $this->db->where('id', $id);
         return $this->db->get($this->table)->row();
     }
 
@@ -27,9 +33,9 @@ class Master_user_model extends CI_Model {
         return $this->db->insert($this->table, $data);
     }
 
-    public function update($username, $data)
+    public function update($id, $data)
     {
-        $this->db->where('username', $username);
+        $this->db->where('id', $id);
         return $this->db->update($this->table, $data);
     }
 
