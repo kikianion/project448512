@@ -35,8 +35,8 @@ $tag1 = 'form_masteruser';
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama User</label>
 				<div class="col-sm-10">
-					<input type="text" name="nama" class="form-control" id="namauser" placeholder="Nama User"
-						value="<?= $this->session->flashdata('nama') ?>" required maxlength="50">
+					<input type="text" name="nama" class="form-control" id="namauser" placeholder="Nama User" value="<?= $this->session->flashdata('nama') ?>"
+						required maxlength="50">
 				</div>
 			</div>
 
@@ -72,8 +72,7 @@ $tag1 = 'form_masteruser';
 					</select>
 				</div>
 				<div class="col-sm-6">
-					<input type="password" name="password" class="form-control" id="password" placeholder="Set Password Awal"
-						maxlength="50">
+					<input type="password" name="password" class="form-control" id="password" placeholder="Set Password Awal" maxlength="50">
 				</div>
 			</div>
 
@@ -135,7 +134,8 @@ $tag1 = 'form_masteruser';
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="<?= site_url('admsistem/setStatus_user/' . $u->id) ?>"
 											onclick="return confirm('Apakah Anda yakin ingin mengubah status user ini?')">Ubah Status
-										</a>
+											<a class="dropdown-item" onclick="resetPassUser(<?= $u->id ?>)">Reset Password
+											</a>
 									</div>
 								</div>
 							</td>
@@ -152,6 +152,19 @@ $tag1 = 'form_masteruser';
 	</div>
 </div>
 <script>
+	function resetPassUser(id) {
+		// Open modal from admsistem.php and wire submit
+		var $modal = $('#reset-password');
+		$modal.appendTo('body').modal('show');
+
+		// Clear previous values and errors
+		$modal.find('input[name=password-baru]').val('');
+		$modal.find('input[name=password-baru2]').val('');
+		$modal.find('input[name=id]').val(id);
+		$modal.find('input[name=tag1]').val('<?= $tag1 ?>');
+		$modal.find('#reset-pass').attr('action', "admsistem/reset_password");
+	}
+
 	function editModalUser(id) {
 		$.ajax({
 			url: 'admsistem/userById/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
@@ -159,6 +172,7 @@ $tag1 = 'form_masteruser';
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');
 					$('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
+					$('#edit-record-common .modal-body').find("input[name=password]").first().remove();
 					$('#edit-record-common .modal-title').html("Edit data user");
 
 					$('#edit-record-common input[name=username]').val(res.data.username);

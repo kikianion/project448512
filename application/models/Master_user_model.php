@@ -24,6 +24,7 @@ class Master_user_model extends CI_Model {
 
 	public function get($id)
     {
+		$this->db->select('id,username,nama,role,opd,status'); 
         $this->db->where('id', $id);
         return $this->db->get($this->table)->row();
     }

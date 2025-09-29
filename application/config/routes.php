@@ -64,6 +64,8 @@ $route['admsistem/settings'] = 'admsistem/settings';
 $route['admsistem/logs'] = 'admsistem/logs';
 // Route for saving visi from the Master Visi form
 $route['admsistem/save_visi'] = 'admSistem/save_visi';
+$route['admsistem/visiById/(:num)'] = 'admSistem/visiById/$1';
+$route['admsistem/setStatus_visi/(:num)'] = 'admSistem/setStatus_visi/$1';
 
 // Master user CRUD (table `user`)
 $route['admsistem/save_master_user'] = 'admSistem/save_master_user';
@@ -71,6 +73,7 @@ $route['admsistem/edit_master_user/(:any)'] = 'admSistem/edit_master_user/$1';
 $route['admsistem/delete_master_user/(:any)'] = 'admSistem/delete_master_user/$1';
 $route['admsistem/userById/(:num)'] = 'admSistem/userById/$1';
 $route['admsistem/setStatus_user/(:num)'] = 'admSistem/setStatus_user/$1';
+$route['admsistem/reset_password'] = 'admSistem/reset_password';
 
 // Master mitra CRUD (table `mitra`)
 $route['admsistem/save_master_mitra'] = 'admSistem/save_master_mitra';

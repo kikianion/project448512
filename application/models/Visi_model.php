@@ -22,6 +22,16 @@ class Visi_model extends CI_Model
     }
 
     /**
+     * Get single visi by id
+     * @param int $id
+     * @return object|null
+     */
+    public function get($id)
+    {
+        return $this->db->where('id', (int)$id)->get($this->table)->row();
+    }
+
+    /**
      * Deactivate all visi entries (set status = 0)
      * @return bool
      */
@@ -61,6 +71,17 @@ class Visi_model extends CI_Model
         }
 
         return false;
+    }
+
+    /**
+     * Update visi row
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
+    public function update($id, $data)
+    {
+        return (bool)$this->db->where('id', (int)$id)->update($this->table, $data);
     }
 
     /**

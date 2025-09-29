@@ -82,7 +82,7 @@ class AdmSistem extends MY_Controller
 	public function userById($id)
 	{
 		// Check if an ID was provided
-		if (!$id) {
+		if ( $id!=0 && !$id) {
 			// Handle the case where no ID is provided (e.g., return an error or empty array)
 			$user = ['error' => 'User ID is required.'];
 			$status_code = 400;  // Bad Request
@@ -218,30 +218,85 @@ class AdmSistem extends MY_Controller
 			return;
 		}
 
+		$id = $this->input->post('id');  // optional for update
+
 		$this->load->library('form_validation');
 		// Allow up to 1000 characters for visi; trim input
 		$this->form_validation->set_rules('visi', 'Visi', 'required|max_length[5000]|trim');
 
 		// Preserve old input so the form can be repopulated in case of error
 		$old_visi = $this->input->post('visi');
+		$tag1 = $this->input->post('tag1');
 
 		if ($this->form_validation->run() === FALSE) {
-			$this->session->set_flashdata('error', validation_errors());
+			$this->session->set_flashdata('error-' . $tag1, validation_errors());
 			$this->session->set_flashdata('old_visi', $old_visi);
 			redirect('admsistem');
 			return;
 		}
 
-		// Clean input (XSS filter) before inserting
-		$visi_text = $this->input->post('visi', TRUE);
-		$inserted = $this->Visi_model->insert($visi_text);
+		$visi_new=$this->input->post('visi');
+		$data = array(
+			'visi' => $this->input->post('visi'),
+		);
 
-		if ($inserted) {
-			$this->session->set_flashdata('success', 'Visi berhasil disimpan.');
+		if ($id) {
+			$ok = $this->Visi_model->update($id, $data);
+			if ($ok) {
+				$this->session->set_flashdata('success-' . $tag1, 'Visi berhasil disimpan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan visi.');
+			}
 		} else {
-			$this->session->set_flashdata('error', 'Gagal menyimpan visi.');
+			$ok = $this->Visi_model->insert($visi_new);
+			if ($ok) {
+				$this->session->set_flashdata('success-' . $tag1, 'Visi berhasil disimpan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan visi.');
+			}
+		}
+		// Clean input (XSS filter) before inserting
+
+		redirect('admsistem');
+	}
+
+	public function visiById($id)
+	{
+		if (!$id) {
+			$visi = ['error' => 'Visi ID is required.'];
+			$status_code = 400;
+		} else {
+			$visi = $this->Visi_model->get($id);
+			$status_code = 200;
 		}
 
+		$res = [
+			'status' => 'success',
+			'data' => $visi
+		];
+		$this->output
+			->set_content_type('application/json')
+			->set_status_header($status_code)
+			->set_output(json_encode($res));
+	}
+
+	public function setStatus_visi($id)
+	{
+		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+		$visi = $this->Visi_model->get($id);
+		if (!$visi) {
+			$this->session->set_flashdata('error-' . $tag1, 'Visi not found.');
+			redirect('admsistem');
+			return;
+		}
+
+		$new_status = ((int)$visi->status === 1) ? 0 : 1;
+		$ok = $this->Visi_model->update($id, ['status' => $new_status]);
+		if ($ok) {
+			$this->session->set_flashdata('success-' . $tag1, 'Status visi berhasil diubah.');
+		} else {
+			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status visi.');
+		}
 		redirect('admsistem');
 	}
 
@@ -800,5 +855,42 @@ class AdmSistem extends MY_Controller
 		}
 
 		redirect('admin/users');
+	}
+
+	public function reset_password()
+	{
+		$tag1 = $this->input->post('tag1');
+		$id = $this->input->post('id');
+		$passwordbaru = $this->input->post('password-baru');
+		$passwordbaru2 = $this->input->post('password-baru2');
+
+		// $target_user = $this->Admin_model->get_user_by_id($id);
+		$target_user = $this->Master_user_model->get($id);
+
+		if (!$target_user) {
+			$this->session->set_flashdata('error-'.$tag1, 'Pengguna tidak ditemukan.');
+			// redirect('admin/users');
+			redirect('admsistem');
+
+		}
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('password-baru', 'Password Baru', 'required|min_length[6]');
+		$this->form_validation->set_rules('password-baru2', 'Konfirmasi Password', 'required|matches[password-baru]');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error-'.$tag1, 'Password baru salah.');
+			redirect('admsistem');
+		} else {
+			// Hash password, assuming password_hash is available
+			$hashed_password = password_hash($passwordbaru, PASSWORD_DEFAULT);
+
+			if ($this->Master_user_model->update($id, array('password' => $hashed_password))) {
+				$this->session->set_flashdata('success-'.$tag1, 'Password berhasil direset.');
+			} else {
+				$this->session->set_flashdata('error-'.$tag1, 'Gagal mereset password.');
+			}
+			redirect('admsistem');
+		}
 	}
 }
