@@ -67,6 +67,11 @@ $route['admsistem/save_visi'] = 'admSistem/save_visi';
 $route['admsistem/visiById/(:num)'] = 'admSistem/visiById/$1';
 $route['admsistem/setStatus_visi/(:num)'] = 'admSistem/setStatus_visi/$1';
 
+// Master misi CRUD
+$route['admsistem/save_misi'] = 'admSistem/save_misi';
+$route['admsistem/misiById/(:num)'] = 'admSistem/misiById/$1';
+$route['admsistem/setStatus_misi/(:num)'] = 'admSistem/setStatus_misi/$1';
+
 // Master user CRUD (table `user`)
 $route['admsistem/save_master_user'] = 'admSistem/save_master_user';
 $route['admsistem/edit_master_user/(:any)'] = 'admSistem/edit_master_user/$1';

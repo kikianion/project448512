@@ -1,3 +1,7 @@
+<?php
+$tag1 = "form_mastermitra";
+?>
+
 <div class="card card-info card-outline collapsed-card">
     <div class="card-header" data-card-widget="collapse">
         <h5 class="card-title m-0"><b>Master Misi</b></h5>
@@ -12,35 +16,52 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Misi</label>
-            <div class="col-sm-8">
-                <input type="email" class="form-control" id="misi" placeholder="Masukan Misi">
-            </div>
-            <div class="col-sm-2">
-                <input type="email" class="form-control" id="urutanpd" placeholder="urut">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Visi</label>
-            <div class="col-sm-10">
-                <select class="form-control">
-                    <option>Visi Aktif 1</option>
-                    <option>Visi Aktif 2</option>
-                    <option>Visi Aktif 3</option>
-                    <option>dst...</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-2">
-                <button type="submit" class="btn btn-default float-right">Cancel</button>
-            </div>
-            <div class="col-sm-8">
-            </div>
-            <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
+        <?php $tag1 = 'form_mastermisi'; ?>
+        <?= widget_flash($tag1) ?>
+
+        <div id="form-<?= $tag1 ?>">
+            <form method="post" action="<?php echo site_url('admsistem/save_misi'); ?>">
+                <div class="form-group row">
+                    <label for="misi" class="col-sm-2 col-form-label">Misi</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="misi" name="misi" rows="2" placeholder="Masukan Misi"><?php echo htmlspecialchars($this->session->flashdata('old_misi') ?: ''); ?></textarea>
+                        <input type="hidden" name="tag1" value="<?= $tag1 ?>">
+                        <input type="hidden" name="id">
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="urut" name="urut" placeholder="urut" value="<?php echo htmlspecialchars($this->session->flashdata('old_urut') ?: ''); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="visi_id" class="col-sm-2 col-form-label">Visi</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="visi_id" name="visi_id">
+                            <?php if (!empty($visi_list) && is_array($visi_list)): ?>
+                                <?php $old_visi_id = $this->session->flashdata('old_visi_id'); ?>
+                                <?php foreach ($visi_list as $visi): ?>
+                                    <?php if ((int)$visi->status === 1): ?>
+                                        <option value="<?php echo (int)$visi->id; ?>" <?php echo ($old_visi_id && (int)$old_visi_id === (int)$visi->id) ? 'selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($visi->visi); ?>
+                                        </option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <option value="">Tidak ada visi aktif</option>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <a href="<?php echo site_url('admsistem'); ?>" class="btn btn-default float-right">Cancel</a>
+                    </div>
+                    <div class="col-sm-8">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </form>
         </div>
         <hr class="hr hr-blurry">
         </hr>
@@ -55,26 +76,52 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Misi 1</td>
-                    <td>Visi yang Dipilih</td>
-                    <td>Aktif</td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default">Tindakan</button>
-                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                                <span class="sr-only"></span>
-                            </button>
-                            <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" data-toggle="modal" data-target="#edit-misi">Edit</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" data-toggle="modal" data-target="#ubah-status-misi">Ubah Status</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                <?php if (!empty($misi_list) && is_array($misi_list)): ?>
+                    <?php foreach ($misi_list as $misi): ?>
+                        <tr>
+                            <td class="align-middle"><?php echo (int)$misi->urut; ?></td>
+                            <td class="align-middle"><?php echo htmlspecialchars($misi->misi); ?></td>
+                            <td class="align-middle"><?php echo htmlspecialchars($misi->visi_text ?: '-'); ?></td>
+                            <td class="align-middle"><?php echo ((int)$misi->status === 1) ? 'Aktif' : 'Tidak Aktif'; ?></td>
+                            <td class="align-middle">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default">Tindakan</button>
+                                    <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                        <span class="sr-only"></span>
+                                    </button>
+                                    <div class="dropdown-menu" role="menu">
+                                        <a class="dropdown-item" data-toggle="modal" onclick="editModalMisi(<?= $misi->id ?>)">Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="<?= site_url('admsistem/setStatus_misi/' . $misi->id) ?>" onclick="return confirm('Ubah status misi ini?')">Ubah Status</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5">Belum ada data misi.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
+        <script>
+        function editModalMisi(id) {
+            $.ajax({
+                url: 'admsistem/misiById/' + id,
+                success: function (res) {
+                    if (res.status === 'success') {
+                        $('#edit-record-common').appendTo('body').modal('show');
+                        $('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
+                        $('#edit-record-common .modal-title').html('Edit data misi');
+                        $('#edit-record-common textarea[name=misi]').val(res.data.misi);
+                        $('#edit-record-common input[name=id]').val(res.data.id);
+                        $('#edit-record-common input[name=urut]').val(res.data.urut);
+                        $('#edit-record-common select[name=visi_id]').val(res.data.visi_id);
+                    }
+                },
+            });
+        }
+        </script>
     </div>
 </div>

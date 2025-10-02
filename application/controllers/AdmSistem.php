@@ -15,6 +15,7 @@ class AdmSistem extends MY_Controller
 		$this->load->model('Master_opd_model');
 		$this->load->model('Master_branding_model');
 		$this->load->model('Visi_model');
+        $this->load->model('Misi_model');
 
 		// Check if user is logged in and has admin privileges
 		if (!$this->session->userdata('logged_in')) {
@@ -47,8 +48,105 @@ class AdmSistem extends MY_Controller
 		// $data['active_users'] = $this->Admin_model->get_active_users();
 		// $data['system_logs'] = $this->Admin_model->get_recent_logs(10);
 
+		// load misi list for the view
+		$data['misi_list'] = $this->Misi_model->get_all();
+
 		// $this->load->view('admin/dashboard', $data);
 		$this->load->view('administrator/admsistem', $data);
+	}
+
+	/**
+	 * Misi handlers
+	 */
+	public function save_misi()
+	{
+		if ($this->input->method() !== 'post') {
+			show_error('Method not allowed', 405);
+			return;
+		}
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('misi', 'Misi', 'required|max_length[5000]|trim');
+		$this->form_validation->set_rules('urut', 'Urut', 'integer');
+		$this->form_validation->set_rules('visi_id', 'Visi', 'required|integer');
+
+		$id = $this->input->post('id');
+		$tag1 = $this->input->post('tag1');
+
+		if ($this->form_validation->run() === FALSE) {
+			$this->session->set_flashdata('error-' . $tag1, validation_errors());
+			// also keep old values
+			$this->session->set_flashdata('old_misi', $this->input->post('misi'));
+			$this->session->set_flashdata('old_urut', $this->input->post('urut'));
+			$this->session->set_flashdata('old_visi_id', $this->input->post('visi_id'));
+			redirect('admsistem');
+			return;
+		}
+
+		$data = array(
+			'misi' => $this->input->post('misi'),
+			'urut' => $this->input->post('urut') ?: 0,
+			'visiinduk' => $this->input->post('visi_id'),
+			'status' => 1,
+		);
+
+		if ($id) {
+			$ok = $this->Misi_model->update($id, $data);
+			if ($ok) {
+				$this->session->set_flashdata('success-' . $tag1, 'Misi berhasil disimpan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan misi.');
+			}
+		} else {
+			$ok = $this->Misi_model->insert($data);
+			if ($ok) {
+				$this->session->set_flashdata('success-' . $tag1, 'Misi berhasil disimpan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan misi.');
+			}
+		}
+
+		redirect('admsistem');
+	}
+
+	public function misiById($id)
+	{
+		if (!$id) {
+			$misi = ['error' => 'Misi ID is required.'];
+			$status_code = 400;
+		} else {
+			$misi = $this->Misi_model->get($id);
+			$status_code = 200;
+		}
+
+		$res = [
+			'status' => 'success',
+			'data' => $misi
+		];
+		$this->output
+			->set_content_type('application/json')
+			->set_status_header($status_code)
+			->set_output(json_encode($res));
+	}
+
+	public function setStatus_misi($id)
+	{
+		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+		$misi = $this->Misi_model->get($id);
+		if (!$misi) {
+			$this->session->set_flashdata('error-' . $tag1, 'Misi not found.');
+			redirect('admsistem');
+			return;
+		}
+
+		$new_status = ((int)$misi->status === 1) ? 0 : 1;
+		$ok = $this->Misi_model->update($id, ['status' => $new_status]);
+		if ($ok) {
+			$this->session->set_flashdata('success-' . $tag1, 'Status misi berhasil diubah.');
+		} else {
+			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status misi.');
+		}
+		redirect('admsistem');
 	}
 
 	public function mitraById($id)

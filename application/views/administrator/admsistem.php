@@ -38,11 +38,11 @@ function widget_flash($tag1)
 		<div class="container-fluid">
 
 			<!-- <?php if ($this->session->flashdata('success')): ?>
-          <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
-        <?php endif; ?>
-        <?php if ($this->session->flashdata('error')): ?>
-          <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
-        <?php endif; ?> -->
+		  <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
+		<?php endif; ?>
+		<?php if ($this->session->flashdata('error')): ?>
+		  <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
+		<?php endif; ?> -->
 
 			<div class="row">
 				<div class="col-lg-4  ">
@@ -115,35 +115,40 @@ function widget_flash($tag1)
 				<h5 class="text-bold">Judul Pengumuman 1</h5>
 				<h6 class="text-monospace">Tanggal : 25 Mei 2025</h>
 					<p></p>
-					<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang
+					<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+						Pengumumanyang
 						ditampilkan.</p>
 					<hr class="hr">
 					</hr>
 					<h5 class="text-bold">Judul Pengumuman 2</h5>
 					<h6 class="text-monospace">Tanggal : 24 Mei 2025</h>
 						<p></p>
-						<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang
+						<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+							Pengumumanyang
 							ditampilkan.</p>
 						<hr class="hr">
 						</hr>
 						<h5 class="text-bold">Judul Pengumuman 3</h5>
 						<h6 class="text-monospace">Tanggal : 23 Mei 2025</h>
 							<p></p>
-							<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang
+							<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+								Pengumumanyang
 								ditampilkan.</p>
 							<hr class="hr">
 							</hr>
 							<h5 class="text-bold">Judul Pengumuman 4</h5>
 							<h6 class="text-monospace">Tanggal : 22 Mei 2025</h>
 								<p></p>
-								<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang
+								<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+									Pengumumanyang
 									ditampilkan.</p>
 								<hr class="hr">
 								</hr>
 								<h5 class="text-bold">Judul Pengumuman 5</h5>
 								<h6 class="text-monospace">Tanggal : 21 Mei 2025</h>
 									<p></p>
-									<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+									<p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas
+										maksimal 5
 										Pengumumanyang ditampilkan.</p>
 			</div>
 			<div class="modal-footer pull-right">
@@ -164,11 +169,19 @@ function widget_flash($tag1)
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="form-group"><input type="password" class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
-				<div class="form-group"><input type="password" class="form-control" id="password-baru2" placeholder="Ulangi password baru"></div>
-				<div class="modal-footer pull-right">
-					<button type="button" class="btn btn-warning">Terapkan Password Baru</button>
-				</div>
+				<form id="reset-pass" method="post" action="#">
+					<div class="form-group">
+						<input type="hidden" name="id">
+						<input type="hidden" name="tag1">
+						<input type="password" class="form-control" name="password-baru" placeholder="Masukan password baru">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" name="password-baru2" placeholder="Ulangi password baru">
+					</div>
+					<div class="modal-footer pull-right">
+						<button type="submit" class="btn btn-warning">Terapkan Password Baru</button>
+					</div>
+				</form>
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -551,7 +564,7 @@ function widget_flash($tag1)
 <?php $this->load->view('_appshell/8scripts'); ?>
 
 <script>
-	$(function() {
+	$(function () {
 		$("#tabeluser").DataTable({
 			"pageLength": 3,
 			"autoWidth": true
@@ -583,7 +596,7 @@ function widget_flash($tag1)
 	});
 </script>
 <script>
-	$(function() {
+	$(function () {
 		//Initialize Select2 Elements
 		$('.select2').select2()
 
@@ -595,7 +608,7 @@ function widget_flash($tag1)
 </script>
 
 <script>
-	$(function() {
+	$(function () {
 		let lastParent = null;
 		for (card of $(".card.card-info.card-outline ")) {
 			let title_ = $(card).find('.card-title').first();
@@ -628,7 +641,7 @@ function widget_flash($tag1)
 			}
 		}
 
-		$(".btn-fs").click(function(event) {
+		$(".btn-fs").click(function (event) {
 
 			let title_ = $(this).parent().siblings('.card-title').first();
 			let title = title_[0]?.innerHTML.trim();
@@ -654,7 +667,7 @@ function widget_flash($tag1)
 			event.stopPropagation();
 		});
 
-		$(".card-outline button, .card-outline div.card-header").click(function() {
+		$(".card-outline button, .card-outline div.card-header").click(function () {
 			let cards = $(this).parents('.card').first();
 			let that = this
 			setTimeout(() => {

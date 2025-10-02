@@ -59,7 +59,7 @@ class Visi_model extends CI_Model
         $this->db->trans_start();
 
         // set all existing visi to inactive
-        $this->db->update($this->table, array('status' => 0));
+        // $this->db->update($this->table, array('status' => 0));
 
         $this->db->insert($this->table, $data);
         $id1=$this->db->insert_id();
@@ -82,6 +82,15 @@ class Visi_model extends CI_Model
     public function update($id, $data)
     {
         return (bool)$this->db->where('id', (int)$id)->update($this->table, $data);
+    }
+
+    /**
+     * Get all active visi (status = 1)
+     * @return array
+     */
+    public function get_active()
+    {
+        return $this->db->where('status', 1)->order_by('id', 'DESC')->get($this->table)->result();
     }
 
     /**
