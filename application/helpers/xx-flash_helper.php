@@ -87,3 +87,72 @@ function wrap_ci_session($controller)
     $controller->session = new FlashSessionWrapper($controller->session);
     return true;
 }
+
+/**
+ * Set flash message with tag support
+ * @param string $tag - Tag identifier for the message
+ * @param string $type - Message type (success, error, warning, info)
+ * @param string $message - The message content
+ */
+if (!function_exists('set_flash_message')) {
+    function set_flash_message($tag, $type, $message)
+    {
+        $CI =& get_instance();
+        $flash_data = array(
+            'type' => $type,
+            'message' => $message,
+            'timestamp' => time()
+        );
+        $CI->session->set_flashdata('flash_' . $tag, $flash_data);
+    }
+}
+
+/**
+ * Get flash message widget HTML
+ * @param string $tag - Tag identifier for the message
+ * @return string - HTML for the flash message
+ */
+if (!function_exists('widget_flash')) {
+    function widget_flash($tag)
+    {
+        $CI =& get_instance();
+        $flash_data = $CI->session->flashdata('flash_' . $tag);
+        
+        if (!$flash_data) {
+            return '';
+        }
+        
+        $type = isset($flash_data['type']) ? $flash_data['type'] : 'info';
+        $message = isset($flash_data['message']) ? $flash_data['message'] : '';
+        
+        // Map types to Bootstrap alert classes
+        $alert_class = array(
+            'success' => 'alert-success',
+            'error' => 'alert-danger',
+            'warning' => 'alert-warning',
+            'info' => 'alert-info'
+        );
+        
+        $class = isset($alert_class[$type]) ? $alert_class[$type] : 'alert-info';
+        
+        // Map types to icons
+        $icons = array(
+            'success' => 'fas fa-check-circle',
+            'error' => 'fas fa-exclamation-triangle',
+            'warning' => 'fas fa-exclamation-circle',
+            'info' => 'fas fa-info-circle'
+        );
+        
+        $icon = isset($icons[$type]) ? $icons[$type] : 'fas fa-info-circle';
+        
+        $html = '<div class="alert ' . $class . ' alert-dismissible fade show" role="alert">';
+        $html .= '<i class="' . $icon . '"></i> ';
+        $html .= htmlspecialchars($message);
+        $html .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+        $html .= '<span aria-hidden="true">&times;</span>';
+        $html .= '</button>';
+        $html .= '</div>';
+        
+        return $html;
+    }
+}

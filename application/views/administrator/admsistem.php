@@ -1,24 +1,6 @@
 <?php $this->load->view('_appshell/1head2'); ?>
 
 
-<?php
-function widget_flash($tag1)
-{
-	$CI = &get_instance();
-	$html = '';
-
-	if ($CI->session->flashdata('success-' . $tag1)) {
-		$html .= '<div class="alert alert-success">' . $CI->session->flashdata('success-' . $tag1) . '</div>';
-	}
-	if ($CI->session->flashdata('error-' . $tag1)) {
-		$html .= '<div class="alert alert-danger">' . $CI->session->flashdata('error-' . $tag1) . '</div>';
-	}
-
-	return $html;
-}
-
-?>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -26,7 +8,7 @@ function widget_flash($tag1)
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0"> Administrasi Sistem</h1>
+					<h1 class="m-0"> Administrasi Sistem <a style="font-size: .6em" href="#" id="relayoutPage"><i class="fa fa-sync"></i></a></h1>
 				</div><!-- /.col -->
 			</div><!-- /.row -->
 		</div><!-- /.container-fluid -->
@@ -36,40 +18,32 @@ function widget_flash($tag1)
 	<!-- Main content -->
 	<div class="content">
 		<div class="container-fluid">
-
-			<!-- <?php if ($this->session->flashdata('success')): ?>
-		  <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
-		<?php endif; ?>
-		<?php if ($this->session->flashdata('error')): ?>
-		  <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
-		<?php endif; ?> -->
-
 			<div class="row">
 				<div class="col-lg-4  ">
-					<?php $this->load->view('administrator/admsistem_masteruser'); ?>
+					<?php $this->load->view('administrator/admsistem/masteruser'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem_masteropd'); ?>
+					<?php $this->load->view('administrator/admsistem/masteropd'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem_mastermitra'); ?>
+					<?php $this->load->view('administrator/admsistem/mastermitra'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 			</div>
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem_mastervisi'); ?>
+					<?php $this->load->view('administrator/admsistem/mastervisi'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem_mastermisi'); ?>
+					<?php $this->load->view('administrator/admsistem/mastermisi'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem_masterperiode'); ?>
+					<?php $this->load->view('administrator/admsistem/masterperiode'); ?>
 				</div>
 
 				<!-- /.col-md-6 -->
@@ -77,11 +51,11 @@ function widget_flash($tag1)
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem_mastergroupperiode'); ?>
+					<?php $this->load->view('administrator/admsistem/mastergroupperiode'); ?>
 				</div>
 
 				<div class="col-lg-8">
-					<?php $this->load->view('administrator/admsistem_masterbranding'); ?>
+					<?php $this->load->view('administrator/admsistem/masterbranding'); ?>
 				</div>
 			</div>
 		</div><!-- /.container-fluid -->
@@ -470,7 +444,7 @@ function widget_flash($tag1)
 				<div class="form-group row">
 					<label for="inputEmail3" class="col-sm-2 col-form-label">OPD</label>
 					<div class="col-sm-8">
-						<input type="email" class="form-control" id="namapd" placeholder="Masukan Nama OPD">
+						<input type="email" class="form-control" xid="namapd" placeholder="Masukan Nama OPD">
 					</div>
 					<div class="col-sm-2">
 						<input type="email" class="form-control" id="urutanpd" placeholder="No Urut">
@@ -542,22 +516,6 @@ function widget_flash($tag1)
 	</div>
 </div>
 
-<div class="modal fade" id="edit-record-common">
-	<div class="modal-dialog modal-md modal-outline">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Edit data xxx</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-</div>
 
 <!-- REQUIRED SCRIPTS -->
 
@@ -604,87 +562,6 @@ function widget_flash($tag1)
 		$('.select2bs4').select2({
 			theme: 'bootstrap4'
 		})
-	})
-</script>
-
-<script>
-	$(function () {
-		let lastParent = null;
-		for (card of $(".card.card-info.card-outline ")) {
-			let title_ = $(card).find('.card-title').first();
-			let title = title_[0]?.innerHTML.trim();
-			let state = localStorage.getItem('adminsistem-' + title) === null ? "-" : localStorage.getItem('adminsistem-' + title);
-			let button = $(card).find('button').eq(1).find('i').first();
-
-			let lsKey1 = 'adminsistem-maxed-' + title;
-			let maxed = localStorage.getItem(lsKey1) === null ? "0" : localStorage.getItem(lsKey1);
-
-			if (maxed === '0' && state === 'collapsed-card') { //close card
-				$(card).addClass("collapsed-card");
-				button.removeClass('fa-minus').addClass('fa-plus');
-			} else { //open card
-				$(card).removeClass("collapsed-card");
-				button.removeClass('fa-plus').addClass('fa-minus');
-			}
-
-			if (maxed === '1') {
-				let btn = $(card).find('button.btn-fs').first();
-				lastParent = $(card).parent();
-				$(card).appendTo("#box1");
-				$("div.content").hide();
-				btn[0].innerHTML = "]&nbsp;[";
-			} else {
-				let btn = $(card).find('button.btn-fs').first();
-				if (btn[0]) {
-					btn[0].innerHTML = "[&nbsp;&nbsp;&nbsp;]";
-				}
-			}
-		}
-
-		$(".btn-fs").click(function (event) {
-
-			let title_ = $(this).parent().siblings('.card-title').first();
-			let title = title_[0]?.innerHTML.trim();
-
-			let lsKey1 = 'adminsistem-maxed-' + title;
-			if (this.innerHTML === "]&nbsp;[") {
-				$(this).parents(".card").first().appendTo("#box1");
-				$("div.content").show();
-				this.innerHTML = "[&nbsp;&nbsp;&nbsp;]";
-				$(this).parents(".card").first().appendTo(lastParent);
-				localStorage.setItem(lsKey1, "0");
-			} else {
-				lastParent = $(this).parents(".card").parent();
-				$(this).parents(".card").first().appendTo("#box1");
-				$("div.content").hide();
-				this.innerHTML = "]&nbsp;[";
-				localStorage.setItem(lsKey1, "1");
-				//open card when max
-				if ($(this).parents(".card").first().hasClass('collapsed-card')) {
-					$(this).parents("div.card-header").first().click();
-				}
-			}
-			event.stopPropagation();
-		});
-
-		$(".card-outline button, .card-outline div.card-header").click(function () {
-			let cards = $(this).parents('.card').first();
-			let that = this
-			setTimeout(() => {
-
-				let title_ = $(that).parent().siblings('.card-title').first();
-				if (title_.length === 0) {
-					title_ = $(that).find('.card-title').first();
-				}
-				console.log(title_);
-				let title = title_[0]?.innerHTML.trim();
-				if ($(cards[0]).hasClass('collapsed-card')) {
-					localStorage.setItem('adminsistem-' + title, "collapsed-card");
-				} else {
-					localStorage.setItem('adminsistem-' + title, "");
-				}
-			}, 500);
-		});
 	})
 </script>
 

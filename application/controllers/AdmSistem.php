@@ -16,6 +16,8 @@ class AdmSistem extends MY_Controller
 		$this->load->model('Master_branding_model');
 		$this->load->model('Visi_model');
         $this->load->model('Misi_model');
+		$this->load->model('Periode_model');
+		$this->load->model('Grouping_periode_model');
 
 		// Check if user is logged in and has admin privileges
 		if (!$this->session->userdata('logged_in')) {
@@ -50,6 +52,10 @@ class AdmSistem extends MY_Controller
 
 		// load misi list for the view
 		$data['misi_list'] = $this->Misi_model->get_all();
+		// load periode list for the view
+		$data['periode_list'] = $this->Periode_model->get_all();
+		// load grouping periode list for the view
+		$data['grouping_periode_list'] = $this->Grouping_periode_model->get_all();
 
 		// $this->load->view('admin/dashboard', $data);
 		$this->load->view('administrator/admsistem', $data);
@@ -145,6 +151,192 @@ class AdmSistem extends MY_Controller
 			$this->session->set_flashdata('success-' . $tag1, 'Status misi berhasil diubah.');
 		} else {
 			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status misi.');
+		}
+		redirect('admsistem');
+	}
+
+	/**
+	 * Periode handlers
+	 */
+	public function save_periode()
+	{
+		if ($this->input->method() !== 'post') {
+			show_error('Method not allowed', 405);
+			return;
+		}
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('kode', 'Kode', 'required|max_length[20]');
+		$this->form_validation->set_rules('keterangan', 'Keterangan', 'required|max_length[100]');
+
+		$id = $this->input->post('id');  // optional for update
+		$tag1 = $this->input->post('tag1');
+
+		if ($this->form_validation->run() === FALSE) {
+			$this->session->set_flashdata('error-' . $tag1, validation_errors());
+			// also keep old values
+			$this->session->set_flashdata('old_kode', $this->input->post('kode'));
+			$this->session->set_flashdata('old_keterangan', $this->input->post('keterangan'));
+			redirect('admsistem');
+			return;
+		}
+
+		$data = array(
+			'kode' => $this->input->post('kode'),
+			'keterangan' => $this->input->post('keterangan'),
+			'status' => 'Aktif',
+		);
+
+		if ($id) {
+			$ok = $this->Periode_model->update($id, $data);
+			if ($ok) {
+				$this->session->set_flashdata('success-' . $tag1, 'Periode berhasil disimpan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan periode.');
+			}
+		} else {
+			$ok = $this->Periode_model->insert($data);
+			if ($ok) {
+				$this->session->set_flashdata('success-' . $tag1, 'Periode berhasil disimpan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan periode.');
+			}
+		}
+
+		redirect('admsistem');
+	}
+
+	public function periodeById($id)
+	{
+		if (!$id) {
+			$periode = ['error' => 'Periode ID is required.'];
+			$status_code = 400;
+		} else {
+			$periode = $this->Periode_model->get($id);
+			$status_code = 200;
+		}
+
+		$res = [
+			'status' => 'success',
+			'data' => $periode
+		];
+		$this->output
+			->set_content_type('application/json')
+			->set_status_header($status_code)
+			->set_output(json_encode($res));
+	}
+
+	public function setStatus_periode($id)
+	{
+		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+		$periode = $this->Periode_model->get($id);
+		if (!$periode) {
+			$this->session->set_flashdata('error-' . $tag1, 'Periode not found.');
+			redirect('admsistem');
+			return;
+		}
+
+		// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
+		$new_status = (strtolower($periode->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
+
+		$ok = $this->Periode_model->update($id, ['status' => $new_status]);
+		if ($ok) {
+			$this->session->set_flashdata('success-' . $tag1, 'Status periode berhasil diubah menjadi "' . $new_status . '".');
+		} else {
+			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status periode.');
+		}
+		redirect('admsistem');
+	}
+
+	/**
+	 * Grouping Periode handlers
+	 */
+	public function save_grouping_periode()
+	{
+		if ($this->input->method() !== 'post') {
+			show_error('Method not allowed', 405);
+			return;
+		}
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('group', 'Group', 'required|max_length[50]');
+		$this->form_validation->set_rules('jumlah_bulan', 'Jumlah Bulan', 'required|integer|greater_than[0]');
+
+		$id = $this->input->post('id');  // optional for update
+		$tag1 = $this->input->post('tag1');
+
+		if ($this->form_validation->run() === FALSE) {
+			$this->session->set_flashdata('error-' . $tag1, validation_errors());
+			// also keep old values
+			$this->session->set_flashdata('old_group', $this->input->post('group'));
+			$this->session->set_flashdata('old_jumlah_bulan', $this->input->post('jumlah_bulan'));
+			redirect('admsistem');
+			return;
+		}
+
+		$data = array(
+			'nama' => $this->input->post('group'),
+			'jmlbulan' => $this->input->post('jumlah_bulan'),
+			'status' => 'Aktif',
+		);
+
+		if ($id) {
+			$ok = $this->Grouping_periode_model->update($id, $data);
+			if ($ok) {
+				$this->session->set_flashdata('success-' . $tag1, 'Grouping periode berhasil disimpan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan grouping periode.');
+			}
+		} else {
+			$ok = $this->Grouping_periode_model->insert($data);
+			if ($ok) {
+				$this->session->set_flashdata('success-' . $tag1, 'Grouping periode berhasil disimpan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan grouping periode.');
+			}
+		}
+
+		redirect('admsistem');
+	}
+
+	public function groupingPeriodeById($id)
+	{
+		if (!$id) {
+			$grouping = ['error' => 'Grouping Periode ID is required.'];
+			$status_code = 400;
+		} else {
+			$grouping = $this->Grouping_periode_model->get($id);
+			$status_code = 200;
+		}
+
+		$res = [
+			'status' => 'success',
+			'data' => $grouping
+		];
+		$this->output
+			->set_content_type('application/json')
+			->set_status_header($status_code)
+			->set_output(json_encode($res));
+	}
+
+	public function setStatus_grouping_periode($id)
+	{
+		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+		$grouping = $this->Grouping_periode_model->get($id);
+		if (!$grouping) {
+			$this->session->set_flashdata('error-' . $tag1, 'Grouping periode not found.');
+			redirect('admsistem');
+			return;
+		}
+
+		// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
+		$new_status = (strtolower($grouping->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
+
+		$ok = $this->Grouping_periode_model->update($id, ['status' => $new_status]);
+		if ($ok) {
+			$this->session->set_flashdata('success-' . $tag1, 'Status grouping periode berhasil diubah menjadi "' . $new_status . '".');
+		} else {
+			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status grouping periode.');
 		}
 		redirect('admsistem');
 	}

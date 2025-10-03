@@ -117,7 +117,7 @@ $tag1 = "form_mastermitra";
                         $('#edit-record-common textarea[name=misi]').val(res.data.misi);
                         $('#edit-record-common input[name=id]').val(res.data.id);
                         $('#edit-record-common input[name=urut]').val(res.data.urut);
-                        $('#edit-record-common select[name=visi_id]').val(res.data.visi_id);
+                        $('#edit-record-common select[name=visi_id]').val(res.data.visiinduk);
                     }
                 },
             });
