@@ -1,15 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Misi_model extends CI_Model
+class MMisi extends MY_Model
 {
     protected $table = 'misi';
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
 
     public function get_all()
     {
@@ -38,11 +33,6 @@ class Misi_model extends CI_Model
         return $this->db->update($this->table, $data);
     }
 
-    public function delete($id)
-    {
-        $this->db->where('id', (int)$id);
-        return $this->db->delete($this->table);
-    }
 }
 
 

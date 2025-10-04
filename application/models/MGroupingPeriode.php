@@ -1,21 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Master_mitra_model extends CI_Model {
+class MGroupingPeriode extends MY_Model {
 
-    protected $table = 'mitra';
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
-
-    public function get_all()
-    {
-        $this->db->order_by('urut', 'ASC');
-        return $this->db->get($this->table)->result();
-    }
+    protected $table = 'periodegrouping';
 
     public function get($id)
     {

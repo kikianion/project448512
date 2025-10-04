@@ -19,7 +19,7 @@ $tag1 = "form_mastermitra";
 		<?= widget_flash($tag1) ?>
 
 		<div id="form-<?= $tag1 ?>">
-			<?php echo form_open('admsistem/save_master_mitra'); ?>
+			<?php echo form_open('admsistem/mitra/save'); ?>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Mitra</label>
 				<div class="col-sm-8">
@@ -105,7 +105,7 @@ $tag1 = "form_mastermitra";
 									<div class="dropdown-menu" role="menu">
 										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra" onclick="editModalMitra(<?= $m->id ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/setStatus_mitra/' . $m->id) ?>"
+										<a class="dropdown-item" href="<?= site_url('admsistem/mitra/setStatus/' . $m->id) ?>"
 											onclick="return confirm('Apakah Anda yakin ingin mengubah status mitra ini?')">Ubah Status</a>
 									</div>
 								</div>
@@ -125,7 +125,7 @@ $tag1 = "form_mastermitra";
 <script>
 	function editModalMitra(id) {
 		$.ajax({
-			url: 'admsistem/mitraById/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
+			url: 'admsistem/mitra/mitraById/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
 			success: function (res) {
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');
@@ -144,20 +144,4 @@ $tag1 = "form_mastermitra";
 			},
 		});
 	}
-</script>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-		var f1 = document.querySelectorAll('#form-form_mastermitra input');
-		// console.log(f1);
-		// if (f1.length > 0) {
-		//   f1[0].value = "sandi";
-		//   f1[1].value = 11;
-		//   // f1[2].value = "01112121212";
-		//   f1[4].value = "PLT1";
-		//   f1[5].value = "dsfewfewf";
-		//   f1[6].value = "dddgfdsf";
-		//   f1[7].value = "45gt54";
-		// }
-	});
 </script>

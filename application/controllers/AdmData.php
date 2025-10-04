@@ -13,6 +13,7 @@ class AdmData extends MY_Controller
 		$this->load->model('Data_model');
 		$this->load->model('Master_fungsi_model');
 		$this->load->model('Master_urusan_model');
+		$this->load->model('Master_program_model');
 		$this->load->library('upload');
 		$this->load->library('zip');
 		$this->load->library('form_validation');
@@ -35,6 +36,8 @@ class AdmData extends MY_Controller
 		// Load data for all master components
 		$data['master_fungsi'] = $this->Master_fungsi_model->get_all();
 		$data['master_urusan'] = $this->Master_urusan_model->get_all();
+		$data['master_urusan_active'] = $this->Master_urusan_model->get_active();
+		$data['master_program'] = $this->Master_program_model->get_all();
 
 		// Load edit data if editing
 		$edit_id = $this->session->flashdata('edit_master_fungsi_id');
@@ -50,19 +53,19 @@ class AdmData extends MY_Controller
 		$this->load->view('administrator/admdata', $data);
 	}
 
-	public function dashboard()
-	{
-		$data['title'] = 'Administrasi Data';
-		$data['user'] = $this->session->userdata();
+	// public function dashboard()
+	// {
+	// 	$data['title'] = 'Administrasi Data';
+	// 	$data['user'] = $this->session->userdata();
 
-		// Get data statistics
-		$data['total_records'] = $this->Data_model->get_total_records();
-		$data['recent_imports'] = $this->Data_model->get_recent_imports(5);
-		$data['backup_files'] = $this->Data_model->get_backup_files();
-		$data['data_quality'] = $this->Data_model->get_data_quality_stats();
+	// 	// Get data statistics
+	// 	$data['total_records'] = $this->Data_model->get_total_records();
+	// 	$data['recent_imports'] = $this->Data_model->get_recent_imports(5);
+	// 	$data['backup_files'] = $this->Data_model->get_backup_files();
+	// 	$data['data_quality'] = $this->Data_model->get_data_quality_stats();
 
-		$this->load->view('admin/admdata_dashboard', $data);
-	}
+	// 	$this->load->view('admin/admdata_dashboard', $data);
+	// }
 
 	public function import()
 	{
@@ -443,6 +446,100 @@ class AdmData extends MY_Controller
 			}
 		}
 
+		redirect('admdata');
+	}
+
+	// ========================================
+	// MASTER PROGRAM CRUD METHODS
+	// ========================================
+
+	/**
+	 * Save master program (Create/Update)
+	 */
+	public function save_master_program()
+	{
+		$this->form_validation->set_rules('namaprogram', 'Nama Program', 'required|max_length[100]');
+		$this->form_validation->set_rules('kode', 'Kode', 'required|max_length[20]');
+		$this->form_validation->set_rules('urusan_id', 'Urusan', 'required|integer');
+		$this->form_validation->set_rules('tag1', 'Tag', 'required');
+
+		$tag = $this->input->post('tag1');
+		$post = $this->input->post();
+
+		if ($this->form_validation->run() === FALSE) {
+			$this->session->set_flashdata('error-' . $tag, 'Validasi gagal: ' . validation_errors());
+			redirect('admdata');
+			return;
+		}
+
+		$data = array(
+			'namaprogram' => $this->input->post('namaprogram'),
+			'kode' => $this->input->post('kode'),
+			'urusan_id' => $this->input->post('urusan_id')
+		);
+
+		$id = $this->input->post('id');
+
+		if ($id) {
+			$result = $this->Master_program_model->update($id, $data);
+			if ($result) {
+				$this->session->set_flashdata('success-' . $tag, 'Data program berhasil diperbarui.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag, 'Gagal memperbarui data program. Kode mungkin sudah ada.');
+			}
+		} else {
+			$result = $this->Master_program_model->insert($data);
+			if ($result) {
+				$this->session->set_flashdata('success-' . $tag, 'Data program berhasil ditambahkan.');
+			} else {
+				$this->session->set_flashdata('error-' . $tag, 'Gagal menambahkan data program. Kode mungkin sudah ada.');
+			}
+		}
+
+		redirect('admdata');
+	}
+
+	/**
+	 * Get program by ID (AJAX)
+	 */
+	public function programById($id)
+	{
+		$program = $this->Master_program_model->get_by_id($id);
+
+		if ($program) {
+			$response = array('status' => 'success', 'data' => $program);
+		} else {
+			$response = array('status' => 'error', 'message' => 'Data tidak ditemukan');
+		}
+
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	/**
+	 * Toggle program status
+	 */
+	public function setStatus_program($id)
+	{
+		$result = $this->Master_program_model->toggle_status($id);
+		if ($result) {
+			$this->session->set_flashdata('success', 'Status program berhasil diubah.');
+		} else {
+			$this->session->set_flashdata('error', 'Gagal mengubah status program.');
+		}
+		redirect('admdata');
+	}
+
+	/**
+	 * Delete program
+	 */
+	public function delete_program($id)
+	{
+		$result = $this->Master_program_model->delete($id);
+		if ($result) {
+			$this->session->set_flashdata('success', 'Data program berhasil dihapus.');
+		} else {
+			$this->session->set_flashdata('error', 'Gagal menghapus data program.');
+		}
 		redirect('admdata');
 	}
 

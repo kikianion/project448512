@@ -632,11 +632,11 @@
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Satuan</label>
           <div class="col-sm-4">
-            <input type="email" class="form-control" id="satuan" placeholder="Satuan Indikator">
+            <input type="email" class="form-control" xid="satuan" placeholder="Satuan Indikator">
           </div>
           <label for="inputEmail3" class="col-sm-2 col-form-label">Awal</label>
           <div class="col-sm-4">
-            <input type="email" class="form-control" id="satuan" placeholder="Kondisi Awal Periode">
+            <input type="email" class="form-control" xid="satuan" placeholder="Kondisi Awal Periode">
           </div>
         </div>
         <div class="form-group row">

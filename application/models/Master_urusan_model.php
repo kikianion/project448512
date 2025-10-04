@@ -1,10 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Master_urusan_model extends CI_Model {
+class Master_urusan_model extends MY_Model {
 
-    private $table = 'urusan';
-    private $primary_key = 'id';
+    protected $table = 'urusan';
+    protected $primary_key = 'id';
+    protected $status_field = 'status';
 
     public function __construct()
     {

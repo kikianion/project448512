@@ -21,6 +21,15 @@
 	let page_name = "x"
 
 	document.addEventListener('DOMContentLoaded', function () {
+		if(localStorage.getItem("auto_reload_do")==="1") {
+			localStorage.removeItem("auto_reload_do")
+			$("#status1").html("auto reload done")
+			setTimeout(() => {
+				$("#status1").html("")
+			}, 1000);
+		}
+
+
 		page_name = lsPrefLayout + $(".content-header h1").first().text().trim() + "-";
 		// console.log(page_name)
 		// let lastParent = null;
@@ -36,11 +45,6 @@
 			let collap = localStorage.getItem(lsKeyCollapsed) === null ? 1 : localStorage.getItem(lsKeyCollapsed);
 			let maxed = localStorage.getItem(lsKeyMaxed) === null ? 0 : localStorage.getItem(lsKeyMaxed);
 
-			// console.log("title:" + title)
-			// console.log("collap:"+collap)
-			// console.log("maxed:"+maxed)
-			// debugger
-
 			if (collap == 1) {
 				// console.log("collap1:"+collap)
 				$(card).addClass("collapsed-card");
@@ -53,44 +57,10 @@
 
 			if (maxed == 1) {
 				let btnfs=$(card).find('.card-tools button').first();
-				// log1("btnfs maxed")
-				// log1(btnfs)
 				setTimeout(() => {
 					btnfs.click()
 				}, 200);
-				
-				// btnfs.html("]&nbsp;[")
-				// $(card).addClass("collapsed-card");
-				// button.removeClass('fa-minus').addClass('fa-plus');
 			}
-			else {
-			// 	$(card).removeClass("collapsed-card");
-			// 	button.removeClass('fa-plus').addClass('fa-minus');
-			}
-
-			// if (state === '-') { //
-
-			// }
-			// else if (maxed === '0' && state === 'collapsed-card') { //close card
-			// 	$(card).addClass("collapsed-card");
-			// 	button.removeClass('fa-minus').addClass('fa-plus');
-			// } else { //open card
-			// 	$(card).removeClass("collapsed-card");
-			// 	button.removeClass('fa-plus').addClass('fa-minus');
-			// }
-			// debugger
-			// if (maxed === '1') {
-			// 	let btn = $(card).find('button.btn-fs').first();
-			// 	lastParent = $(card).parent();
-			// 	$(card).appendTo("#box1");
-			// 	$("div.content").hide();
-			// 	btn[0].innerHTML = "]&nbsp;[";
-			// } else {
-			// 	let btn = $(card).find('button.btn-fs').first();
-			// 	if (btn[0]) {
-			// 		btn[0].innerHTML = "[&nbsp;&nbsp;&nbsp;]";
-			// 	}
-			// }
 		}
 
 
@@ -132,11 +102,11 @@
 			log1("target1")
 			log1(target1)
 			if (fTxt === "]&nbsp;[") { // max opened
-				// target1.removeClass("col-lg-12")
+				target1.removeClass("col-lg-12")
 				$(e.currentTarget).html("[&nbsp;&nbsp;]")
 				localStorage.setItem(lsKeyMaxed, 0);
 			} else if (fTxt === "[&nbsp;&nbsp;]") { // max closed
-				// target1.addClass("col-lg-12")
+				target1.addClass("col-lg-12")
 				$(e.currentTarget).html("]&nbsp;[")
 				localStorage.setItem(lsKeyMaxed, 1);
 			}
@@ -187,7 +157,9 @@
 		// get auto_reload localStorage value
 		var autoReload = localStorage.getItem("auto_reload");
 		if (autoReload === "1") {
+			localStorage.setItem("auto_reload_do", 1);
 			location.reload();
+			
 		}
 	};
 </script>

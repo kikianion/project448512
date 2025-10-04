@@ -1,0 +1,90 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class MVisi extends MY_Model
+{
+	protected $table = 'visi';
+
+	/**
+	 * Get single visi by id
+	 * @param int $id
+	 * @return object|null
+	 */
+	public function get($id)
+	{
+		return $this->db->where('id', (int) $id)->get($this->table)->row();
+	}
+
+	/**
+	 * Deactivate all visi entries (set status = 0)
+	 * @return bool
+	 */
+	public function deactivate_all()
+	{
+		return (bool) $this->db->update($this->table, array('status' => 0));
+	}
+
+	/**
+	 * Insert a visi row and make it active. This runs inside a DB transaction
+	 * so that deactivation of previous records and insertion of the new one
+	 * happen atomically.
+	 * @param string $visi_text
+	 * @return int|bool inserted id or false
+	 */
+	public function insert($visi_text)
+	{
+		// prepare data
+		$data = array(
+			'visi' => $visi_text,
+			'status' => 1
+		);
+
+		// transaction: deactivate existing active visi then insert new
+		$this->db->trans_start();
+
+		// set all existing visi to inactive
+		// $this->db->update($this->table, array('status' => 0));
+
+		$this->db->insert($this->table, $data);
+		$id1 = $this->db->insert_id();
+
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === TRUE) {
+			return $id1;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Update visi row
+	 * @param int $id
+	 * @param array $data
+	 * @return bool
+	 */
+	public function update($id, $data)
+	{
+		return (bool) $this->db->where('id', (int) $id)->update($this->table, $data);
+	}
+
+	/**
+	 * Get all active visi (status = 1)
+	 * @return array
+	 */
+	public function get_active()
+	{
+		return $this->db->where('status', 1)->order_by('id', 'DESC')->get($this->table)->result();
+	}
+
+	/**
+	 * Set status for a specific visi id
+	 * @param int $id
+	 * @param int $status
+	 * @return bool
+	 */
+	public function set_status($id, $status)
+	{
+		return (bool) $this->db->where('id', (int) $id)->update($this->table, array('status' => (int) $status));
+	}
+}

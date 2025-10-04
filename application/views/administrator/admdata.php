@@ -351,7 +351,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="edit-fungsi">
+<!-- <div class="modal fade" id="edit-fungsi">
 	<div class="modal-dialog modal-md modal-outline">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -376,7 +376,7 @@
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
-</div>
+</div> -->
 
 <div class="modal fade" id="edit-urusan">
 	<div class="modal-dialog modal-md modal-outline">

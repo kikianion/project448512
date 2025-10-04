@@ -1,23 +1,21 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class AdmSistem extends MY_Controller
+class CAdmSistem extends MY_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('session');
-		$this->load->helper('url');
-		$this->load->model('User_model');
-		$this->load->model('Admin_model');
-		$this->load->model('Master_user_model');
-		$this->load->model('Master_mitra_model');
-		$this->load->model('Master_opd_model');
-		$this->load->model('Master_branding_model');
-		$this->load->model('Visi_model');
-        $this->load->model('Misi_model');
-		$this->load->model('Periode_model');
-		$this->load->model('Grouping_periode_model');
+		// $this->load->model('User_model');
+		// $this->load->model('Admin_model');
+		$this->load->model('MMasterUser');
+		$this->load->model('MMasterMitra');
+		$this->load->model('MMasterOpd');
+		$this->load->model('MMasterBranding');
+		$this->load->model('MVisi');
+		$this->load->model('MMisi');
+		$this->load->model('MPeriode');
+		$this->load->model('MGroupingPeriode');
 
 		// Check if user is logged in and has admin privileges
 		if (!$this->session->userdata('logged_in')) {
@@ -32,38 +30,20 @@ class AdmSistem extends MY_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Administrasi Sistem';
-		// load visi list for the view
-		$data['visi_list'] = $this->Visi_model->get_all();
-		// load master users for the view
-		$data['master_users'] = $this->Master_user_model->get_all();
-		// load master mitra for the view
-		$data['master_mitra'] = $this->Master_mitra_model->get_all();
-		// load master opd for the view
-		$data['master_opd'] = $this->Master_opd_model->get_all();
-		// load branding data
-		$data['master_branding'] = $this->Master_branding_model->get_all();
-		// $data['user'] = $this->session->userdata();
+		$data['master_users'] = $this->MMasterUser->getAll();
+		$data['master_opd'] = $this->MMasterOpd->getAll();
+		$data['master_mitra'] = $this->MMasterMitra->getAll();
 
-		// Get system statistics
-		// $data['total_users'] = $this->Admin_model->get_total_users();
-		// $data['active_users'] = $this->Admin_model->get_active_users();
-		// $data['system_logs'] = $this->Admin_model->get_recent_logs(10);
+		$data['visi_list'] = $this->MVisi->getAll();
+		$data['misi_list'] = $this->MMisi->getAll();
+		$data['periode_list'] = $this->MPeriode->getAll();
 
-		// load misi list for the view
-		$data['misi_list'] = $this->Misi_model->get_all();
-		// load periode list for the view
-		$data['periode_list'] = $this->Periode_model->get_all();
-		// load grouping periode list for the view
-		$data['grouping_periode_list'] = $this->Grouping_periode_model->get_all();
+		$data['grouping_periode_list'] = $this->MGroupingPeriode->getAll();
+		$data['master_branding'] = $this->MMasterBranding->getAll();
 
-		// $this->load->view('admin/dashboard', $data);
 		$this->load->view('administrator/admsistem', $data);
 	}
 
-	/**
-	 * Misi handlers
-	 */
 	public function save_misi()
 	{
 		if ($this->input->method() !== 'post') {
@@ -97,14 +77,14 @@ class AdmSistem extends MY_Controller
 		);
 
 		if ($id) {
-			$ok = $this->Misi_model->update($id, $data);
+			$ok = $this->MMisi->update($id, $data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Misi berhasil disimpan.');
 			} else {
 				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan misi.');
 			}
 		} else {
-			$ok = $this->Misi_model->insert($data);
+			$ok = $this->MMisi->insert($data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Misi berhasil disimpan.');
 			} else {
@@ -121,7 +101,7 @@ class AdmSistem extends MY_Controller
 			$misi = ['error' => 'Misi ID is required.'];
 			$status_code = 400;
 		} else {
-			$misi = $this->Misi_model->get($id);
+			$misi = $this->MMisi->get($id);
 			$status_code = 200;
 		}
 
@@ -138,15 +118,15 @@ class AdmSistem extends MY_Controller
 	public function setStatus_misi($id)
 	{
 		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
-		$misi = $this->Misi_model->get($id);
+		$misi = $this->MMisi->get($id);
 		if (!$misi) {
 			$this->session->set_flashdata('error-' . $tag1, 'Misi not found.');
 			redirect('admsistem');
 			return;
 		}
 
-		$new_status = ((int)$misi->status === 1) ? 0 : 1;
-		$ok = $this->Misi_model->update($id, ['status' => $new_status]);
+		$new_status = ((int) $misi->status === 1) ? 0 : 1;
+		$ok = $this->MMisi->update($id, ['status' => $new_status]);
 		if ($ok) {
 			$this->session->set_flashdata('success-' . $tag1, 'Status misi berhasil diubah.');
 		} else {
@@ -188,14 +168,14 @@ class AdmSistem extends MY_Controller
 		);
 
 		if ($id) {
-			$ok = $this->Periode_model->update($id, $data);
+			$ok = $this->MPeriode->update($id, $data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Periode berhasil disimpan.');
 			} else {
 				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan periode.');
 			}
 		} else {
-			$ok = $this->Periode_model->insert($data);
+			$ok = $this->MPeriode->insert($data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Periode berhasil disimpan.');
 			} else {
@@ -212,7 +192,7 @@ class AdmSistem extends MY_Controller
 			$periode = ['error' => 'Periode ID is required.'];
 			$status_code = 400;
 		} else {
-			$periode = $this->Periode_model->get($id);
+			$periode = $this->MPeriode->get($id);
 			$status_code = 200;
 		}
 
@@ -229,7 +209,7 @@ class AdmSistem extends MY_Controller
 	public function setStatus_periode($id)
 	{
 		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
-		$periode = $this->Periode_model->get($id);
+		$periode = $this->MPeriode->get($id);
 		if (!$periode) {
 			$this->session->set_flashdata('error-' . $tag1, 'Periode not found.');
 			redirect('admsistem');
@@ -239,7 +219,7 @@ class AdmSistem extends MY_Controller
 		// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
 		$new_status = (strtolower($periode->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
 
-		$ok = $this->Periode_model->update($id, ['status' => $new_status]);
+		$ok = $this->MPeriode->update($id, ['status' => $new_status]);
 		if ($ok) {
 			$this->session->set_flashdata('success-' . $tag1, 'Status periode berhasil diubah menjadi "' . $new_status . '".');
 		} else {
@@ -281,14 +261,14 @@ class AdmSistem extends MY_Controller
 		);
 
 		if ($id) {
-			$ok = $this->Grouping_periode_model->update($id, $data);
+			$ok = $this->MGroupingPeriode->update($id, $data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Grouping periode berhasil disimpan.');
 			} else {
 				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan grouping periode.');
 			}
 		} else {
-			$ok = $this->Grouping_periode_model->insert($data);
+			$ok = $this->MGroupingPeriode->insert($data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Grouping periode berhasil disimpan.');
 			} else {
@@ -305,7 +285,7 @@ class AdmSistem extends MY_Controller
 			$grouping = ['error' => 'Grouping Periode ID is required.'];
 			$status_code = 400;
 		} else {
-			$grouping = $this->Grouping_periode_model->get($id);
+			$grouping = $this->MGroupingPeriode->get($id);
 			$status_code = 200;
 		}
 
@@ -322,7 +302,7 @@ class AdmSistem extends MY_Controller
 	public function setStatus_grouping_periode($id)
 	{
 		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
-		$grouping = $this->Grouping_periode_model->get($id);
+		$grouping = $this->MGroupingPeriode->get($id);
 		if (!$grouping) {
 			$this->session->set_flashdata('error-' . $tag1, 'Grouping periode not found.');
 			redirect('admsistem');
@@ -332,7 +312,7 @@ class AdmSistem extends MY_Controller
 		// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
 		$new_status = (strtolower($grouping->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
 
-		$ok = $this->Grouping_periode_model->update($id, ['status' => $new_status]);
+		$ok = $this->MGroupingPeriode->update($id, ['status' => $new_status]);
 		if ($ok) {
 			$this->session->set_flashdata('success-' . $tag1, 'Status grouping periode berhasil diubah menjadi "' . $new_status . '".');
 		} else {
@@ -353,7 +333,7 @@ class AdmSistem extends MY_Controller
 			$status_code = 400;  // Bad Request
 		} else {
 			// 2. Call a new model method (you must create this!) to get a single record by ID
-			$mitra = $this->Master_mitra_model->get($id);
+			$mitra = $this->MMasterMitra->get($id);
 			$status_code = 200;
 		}
 
@@ -372,13 +352,13 @@ class AdmSistem extends MY_Controller
 	public function userById($id)
 	{
 		// Check if an ID was provided
-		if ( $id!=0 && !$id) {
+		if ($id != 0 && !$id) {
 			// Handle the case where no ID is provided (e.g., return an error or empty array)
 			$user = ['error' => 'User ID is required.'];
 			$status_code = 400;  // Bad Request
 		} else {
 			// Call the model method to get a single record by ID
-			$user = $this->Master_user_model->get($id);
+			$user = $this->MMasterUser->get($id);
 			$status_code = 200;
 		}
 
@@ -394,109 +374,6 @@ class AdmSistem extends MY_Controller
 			->set_output(json_encode($res));
 	}
 
-	/**
-	 * Create or update a master user (table `user`)
-	 */
-	public function save_master_user()
-	{
-		if ($this->input->method() !== 'post') {
-			show_error('Method not allowed', 405);
-			return;
-		}
-
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username', 'Username', 'required|max_length[30]');
-		$this->form_validation->set_rules('nama', 'Nama', 'required|max_length[50]');
-		$this->form_validation->set_rules('role', 'Role', 'required|max_length[20]');
-		$this->form_validation->set_rules('opd', 'OPD', 'max_length[10]');
-		$this->form_validation->set_rules('status', 'Status', 'max_length[50]');
-
-		$id = $this->input->post('id');  // optional for update
-		$tag1 = $this->input->post('tag1');
-
-		$post_data = $this->input->post();
-
-		if ($this->form_validation->run() === FALSE) {
-			$this->session->set_flashdata('error-' . $tag1, validation_errors());
-			$this->session->set_flashdata($post_data);
-			redirect('admsistem');
-			return;
-		}
-
-		$data = array(
-			'username' => $this->input->post('username'),
-			'nama' => $this->input->post('nama'),
-			'role' => $this->input->post('role'),
-			'opd' => $this->input->post('opd'),
-			'status' => $this->input->post('status') ?: 'active'
-		);
-
-		// Only set password if provided; hash it
-		$password = $this->input->post('password');
-		if (!empty($password)) {
-			$data['password'] = password_hash($password, PASSWORD_DEFAULT);
-		}
-
-		if ($id) {
-			// Update existing
-			$update_key = $id ? $id : $original;
-			$ok = $this->Master_user_model->update($update_key, $data);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'Master user updated.');
-			} else {
-				$this->session->set_flashdata($post_data);
-				$this->session->set_flashdata('error-' . $tag1, 'Failed to update master user.');
-			}
-		} else {
-			// Create new
-			// Ensure username doesn't already exist
-			if ($this->Master_user_model->get($data['username'])) {
-				$this->session->set_flashdata($post_data);
-				$this->session->set_flashdata('error-' . $tag1, 'Username already exists.');
-			} else {
-				// Password is required for new user
-				if (empty($data['password'])) {
-					$this->session->set_flashdata($post_data);
-
-					$this->session->set_flashdata('error-' . $tag1, 'Password is required for new users.');
-					redirect('admsistem');
-					return;
-				}
-
-				$ok = $this->Master_user_model->insert($data);
-				if ($ok) {
-					$this->session->set_flashdata('success-' . $tag1, 'Master user created.');
-				} else {
-					$this->session->set_flashdata('error-' . $tag1, 'Failed to create master user.');
-				}
-			}
-		}
-
-		redirect('admsistem');
-	}
-
-	public function edit_master_user($username)
-	{
-		$data['title'] = 'Administrasi Sistem';
-		$data['visi_list'] = $this->Visi_model->get_all();
-		$data['master_users'] = $this->Master_user_model->get_all();
-		$data['edit_master_user'] = $this->Master_user_model->get($username);
-		if (!$data['edit_master_user']) {
-			show_404();
-			return;
-		}
-		$this->load->view('administrator/admsistem', $data);
-	}
-
-	public function delete_master_user($username)
-	{
-		if ($this->Master_user_model->delete($username)) {
-			$this->session->set_flashdata('success', 'Master user deleted.');
-		} else {
-			$this->session->set_flashdata('error', 'Failed to delete master user.');
-		}
-		redirect('admsistem');
-	}
 
 	/**
 	 * Handle POST to save visi
@@ -525,20 +402,20 @@ class AdmSistem extends MY_Controller
 			return;
 		}
 
-		$visi_new=$this->input->post('visi');
+		$visi_new = $this->input->post('visi');
 		$data = array(
 			'visi' => $this->input->post('visi'),
 		);
 
 		if ($id) {
-			$ok = $this->Visi_model->update($id, $data);
+			$ok = $this->MVisi->update($id, $data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Visi berhasil disimpan.');
 			} else {
 				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan visi.');
 			}
 		} else {
-			$ok = $this->Visi_model->insert($visi_new);
+			$ok = $this->MVisi->insert($visi_new);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Visi berhasil disimpan.');
 			} else {
@@ -556,7 +433,7 @@ class AdmSistem extends MY_Controller
 			$visi = ['error' => 'Visi ID is required.'];
 			$status_code = 400;
 		} else {
-			$visi = $this->Visi_model->get($id);
+			$visi = $this->MVisi->get($id);
 			$status_code = 200;
 		}
 
@@ -573,15 +450,15 @@ class AdmSistem extends MY_Controller
 	public function setStatus_visi($id)
 	{
 		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
-		$visi = $this->Visi_model->get($id);
+		$visi = $this->MVisi->get($id);
 		if (!$visi) {
 			$this->session->set_flashdata('error-' . $tag1, 'Visi not found.');
 			redirect('admsistem');
 			return;
 		}
 
-		$new_status = ((int)$visi->status === 1) ? 0 : 1;
-		$ok = $this->Visi_model->update($id, ['status' => $new_status]);
+		$new_status = ((int) $visi->status === 1) ? 0 : 1;
+		$ok = $this->MVisi->update($id, ['status' => $new_status]);
 		if ($ok) {
 			$this->session->set_flashdata('success-' . $tag1, 'Status visi berhasil diubah.');
 		} else {
@@ -627,14 +504,14 @@ class AdmSistem extends MY_Controller
 		);
 
 		if ($id) {
-			$ok = $this->Master_mitra_model->update($id, $data);
+			$ok = $this->MMasterMitra->update($id, $data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Mitra updated.');
 			} else {
 				$this->session->set_flashdata('error-' . $tag1, 'Failed to update mitra.');
 			}
 		} else {
-			$ok = $this->Master_mitra_model->insert($data);
+			$ok = $this->MMasterMitra->insert($data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'Mitra created.');
 			} else {
@@ -651,7 +528,7 @@ class AdmSistem extends MY_Controller
 		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
 
 		// Fetch the mitra record
-		$mitra = $this->Master_mitra_model->get($id);
+		$mitra = $this->MMasterMitra->get($id);
 		if (!$mitra) {
 			$this->session->set_flashdata('error-' . $tag1, 'Mitra not found.');
 			redirect('admsistem');
@@ -661,37 +538,11 @@ class AdmSistem extends MY_Controller
 		// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
 		$new_status = (strtolower($mitra->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
 
-		$ok = $this->Master_mitra_model->update($id, ['status' => $new_status]);
+		$ok = $this->MMasterMitra->update($id, ['status' => $new_status]);
 		if ($ok) {
 			$this->session->set_flashdata('success-' . $tag1, 'Status mitra berhasil diubah menjadi "' . $new_status . '".');
 		} else {
 			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status mitra.');
-		}
-
-		redirect('admsistem');
-	}
-
-	public function setStatus_user($id)
-	{
-		// Get the tag1 from POST or GET for flashdata grouping (optional)
-		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
-
-		// Fetch the user record
-		$user = $this->Master_user_model->get($id);
-		if (!$user) {
-			$this->session->set_flashdata('error-' . $tag1, 'User not found.');
-			redirect('admsistem');
-			return;
-		}
-
-		// Toggle status: if 'active' -> 'inactive', else -> 'active'
-		$new_status = (strtolower($user->status) === 'active') ? 'inactive' : 'active';
-
-		$ok = $this->Master_user_model->update($id, ['status' => $new_status]);
-		if ($ok) {
-			$this->session->set_flashdata('success-' . $tag1, 'Status user berhasil diubah menjadi "' . $new_status . '".');
-		} else {
-			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status user.');
 		}
 
 		redirect('admsistem');
@@ -703,7 +554,7 @@ class AdmSistem extends MY_Controller
 		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
 
 		// Fetch the OPD record
-		$opd = $this->Master_opd_model->get($id);
+		$opd = $this->MMasterOpd->get($id);
 		if (!$opd) {
 			$this->session->set_flashdata('error-' . $tag1, 'OPD not found.');
 			redirect('admsistem');
@@ -713,7 +564,7 @@ class AdmSistem extends MY_Controller
 		// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
 		$new_status = (strtolower($opd->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
 
-		$ok = $this->Master_opd_model->update($id, ['status' => $new_status]);
+		$ok = $this->MMasterOpd->update($id, ['status' => $new_status]);
 		if ($ok) {
 			$this->session->set_flashdata('success-' . $tag1, 'Status OPD berhasil diubah menjadi "' . $new_status . '".');
 		} else {
@@ -726,10 +577,10 @@ class AdmSistem extends MY_Controller
 	public function edit_master_mitra($id)
 	{
 		$data['title'] = 'Administrasi Sistem';
-		$data['visi_list'] = $this->Visi_model->get_all();
-		$data['master_users'] = $this->Master_user_model->get_all();
-		$data['master_mitra'] = $this->Master_mitra_model->get_all();
-		$data['edit_master_mitra'] = $this->Master_mitra_model->get($id);
+		$data['visi_list'] = $this->MVisi->getAll();
+		$data['master_users'] = $this->MMasterUser->getAll();
+		$data['master_mitra'] = $this->MMasterMitra->getAll();
+		$data['edit_master_mitra'] = $this->MMasterMitra->get($id);
 		if (!$data['edit_master_mitra']) {
 			show_404();
 			return;
@@ -739,7 +590,7 @@ class AdmSistem extends MY_Controller
 
 	public function delete_master_mitra($id, $tag1)
 	{
-		if ($this->Master_mitra_model->delete($id)) {
+		if ($this->MMasterMitra->delete($id)) {
 			$this->session->set_flashdata('success-' . $tag1, 'Mitra deleted.');
 		} else {
 			$this->session->set_flashdata('error-' . $tag1, 'Failed to delete mitra.');
@@ -757,7 +608,7 @@ class AdmSistem extends MY_Controller
 			$status_code = 400;  // Bad Request
 		} else {
 			// Call the model method to get a single record by ID
-			$opd = $this->Master_opd_model->get($id);
+			$opd = $this->MMasterOpd->get($id);
 			$status_code = 200;
 		}
 
@@ -811,14 +662,14 @@ class AdmSistem extends MY_Controller
 		);
 
 		if ($id) {
-			$ok = $this->Master_opd_model->update($id, $data);
+			$ok = $this->MMasterOpd->update($id, $data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'OPD updated.');
 			} else {
 				$this->session->set_flashdata('error-' . $tag1, 'Failed to update OPD.');
 			}
 		} else {
-			$ok = $this->Master_opd_model->insert($data);
+			$ok = $this->MMasterOpd->insert($data);
 			if ($ok) {
 				$this->session->set_flashdata('success-' . $tag1, 'OPD created.');
 			} else {
@@ -832,11 +683,11 @@ class AdmSistem extends MY_Controller
 	public function edit_master_opd($id)
 	{
 		$data['title'] = 'Administrasi Sistem';
-		$data['visi_list'] = $this->Visi_model->get_all();
-		$data['master_users'] = $this->Master_user_model->get_all();
-		$data['master_mitra'] = $this->Master_mitra_model->get_all();
-		$data['master_opd'] = $this->Master_opd_model->get_all();
-		$data['edit_master_opd'] = $this->Master_opd_model->get($id);
+		$data['visi_list'] = $this->MVisi->getAll();
+		$data['master_users'] = $this->MMasterUser->getAll();
+		$data['master_mitra'] = $this->MMasterMitra->getAll();
+		$data['master_opd'] = $this->MMasterOpd->getAll();
+		$data['edit_master_opd'] = $this->MMasterOpd->get($id);
 		if (!$data['edit_master_opd']) {
 			show_404();
 			return;
@@ -846,7 +697,7 @@ class AdmSistem extends MY_Controller
 
 	public function delete_master_opd($id, $tag1)
 	{
-		if ($this->Master_opd_model->delete($id)) {
+		if ($this->MMasterOpd->delete($id)) {
 			$this->session->set_flashdata('success-' . $tag1, 'OPD deleted.');
 		} else {
 			$this->session->set_flashdata('error-' . $tag1, 'Failed to delete OPD.');
@@ -868,7 +719,7 @@ class AdmSistem extends MY_Controller
 
 		// Always operate on row id = 1
 		$branding_id = 1;
-		$existing = $this->Master_branding_model->get_by_id($branding_id);
+		$existing = $this->MMasterBranding->get_by_id($branding_id);
 		if (!$existing) {
 			$this->session->set_flashdata('error-' . $tag1, 'Branding record (id=1) not found. Cannot update.');
 			redirect('admsistem');
@@ -894,7 +745,7 @@ class AdmSistem extends MY_Controller
 					return;
 				}
 				$data = ['nama' => $this->input->post('nama')];
-				$ok = $this->Master_branding_model->update_by_id($branding_id, $data);
+				$ok = $this->MMasterBranding->update_by_id($branding_id, $data);
 				if ($ok)
 					$this->session->set_flashdata('success-' . $tag1, 'Nama branding updated.');
 				else
@@ -910,7 +761,7 @@ class AdmSistem extends MY_Controller
 					return;
 				}
 				$data = ['subnote' => $this->input->post('subnote')];
-				$ok = $this->Master_branding_model->update_by_id($branding_id, $data);
+				$ok = $this->MMasterBranding->update_by_id($branding_id, $data);
 				if ($ok)
 					$this->session->set_flashdata('success-' . $tag1, 'Subnote updated.');
 				else
@@ -957,7 +808,7 @@ class AdmSistem extends MY_Controller
 				}
 
 				$data = [$field => $new_path];
-				$ok = $this->Master_branding_model->update_by_id($branding_id, $data);
+				$ok = $this->MMasterBranding->update_by_id($branding_id, $data);
 				if ($ok)
 					$this->session->set_flashdata('success-' . $tag1, ucfirst($field) . ' updated.');
 				else
@@ -974,7 +825,7 @@ class AdmSistem extends MY_Controller
 
 	public function delete_branding($nama)
 	{
-		if ($this->Master_branding_model->delete($nama)) {
+		if ($this->MMasterBranding->delete($nama)) {
 			$this->session->set_flashdata('success', 'Branding deleted.');
 		} else {
 			$this->session->set_flashdata('error', 'Failed to delete branding.');
@@ -982,205 +833,4 @@ class AdmSistem extends MY_Controller
 		redirect('admsistem');
 	}
 
-	public function users()
-	{
-		$data['title'] = 'Manajemen Pengguna';
-		$data['users'] = $this->Admin_model->get_all_users();
-		$data['user'] = $this->session->userdata();
-
-		$this->load->view('admin/users', $data);
-	}
-
-	public function create_user()
-	{
-		$data['title'] = 'Tambah Pengguna Baru';
-		$data['user'] = $this->session->userdata();
-
-		if ($this->input->method() === 'post') {
-			$this->load->library('form_validation');
-
-			$this->form_validation->set_rules('username', 'Username', 'required|min_length[3]|is_unique[users.username]');
-			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
-			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-			$this->form_validation->set_rules('role', 'Role', 'required|in_list[admin,operator,mitra]');
-			$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required');
-
-			if ($this->form_validation->run() === TRUE) {
-				$user_data = array(
-					'username' => $this->input->post('username'),
-					'email' => $this->input->post('email'),
-					'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-					'role' => $this->input->post('role'),
-					'full_name' => $this->input->post('full_name'),
-					'is_active' => 1,
-					'created_at' => date('Y-m-d H:i:s')
-				);
-
-				if ($this->Admin_model->create_user($user_data)) {
-					$this->session->set_flashdata('success', 'Pengguna berhasil ditambahkan.');
-					redirect('admin/users');
-				} else {
-					$this->session->set_flashdata('error', 'Gagal menambahkan pengguna.');
-				}
-			}
-		}
-
-		$this->load->view('admin/create_user', $data);
-	}
-
-	public function edit_user($id)
-	{
-		$data['title'] = 'Edit Pengguna';
-		$data['user'] = $this->session->userdata();
-		$data['edit_user'] = $this->Admin_model->get_user_by_id($id);
-
-		if (!$data['edit_user']) {
-			show_404();
-		}
-
-		if ($this->input->method() === 'post') {
-			$this->load->library('form_validation');
-
-			$this->form_validation->set_rules('username', 'Username', 'required|min_length[3]');
-			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-			$this->form_validation->set_rules('role', 'Role', 'required|in_list[admin,operator,mitra]');
-			$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required');
-
-			if ($this->form_validation->run() === TRUE) {
-				$user_data = array(
-					'username' => $this->input->post('username'),
-					'email' => $this->input->post('email'),
-					'role' => $this->input->post('role'),
-					'full_name' => $this->input->post('full_name'),
-					'is_active' => $this->input->post('is_active') ? 1 : 0,
-					'updated_at' => date('Y-m-d H:i:s')
-				);
-
-				// Only update password if provided
-				if ($this->input->post('password')) {
-					$user_data['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-				}
-
-				if ($this->Admin_model->update_user($id, $user_data)) {
-					$this->session->set_flashdata('success', 'Pengguna berhasil diperbarui.');
-					redirect('admin/users');
-				} else {
-					$this->session->set_flashdata('error', 'Gagal memperbarui pengguna.');
-				}
-			}
-		}
-
-		$this->load->view('admin/edit_user', $data);
-	}
-
-	public function delete_user($id)
-	{
-		if ($this->Admin_model->delete_user($id)) {
-			$this->session->set_flashdata('success', 'Pengguna berhasil dihapus.');
-		} else {
-			$this->session->set_flashdata('error', 'Gagal menghapus pengguna.');
-		}
-
-		redirect('admin/users');
-	}
-
-	public function settings()
-	{
-		$data['title'] = 'Pengaturan Sistem';
-		$data['user'] = $this->session->userdata();
-		$data['settings'] = $this->Admin_model->get_system_settings();
-
-		if ($this->input->method() === 'post') {
-			$settings_data = array(
-				'site_name' => $this->input->post('site_name'),
-				'site_description' => $this->input->post('site_description'),
-				'maintenance_mode' => $this->input->post('maintenance_mode') ? 1 : 0,
-				'max_login_attempts' => $this->input->post('max_login_attempts'),
-				'session_timeout' => $this->input->post('session_timeout')
-			);
-
-			if ($this->Admin_model->update_system_settings($settings_data)) {
-				$this->session->set_flashdata('success', 'Pengaturan berhasil diperbarui.');
-				redirect('admin/settings');
-			} else {
-				$this->session->set_flashdata('error', 'Gagal memperbarui pengaturan.');
-			}
-		}
-
-		$this->load->view('admin/settings', $data);
-	}
-
-	public function logs()
-	{
-		$data['title'] = 'Log Sistem';
-		$data['user'] = $this->session->userdata();
-
-		// Pagination
-		$this->load->library('pagination');
-		$config['base_url'] = base_url('admin/logs');
-		$config['total_rows'] = $this->Admin_model->get_logs_count();
-		$config['per_page'] = 20;
-		$config['uri_segment'] = 3;
-
-		$this->pagination->initialize($config);
-
-		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-		$data['logs'] = $this->Admin_model->get_logs($config['per_page'], $page);
-		$data['pagination'] = $this->pagination->create_links();
-
-		$this->load->view('admin/logs', $data);
-	}
-
-	public function toggle_user_status($id)
-	{
-		$user = $this->Admin_model->get_user_by_id($id);
-		if ($user) {
-			$new_status = $user->is_active ? 0 : 1;
-			if ($this->Admin_model->update_user($id, array('is_active' => $new_status))) {
-				$status_text = $new_status ? 'diaktifkan' : 'dinonaktifkan';
-				$this->session->set_flashdata('success', "Pengguna berhasil {$status_text}.");
-			} else {
-				$this->session->set_flashdata('error', 'Gagal mengubah status pengguna.');
-			}
-		}
-
-		redirect('admin/users');
-	}
-
-	public function reset_password()
-	{
-		$tag1 = $this->input->post('tag1');
-		$id = $this->input->post('id');
-		$passwordbaru = $this->input->post('password-baru');
-		$passwordbaru2 = $this->input->post('password-baru2');
-
-		// $target_user = $this->Admin_model->get_user_by_id($id);
-		$target_user = $this->Master_user_model->get($id);
-
-		if (!$target_user) {
-			$this->session->set_flashdata('error-'.$tag1, 'Pengguna tidak ditemukan.');
-			// redirect('admin/users');
-			redirect('admsistem');
-
-		}
-
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('password-baru', 'Password Baru', 'required|min_length[6]');
-		$this->form_validation->set_rules('password-baru2', 'Konfirmasi Password', 'required|matches[password-baru]');
-
-		if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('error-'.$tag1, 'Password baru salah.');
-			redirect('admsistem');
-		} else {
-			// Hash password, assuming password_hash is available
-			$hashed_password = password_hash($passwordbaru, PASSWORD_DEFAULT);
-
-			if ($this->Master_user_model->update($id, array('password' => $hashed_password))) {
-				$this->session->set_flashdata('success-'.$tag1, 'Password berhasil direset.');
-			} else {
-				$this->session->set_flashdata('error-'.$tag1, 'Gagal mereset password.');
-			}
-			redirect('admsistem');
-		}
-	}
 }

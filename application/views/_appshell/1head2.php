@@ -111,6 +111,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								<label class="form-check-label" for="auto_reload">
 									auto reload
 								</label>
+								<label class="form-check-label text-info" id="status1">
+									-
+								</label>
 							</div>
 							<script>
 								//save this checkbox state to localStorage

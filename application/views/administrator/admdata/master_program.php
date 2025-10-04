@@ -40,10 +40,12 @@ $tag1 = "form_masterprogram";
 					<div class="col-sm-10">
 						<select name="urusan_id" class="form-control">
 							<option value="">Pilih salah satu urusan yang Aktif</option>
-							<?php if (!empty($master_urusan)):
-								foreach ($master_urusan as $urusan): ?>
+						<?php 
+							$urusan_list = !empty($master_urusan_active) ? $master_urusan_active : (isset($master_urusan) ? $master_urusan : []);
+							if (!empty($urusan_list)):
+								foreach ($urusan_list as $urusan): ?>
 									<option value="<?= $urusan->id ?>" <?= (isset($edit_master_program->urusan_id) && $edit_master_program->urusan_id == $urusan->id) ? 'selected' : '' ?>>
-										<?= htmlspecialchars($urusan->namaurusan) ?>
+										<?= htmlspecialchars($urusan->urusan) ?>
 									</option>
 								<?php endforeach;
 							endif; ?>
@@ -79,7 +81,7 @@ $tag1 = "form_masterprogram";
 							<tr>
 								<td><?php echo htmlspecialchars($p->kode); ?></td>
 								<td><?php echo htmlspecialchars($p->namaprogram); ?></td>
-								<td><?php echo htmlspecialchars($p->namaurusan); ?></td>
+								<td><?php echo htmlspecialchars($p->urusan); ?></td>
 								<td><?php echo htmlspecialchars($p->status); ?></td>
 								<td>
 									<div class="btn-group">
@@ -128,77 +130,3 @@ $tag1 = "form_masterprogram";
 	}
 </script>
 
-<script>
-	// localStorage state management for card collapse/expand
-	document.addEventListener('DOMContentLoaded', function () {
-		var cardElement = document.getElementById('card-master-program');
-		var collapseButton = cardElement.querySelector('[data-card-widget="collapse"]');
-		var maximizeButton = cardElement.querySelector('.btn-fs');
-		
-		// Restore card state from localStorage
-		var cardState = localStorage.getItem('card-master-program-state');
-		if (cardState === 'expanded') {
-			cardElement.classList.remove('collapsed-card');
-			var icon = collapseButton.querySelector('i');
-			if (icon) {
-				icon.classList.remove('fa-plus');
-				icon.classList.add('fa-minus');
-			}
-		}
-		
-		// Restore maximize state from localStorage
-		var maximizeState = localStorage.getItem('card-master-program-maximize');
-		if (maximizeState === 'maximized') {
-			cardElement.classList.add('maximized-card');
-			maximizeButton.innerHTML = '[__]';
-			// Apply maximized styles
-			cardElement.style.position = 'fixed';
-			cardElement.style.top = '0';
-			cardElement.style.left = '0';
-			cardElement.style.width = '100vw';
-			cardElement.style.height = '100vh';
-			cardElement.style.zIndex = '9999';
-			cardElement.style.margin = '0';
-		}
-		
-		// Handle collapse/expand state saving
-		collapseButton.addEventListener('click', function() {
-			setTimeout(function() {
-				if (cardElement.classList.contains('collapsed-card')) {
-					localStorage.setItem('card-master-program-state', 'collapsed');
-				} else {
-					localStorage.setItem('card-master-program-state', 'expanded');
-				}
-			}, 300); // Wait for animation to complete
-		});
-		
-		// Handle maximize/restore functionality
-		maximizeButton.addEventListener('click', function() {
-			if (cardElement.classList.contains('maximized-card')) {
-				// Restore
-				cardElement.classList.remove('maximized-card');
-				maximizeButton.innerHTML = '[&nbsp;&nbsp;]';
-				cardElement.style.position = '';
-				cardElement.style.top = '';
-				cardElement.style.left = '';
-				cardElement.style.width = '';
-				cardElement.style.height = '';
-				cardElement.style.zIndex = '';
-				cardElement.style.margin = '';
-				localStorage.setItem('card-master-program-maximize', 'restored');
-			} else {
-				// Maximize
-				cardElement.classList.add('maximized-card');
-				maximizeButton.innerHTML = '[__]';
-				cardElement.style.position = 'fixed';
-				cardElement.style.top = '0';
-				cardElement.style.left = '0';
-				cardElement.style.width = '100vw';
-				cardElement.style.height = '100vh';
-				cardElement.style.zIndex = '9999';
-				cardElement.style.margin = '0';
-				localStorage.setItem('card-master-program-maximize', 'maximized');
-			}
-		});
-	});
-</script>
