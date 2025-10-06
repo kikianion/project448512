@@ -97,13 +97,13 @@ $tag1 = "xxx";
 				<?php if (!empty($master_mitra)):
 					foreach ($master_mitra as $m): ?>
 						<tr>
-							<td><?php echo htmlspecialchars($m->urut); ?></td>
-							<td><?php echo htmlspecialchars($m->namamitra); ?></td>
-							<td><?php echo htmlspecialchars($m->kepala); ?></td>
-							<td><?php echo htmlspecialchars($m->nipkepala); ?></td>
-							<td><?php echo htmlspecialchars($m->pangkepala); ?></td>
-							<td><?php echo htmlspecialchars($m->jabatan); ?></td>
-							<td><?php echo htmlspecialchars($m->status); ?></td>
+							<td><?= $m->urut ?></td>
+							<td><?= $m->namamitra ?></td>
+							<td><?= $m->kepala ?></td>
+							<td><?= $m->nipkepala ?></td>
+							<td><?= $m->pangkepala ?></td>
+							<td><?= $m->jabatan ?></td>
+							<td><?= $m->status ?></td>
 							<td>
 								<div class="btn-group">
 									<button type="button" class="btn btn-default">Tindakan</button>
@@ -113,7 +113,7 @@ $tag1 = "xxx";
 									<div class="dropdown-menu" role="menu">
 										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra" onclick="editModalMitra(<?= $m->id ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/setStatus_mitra/' . $m->id) ?>" onclick="return confirm('Apakah Anda yakin ingin mengubah status mitra ini?')">Ubah Status</a>
+										<a class="dropdown-item" href="<?= site_url('admsistem/setStatus_mitra/' . $m->id) ?>">Ubah Status</a>
 									</div>
 							</td>
 						</tr>

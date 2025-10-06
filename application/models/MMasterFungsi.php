@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Master_fungsi_model extends CI_Model {
+class MMasterFungsi extends MY_Model {
 
-    private $table = 'fungsi';
-    private $primary_key = 'id';
+    protected $table = 'fungsi';
+    protected $primary_key = 'id';
 
     public function __construct()
     {

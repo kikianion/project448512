@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Master_urusan_model extends MY_Model {
+class MMasterUrusan extends MY_Model {
 
     protected $table = 'urusan';
     protected $primary_key = 'id';

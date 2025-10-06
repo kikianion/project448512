@@ -23,40 +23,33 @@ $tag1 = "form_mastermitra";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Mitra</label>
 				<div class="col-sm-8">
-					<input type="text" name="namamitra" class="form-control" id="namamitra" placeholder="Masukan Nama Mitra"
-						value="<?php echo isset($edit_master_mitra->namamitra) ? htmlspecialchars($edit_master_mitra->namamitra) : ''; ?>" required
-						maxlength="50" />
+					<input type="text" class="form-control" placeholder="Masukan Nama Mitra" <?= expandFieldAttr('namamitra') ?> maxlength="50" />
 				</div>
 				<div class="col-sm-2">
-					<input type="number" name="urut" class="form-control" id="urutanmitra" placeholder="urut"
-						value="<?php echo isset($edit_master_mitra->urut) ? htmlspecialchars($edit_master_mitra->urut) : ''; ?>">
-					<input type="hidden" name="id" value="<?php echo isset($edit_master_mitra->id) ? htmlspecialchars($edit_master_mitra->id) : ''; ?>">
+					<input type="number" class="form-control" placeholder="urut" <?= expandFieldAttr('urut') ?>>
+					<input type="hidden" <?= expandFieldAttr('id') ?>>
 					<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Pimpinan</label>
 				<div class="col-sm-10">
-					<input type="text" name="kepala" class="form-control" id="pimpinanmitra" placeholder="Nama Pimpinan"
-						value="<?php echo isset($edit_master_mitra->kepala) ? htmlspecialchars($edit_master_mitra->kepala) : ''; ?>" maxlength="50">
+					<input type="text" class="form-control" placeholder="Nama Pimpinan" <?= expandFieldAttr('kepala') ?> maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NIP/Pang</label>
 				<div class="col-sm-5">
-					<input type="text" name="nipkepala" class="form-control" id="nip-mitra" placeholder="NIP (196xxxxxxxxxxxx)"
-						value="<?php echo isset($edit_master_mitra->nipkepala) ? htmlspecialchars($edit_master_mitra->nipkepala) : ''; ?>" maxlength="50">
+					<input type="text" class="form-control" placeholder="NIP (196xxxxxxxxxxxx)" <?= expandFieldAttr('nipkepala') ?> maxlength="50">
 				</div>
 				<div class="col-sm-5">
-					<input type="text" name="pangkepala" class="form-control" id="pangkat-mitra" placeholder="Pangkat (Pembina dll)"
-						value="<?php echo isset($edit_master_mitra->pangkepala) ? htmlspecialchars($edit_master_mitra->pangkepala) : ''; ?>" maxlength="50">
+					<input type="text" class="form-control" placeholder="Pangkat (Pembina dll)" <?= expandFieldAttr('pangkepala') ?> maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Jabatan</label>
 				<div class="col-sm-10">
-					<input type="text" name="jabatan" class="form-control" id="jabatan-mitra" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)"
-						value="<?php echo isset($edit_master_mitra->jabatan) ? htmlspecialchars($edit_master_mitra->jabatan) : ''; ?>" maxlength="50">
+					<input type="text" class="form-control" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)" <?= expandFieldAttr('jabatan') ?> maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -89,13 +82,13 @@ $tag1 = "form_mastermitra";
 				<?php if (!empty($master_mitra)):
 					foreach ($master_mitra as $m): ?>
 						<tr>
-							<td><?php echo htmlspecialchars($m->urut); ?></td>
-							<td><?php echo htmlspecialchars($m->namamitra); ?></td>
-							<td><?php echo htmlspecialchars($m->kepala); ?></td>
-							<td><?php echo htmlspecialchars($m->nipkepala); ?></td>
-							<td><?php echo htmlspecialchars($m->pangkepala); ?></td>
-							<td><?php echo htmlspecialchars($m->jabatan); ?></td>
-							<td><?php echo htmlspecialchars($m->status); ?></td>
+							<td><?= $m->urut ?></td>
+							<td><?= $m->namamitra ?></td>
+							<td><?= $m->kepala ?></td>
+							<td><?= $m->nipkepala ?></td>
+							<td><?= $m->pangkepala ?></td>
+							<td><?= $m->jabatan ?></td>
+							<td><?= $m->status ?></td>
 							<td>
 								<div class="btn-group">
 									<button type="button" class="btn btn-default">Tindakan</button>
@@ -105,8 +98,7 @@ $tag1 = "form_mastermitra";
 									<div class="dropdown-menu" role="menu">
 										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra" onclick="editModalMitra(<?= $m->id ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/mitra/setStatus/' . $m->id) ?>"
-											onclick="return confirm('Apakah Anda yakin ingin mengubah status mitra ini?')">Ubah Status</a>
+										<a class="dropdown-item" href="<?= site_url('admsistem/mitra/setStatus/' . $m->id) ?>">Ubah Status</a>
 									</div>
 								</div>
 							</td>
@@ -125,21 +117,24 @@ $tag1 = "form_mastermitra";
 <script>
 	function editModalMitra(id) {
 		$.ajax({
-			url: 'admsistem/mitra/mitraById/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
+			url: 'admsistem/mitra/byId/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
 			success: function (res) {
 				if (res.status === 'success') {
-					$('#edit-record-common').appendTo('body').modal('show');
-					$('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
-					$('#edit-record-common .modal-title').html("Edit data mitra");
 
-					$('#edit-record-common input[name=namamitra]').val(res.data.namamitra);
-					$('#edit-record-common input[name=kepala]').val(res.data.kepala);
-					$('#edit-record-common input[name=nipkepala]').val(res.data.nipkepala);
-					$('#edit-record-common input[name=pangkepala]').val(res.data.pangkepala);
-					$('#edit-record-common input[name=jabatan]').val(res.data.jabatan);
-					$('#edit-record-common input[name=status]').val(res.data.status);
-					$('#edit-record-common input[name=urut]').val(res.data.urut);
-					$('#edit-record-common input[name=id]').val(res.data.id);
+					let e1 = "#edit-record-common"
+					$(e1).appendTo('body').modal('show');
+					$(e1 + ' .modal-body').html($('#form-<?= $tag1 ?>').html());
+					$(e1 + ' .modal-title').html("Edit data mitra");
+
+					let d = res.data
+					$(e1 + ' input[name=namamitra]').val(d.namamitra);
+					$(e1 + ' input[name=kepala]').val(d.kepala);
+					$(e1 + ' input[name=nipkepala]').val(d.nipkepala);
+					$(e1 + ' input[name=pangkepala]').val(d.pangkepala);
+					$(e1 + ' input[name=jabatan]').val(d.jabatan);
+					$(e1 + ' input[name=status]').val(d.status);
+					$(e1 + ' input[name=urut]').val(d.urut);
+					$(e1 + ' input[name=id]').val(d.id);
 				}
 			},
 		});

@@ -18,44 +18,24 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/tujuan_perangkat_daerah'); ?>
-          </div>
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/indikator_tujuan_perangkat_daerah'); ?>
-          </div>
+          <?php $this->load->view('operator/opr/tujuan_perangkat_daerah'); ?>
+          <?php $this->load->view('operator/opr/indikator_tujuan_perangkat_daerah'); ?>
         </div>
         <div class="row">
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/sasaran_perangkat_daerah'); ?>
-          </div>
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah'); ?>
-          </div>
+          <?php $this->load->view('operator/opr/sasaran_perangkat_daerah'); ?>
+          <?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah'); ?>
         </div>
         <div class="row">
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/program'); ?>
-          </div>
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/indikator_program_perangkat_daerah'); ?>
-          </div>
+          <?php $this->load->view('operator/opr/program'); ?>
+          <?php $this->load->view('operator/opr/indikator_program_perangkat_daerah'); ?>
         </div>
         <div class="row">
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/sasaran_perangkat_daerah_2'); ?>
-          </div>
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah_2'); ?>
-          </div>
+          <?php $this->load->view('operator/opr/sasaran_perangkat_daerah_2'); ?>
+          <?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah_2'); ?>
         </div>
         <div class="row">
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/sub_kegiatan'); ?>
-          </div>
-          <div class="col-lg-6">
-            <?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah_3'); ?>
-          </div>
+          <?php $this->load->view('operator/opr/sub_kegiatan'); ?>
+          <?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah_3'); ?>
         </div>
       </div><!-- /.container-fluid -->
     </div>

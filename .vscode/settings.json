@@ -1,0 +1,16 @@
+{
+    "folder-customization.folders": [
+        {
+            "path": "simela2\\application\\controllers\\",
+            "color": "foldercustomization.AnsiColor143"
+        },
+        {
+            "path": "simela2\\application\\models\\",
+            "color": "foldercustomization.AnsiColor166"
+        },
+        {
+            "path": "simela2\\application\\views\\administrator\\admdata\\",
+            "color": "foldercustomization.AnsiColor51"
+        }
+    ]
+}

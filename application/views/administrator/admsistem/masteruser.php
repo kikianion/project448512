@@ -19,7 +19,7 @@ $tag1 = 'form_masteruser';
 		<?= widget_flash($tag1) ?>
 
 		<div id="form-<?= $tag1 ?>">
-			<?php echo form_open('admsistem/save_master_user'); ?>
+			<?php echo form_open('admsistem/user/save'); ?>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Username</label>
 				<div class="col-sm-8">
@@ -105,8 +105,8 @@ $tag1 = 'form_masteruser';
 				<?php if (!empty($master_users)):
 					foreach ($master_users as $u): ?>
 						<tr>
-							<td><?php echo htmlspecialchars($u->username); ?></td>
-							<td><?php echo htmlspecialchars($u->nama); ?></td>
+							<td><?= $u->username ?></td>
+							<td><?= $u->nama ?></td>
 							<td>
 								<?php
 								$opd_name = '';
@@ -121,8 +121,8 @@ $tag1 = 'form_masteruser';
 								echo htmlspecialchars($opd_name ?: $u->opd);
 								?>
 							</td>
-							<td><?php echo htmlspecialchars($u->role); ?></td>
-							<td><?php echo htmlspecialchars($u->status); ?></td>
+							<td><?= $u->role ?></td>
+							<td><?= $u->status ?></td>
 							<td>
 								<div class="btn-group">
 									<button type="button" class="btn btn-default">Tindakan</button>
@@ -132,10 +132,9 @@ $tag1 = 'form_masteruser';
 									<div class="dropdown-menu" role="menu">
 										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-user" onclick="editModalUser(<?= $u->id ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/setStatus_user/' . $u->id) ?>"
-											onclick="return confirm('Apakah Anda yakin ingin mengubah status user ini?')">Ubah Status
-											<a class="dropdown-item" onclick="resetPassUser(<?= $u->id ?>)">Reset Password
-											</a>
+										<a class="dropdown-item" href="<?= site_url('admsistem/user/setStatus/' . $u->id) ?>">Ubah Status</a>
+										<a class="dropdown-item" onclick="resetPassUser(<?= $u->id ?>)">Reset Password
+										</a>
 									</div>
 								</div>
 							</td>

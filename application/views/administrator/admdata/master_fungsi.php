@@ -60,9 +60,9 @@ $tag1 = "form_masterfungsi";
 					<?php if (!empty($master_fungsi)):
 						foreach ($master_fungsi as $f): ?>
 							<tr>
-								<td><?php echo ($f->urut); ?></td>
-								<td><?php echo htmlspecialchars($f->namafungsi); ?></td>
-								<td><?php echo htmlspecialchars($f->status); ?></td>
+								<td><?php echo ($f->urut ?></td>
+								<td><?= $f->namafungsi ?></td>
+								<td><?= $f->status ?></td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default">Tindakan</button>

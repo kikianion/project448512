@@ -65,9 +65,9 @@ $tag1 = "form_masterperiodeanggaran";
 					<?php if (!empty($master_periode_anggaran)):
 						foreach ($master_periode_anggaran as $pa): ?>
 							<tr>
-								<td><?php echo htmlspecialchars($pa->kode); ?></td>
-								<td><?php echo htmlspecialchars($pa->keterangan); ?></td>
-								<td><?php echo htmlspecialchars($pa->status); ?></td>
+								<td><?= $pa->kode ?></td>
+								<td><?= $pa->keterangan ?></td>
+								<td><?= $pa->status ?></td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default">Tindakan</button>

@@ -30,6 +30,9 @@ class CAdmSistem extends MY_Controller
 
 	public function index()
 	{
+
+		// $postdata=$this->input->post();
+
 		$data['master_users'] = $this->MMasterUser->getAll();
 		$data['master_opd'] = $this->MMasterOpd->getAll();
 		$data['master_mitra'] = $this->MMasterMitra->getAll();
@@ -321,33 +324,33 @@ class CAdmSistem extends MY_Controller
 		redirect('admsistem');
 	}
 
-	public function mitraById($id)
-	{
-		// 1. Get the ID from the URL query string (e.g., ?id=123)
-		// $id = $this->input->get('id');
+	// public function mitraById($id)
+	// {
+	// 	// 1. Get the ID from the URL query string (e.g., ?id=123)
+	// 	// $id = $this->input->get('id');
 
-		// Check if an ID was provided
-		if (!$id) {
-			// Handle the case where no ID is provided (e.g., return an error or empty array)
-			$mitra = ['error' => 'Mitra ID is required.'];
-			$status_code = 400;  // Bad Request
-		} else {
-			// 2. Call a new model method (you must create this!) to get a single record by ID
-			$mitra = $this->MMasterMitra->get($id);
-			$status_code = 200;
-		}
+	// 	// Check if an ID was provided
+	// 	if (!$id) {
+	// 		// Handle the case where no ID is provided (e.g., return an error or empty array)
+	// 		$mitra = ['error' => 'Mitra ID is required.'];
+	// 		$status_code = 400;  // Bad Request
+	// 	} else {
+	// 		// 2. Call a new model method (you must create this!) to get a single record by ID
+	// 		$mitra = $this->MMasterMitra->get($id);
+	// 		$status_code = 200;
+	// 	}
 
-		$res = [
-			'status' => 'success',
-			'data' => $mitra
-		];
-		// 3. Set the JSON response
-		$this
-			->output
-			->set_content_type('application/json')
-			->set_status_header($status_code)
-			->set_output(json_encode($res));
-	}
+	// 	$res = [
+	// 		'status' => 'success',
+	// 		'data' => $mitra
+	// 	];
+	// 	// 3. Set the JSON response
+	// 	$this
+	// 		->output
+	// 		->set_content_type('application/json')
+	// 		->set_status_header($status_code)
+	// 		->set_output(json_encode($res));
+	// }
 
 	public function userById($id)
 	{
@@ -468,135 +471,135 @@ class CAdmSistem extends MY_Controller
 	}
 
 	/* Master Mitra CRUD */
-	public function save_master_mitra()
-	{
-		if ($this->input->method() !== 'post') {
-			show_error('Method not allowed', 405);
-			return;
-		}
+	// public function save_master_mitra()
+	// {
+	// 	if ($this->input->method() !== 'post') {
+	// 		show_error('Method not allowed', 405);
+	// 		return;
+	// 	}
 
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('namamitra', 'Nama Mitra', 'required|max_length[50]');
-		$this->form_validation->set_rules('urut', 'Urut', 'integer');
-		$this->form_validation->set_rules('kepala', 'Kepala', 'max_length[50]');
-		$this->form_validation->set_rules('nipkepala', 'NIP Kepala', 'max_length[50]');
-		$this->form_validation->set_rules('pangkepala', 'Pangkat Kepala', 'max_length[50]');
-		$this->form_validation->set_rules('jabatan', 'Jabatan', 'max_length[50]');
-		$this->form_validation->set_rules('status', 'Status', 'max_length[50]');
+	// 	$this->load->library('form_validation');
+	// 	$this->form_validation->set_rules('namamitra', 'Nama Mitra', 'required|max_length[50]');
+	// 	$this->form_validation->set_rules('urut', 'Urut', 'integer');
+	// 	$this->form_validation->set_rules('kepala', 'Kepala', 'max_length[50]');
+	// 	$this->form_validation->set_rules('nipkepala', 'NIP Kepala', 'max_length[50]');
+	// 	$this->form_validation->set_rules('pangkepala', 'Pangkat Kepala', 'max_length[50]');
+	// 	$this->form_validation->set_rules('jabatan', 'Jabatan', 'max_length[50]');
+	// 	$this->form_validation->set_rules('status', 'Status', 'max_length[50]');
 
-		$id = $this->input->post('id');  // optional for update
-		$tag1 = $this->input->post('tag1');
+	// 	$id = $this->input->post('id');  // optional for update
+	// 	$tag1 = $this->input->post('tag1');
 
-		if ($this->form_validation->run() === FALSE) {
-			$this->session->set_flashdata('error-' . $tag1, validation_errors());
-			redirect('admsistem');
-			return;
-		}
+	// 	if ($this->form_validation->run() === FALSE) {
+	// 		$this->session->set_flashdata('error-' . $tag1, validation_errors());
+	// 		redirect('admsistem');
+	// 		return;
+	// 	}
 
-		$data = array(
-			'urut' => $this->input->post('urut'),
-			'namamitra' => $this->input->post('namamitra'),
-			'kepala' => $this->input->post('kepala'),
-			'nipkepala' => $this->input->post('nipkepala'),
-			'pangkepala' => $this->input->post('pangkepala'),
-			'jabatan' => $this->input->post('jabatan'),
-			'status' => $this->input->post('status') ?: 'Aktif'
-		);
+	// 	$data = array(
+	// 		'urut' => $this->input->post('urut'),
+	// 		'namamitra' => $this->input->post('namamitra'),
+	// 		'kepala' => $this->input->post('kepala'),
+	// 		'nipkepala' => $this->input->post('nipkepala'),
+	// 		'pangkepala' => $this->input->post('pangkepala'),
+	// 		'jabatan' => $this->input->post('jabatan'),
+	// 		'status' => $this->input->post('status') ?: 'Aktif'
+	// 	);
 
-		if ($id) {
-			$ok = $this->MMasterMitra->update($id, $data);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'Mitra updated.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag1, 'Failed to update mitra.');
-			}
-		} else {
-			$ok = $this->MMasterMitra->insert($data);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'Mitra created.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag1, 'Failed to create mitra.');
-			}
-		}
+	// 	if ($id) {
+	// 		$ok = $this->MMasterMitra->update($id, $data);
+	// 		if ($ok) {
+	// 			$this->session->set_flashdata('success-' . $tag1, 'Mitra updated.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag1, 'Failed to update mitra.');
+	// 		}
+	// 	} else {
+	// 		$ok = $this->MMasterMitra->insert($data);
+	// 		if ($ok) {
+	// 			$this->session->set_flashdata('success-' . $tag1, 'Mitra created.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag1, 'Failed to create mitra.');
+	// 		}
+	// 	}
 
-		redirect('admsistem');
-	}
+	// 	redirect('admsistem');
+	// }
 
-	public function setStatus_mitra($id)
-	{
-		// Get the tag1 from POST or GET for flashdata grouping (optional)
-		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+	// public function setStatus_mitra($id)
+	// {
+	// 	// Get the tag1 from POST or GET for flashdata grouping (optional)
+	// 	$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
 
-		// Fetch the mitra record
-		$mitra = $this->MMasterMitra->get($id);
-		if (!$mitra) {
-			$this->session->set_flashdata('error-' . $tag1, 'Mitra not found.');
-			redirect('admsistem');
-			return;
-		}
+	// 	// Fetch the mitra record
+	// 	$mitra = $this->MMasterMitra->get($id);
+	// 	if (!$mitra) {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Mitra not found.');
+	// 		redirect('admsistem');
+	// 		return;
+	// 	}
 
-		// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
-		$new_status = (strtolower($mitra->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
+	// 	// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
+	// 	$new_status = (strtolower($mitra->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
 
-		$ok = $this->MMasterMitra->update($id, ['status' => $new_status]);
-		if ($ok) {
-			$this->session->set_flashdata('success-' . $tag1, 'Status mitra berhasil diubah menjadi "' . $new_status . '".');
-		} else {
-			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status mitra.');
-		}
+	// 	$ok = $this->MMasterMitra->update($id, ['status' => $new_status]);
+	// 	if ($ok) {
+	// 		$this->session->set_flashdata('success-' . $tag1, 'Status mitra berhasil diubah menjadi "' . $new_status . '".');
+	// 	} else {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status mitra.');
+	// 	}
 
-		redirect('admsistem');
-	}
+	// 	redirect('admsistem');
+	// }
 
-	public function setStatus_opd($id)
-	{
-		// Get the tag1 from POST or GET for flashdata grouping (optional)
-		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+	// public function setStatus_opd($id)
+	// {
+	// 	// Get the tag1 from POST or GET for flashdata grouping (optional)
+	// 	$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
 
-		// Fetch the OPD record
-		$opd = $this->MMasterOpd->get($id);
-		if (!$opd) {
-			$this->session->set_flashdata('error-' . $tag1, 'OPD not found.');
-			redirect('admsistem');
-			return;
-		}
+	// 	// Fetch the OPD record
+	// 	$opd = $this->MMasterOpd->get($id);
+	// 	if (!$opd) {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'OPD not found.');
+	// 		redirect('admsistem');
+	// 		return;
+	// 	}
 
-		// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
-		$new_status = (strtolower($opd->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
+	// 	// Toggle status: if 'Aktif' -> 'Tidak Aktif', else -> 'Aktif'
+	// 	$new_status = (strtolower($opd->status) === 'aktif') ? 'Tidak Aktif' : 'Aktif';
 
-		$ok = $this->MMasterOpd->update($id, ['status' => $new_status]);
-		if ($ok) {
-			$this->session->set_flashdata('success-' . $tag1, 'Status OPD berhasil diubah menjadi "' . $new_status . '".');
-		} else {
-			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status OPD.');
-		}
+	// 	$ok = $this->MMasterOpd->update($id, ['status' => $new_status]);
+	// 	if ($ok) {
+	// 		$this->session->set_flashdata('success-' . $tag1, 'Status OPD berhasil diubah menjadi "' . $new_status . '".');
+	// 	} else {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status OPD.');
+	// 	}
 
-		redirect('admsistem');
-	}
+	// 	redirect('admsistem');
+	// }
 
-	public function edit_master_mitra($id)
-	{
-		$data['title'] = 'Administrasi Sistem';
-		$data['visi_list'] = $this->MVisi->getAll();
-		$data['master_users'] = $this->MMasterUser->getAll();
-		$data['master_mitra'] = $this->MMasterMitra->getAll();
-		$data['edit_master_mitra'] = $this->MMasterMitra->get($id);
-		if (!$data['edit_master_mitra']) {
-			show_404();
-			return;
-		}
-		$this->load->view('administrator/admsistem', $data);
-	}
+	// public function edit_master_mitra($id)
+	// {
+	// 	$data['title'] = 'Administrasi Sistem';
+	// 	$data['visi_list'] = $this->MVisi->getAll();
+	// 	$data['master_users'] = $this->MMasterUser->getAll();
+	// 	$data['master_mitra'] = $this->MMasterMitra->getAll();
+	// 	$data['edit_master_mitra'] = $this->MMasterMitra->get($id);
+	// 	if (!$data['edit_master_mitra']) {
+	// 		show_404();
+	// 		return;
+	// 	}
+	// 	$this->load->view('administrator/admsistem', $data);
+	// }
 
-	public function delete_master_mitra($id, $tag1)
-	{
-		if ($this->MMasterMitra->delete($id)) {
-			$this->session->set_flashdata('success-' . $tag1, 'Mitra deleted.');
-		} else {
-			$this->session->set_flashdata('error-' . $tag1, 'Failed to delete mitra.');
-		}
-		redirect('admsistem');
-	}
+	// public function delete_master_mitra($id, $tag1)
+	// {
+	// 	if ($this->MMasterMitra->delete($id)) {
+	// 		$this->session->set_flashdata('success-' . $tag1, 'Mitra deleted.');
+	// 	} else {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Failed to delete mitra.');
+	// 	}
+	// 	redirect('admsistem');
+	// }
 
 	/* Master OPD CRUD */
 	public function opdById($id)
@@ -624,86 +627,86 @@ class CAdmSistem extends MY_Controller
 			->set_output(json_encode($res));
 	}
 
-	public function save_master_opd()
-	{
-		if ($this->input->method() !== 'post') {
-			show_error('Method not allowed', 405);
-			return;
-		}
+	// public function save_master_opd()
+	// {
+	// 	if ($this->input->method() !== 'post') {
+	// 		show_error('Method not allowed', 405);
+	// 		return;
+	// 	}
 
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('namaopd', 'Nama OPD', 'required|max_length[50]');
-		$this->form_validation->set_rules('urut', 'Urut', 'integer');
-		$this->form_validation->set_rules('mitra_id', 'Mitra', 'required|integer');
-		$this->form_validation->set_rules('kepala', 'Kepala', 'max_length[50]');
-		$this->form_validation->set_rules('nipkepala', 'NIP Kepala', 'max_length[50]');
-		$this->form_validation->set_rules('pangkepala', 'Pangkat Kepala', 'max_length[50]');
-		$this->form_validation->set_rules('jabatan', 'Jabatan', 'max_length[50]');
-		$this->form_validation->set_rules('status', 'Status', 'max_length[50]');
+	// 	$this->load->library('form_validation');
+	// 	$this->form_validation->set_rules('namaopd', 'Nama OPD', 'required|max_length[50]');
+	// 	$this->form_validation->set_rules('urut', 'Urut', 'integer');
+	// 	$this->form_validation->set_rules('mitra_id', 'Mitra', 'required|integer');
+	// 	$this->form_validation->set_rules('kepala', 'Kepala', 'max_length[50]');
+	// 	$this->form_validation->set_rules('nipkepala', 'NIP Kepala', 'max_length[50]');
+	// 	$this->form_validation->set_rules('pangkepala', 'Pangkat Kepala', 'max_length[50]');
+	// 	$this->form_validation->set_rules('jabatan', 'Jabatan', 'max_length[50]');
+	// 	$this->form_validation->set_rules('status', 'Status', 'max_length[50]');
 
-		$id = $this->input->post('id');  // optional for update
-		$tag1 = $this->input->post('tag1');
+	// 	$id = $this->input->post('id');  // optional for update
+	// 	$tag1 = $this->input->post('tag1');
 
-		if ($this->form_validation->run() === FALSE) {
-			$this->session->set_flashdata('error-' . $tag1, validation_errors());
-			redirect('admsistem');
-			return;
-		}
+	// 	if ($this->form_validation->run() === FALSE) {
+	// 		$this->session->set_flashdata('error-' . $tag1, validation_errors());
+	// 		redirect('admsistem');
+	// 		return;
+	// 	}
 
-		$data = array(
-			'urut' => $this->input->post('urut'),
-			'namaopd' => $this->input->post('namaopd'),
-			'mitra' => $this->input->post('mitra_id'),
-			'kepala' => $this->input->post('kepala'),
-			'nipkepala' => $this->input->post('nipkepala'),
-			'pangkepala' => $this->input->post('pangkepala'),
-			'jabatan' => $this->input->post('jabatan'),
-			'status' => $this->input->post('status') ?: 'Aktif'
-		);
+	// 	$data = array(
+	// 		'urut' => $this->input->post('urut'),
+	// 		'namaopd' => $this->input->post('namaopd'),
+	// 		'mitra' => $this->input->post('mitra_id'),
+	// 		'kepala' => $this->input->post('kepala'),
+	// 		'nipkepala' => $this->input->post('nipkepala'),
+	// 		'pangkepala' => $this->input->post('pangkepala'),
+	// 		'jabatan' => $this->input->post('jabatan'),
+	// 		'status' => $this->input->post('status') ?: 'Aktif'
+	// 	);
 
-		if ($id) {
-			$ok = $this->MMasterOpd->update($id, $data);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'OPD updated.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag1, 'Failed to update OPD.');
-			}
-		} else {
-			$ok = $this->MMasterOpd->insert($data);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'OPD created.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag1, 'Failed to create OPD.');
-			}
-		}
+	// 	if ($id) {
+	// 		$ok = $this->MMasterOpd->update($id, $data);
+	// 		if ($ok) {
+	// 			$this->session->set_flashdata('success-' . $tag1, 'OPD updated.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag1, 'Failed to update OPD.');
+	// 		}
+	// 	} else {
+	// 		$ok = $this->MMasterOpd->insert($data);
+	// 		if ($ok) {
+	// 			$this->session->set_flashdata('success-' . $tag1, 'OPD created.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag1, 'Failed to create OPD.');
+	// 		}
+	// 	}
 
-		redirect('admsistem');
-	}
+	// 	redirect('admsistem');
+	// }
 
-	public function edit_master_opd($id)
-	{
-		$data['title'] = 'Administrasi Sistem';
-		$data['visi_list'] = $this->MVisi->getAll();
-		$data['master_users'] = $this->MMasterUser->getAll();
-		$data['master_mitra'] = $this->MMasterMitra->getAll();
-		$data['master_opd'] = $this->MMasterOpd->getAll();
-		$data['edit_master_opd'] = $this->MMasterOpd->get($id);
-		if (!$data['edit_master_opd']) {
-			show_404();
-			return;
-		}
-		$this->load->view('administrator/admsistem', $data);
-	}
+	// public function edit_master_opd($id)
+	// {
+	// 	$data['title'] = 'Administrasi Sistem';
+	// 	$data['visi_list'] = $this->MVisi->getAll();
+	// 	$data['master_users'] = $this->MMasterUser->getAll();
+	// 	$data['master_mitra'] = $this->MMasterMitra->getAll();
+	// 	$data['master_opd'] = $this->MMasterOpd->getAll();
+	// 	$data['edit_master_opd'] = $this->MMasterOpd->get($id);
+	// 	if (!$data['edit_master_opd']) {
+	// 		show_404();
+	// 		return;
+	// 	}
+	// 	$this->load->view('administrator/admsistem', $data);
+	// }
 
-	public function delete_master_opd($id, $tag1)
-	{
-		if ($this->MMasterOpd->delete($id)) {
-			$this->session->set_flashdata('success-' . $tag1, 'OPD deleted.');
-		} else {
-			$this->session->set_flashdata('error-' . $tag1, 'Failed to delete OPD.');
-		}
-		redirect('admsistem');
-	}
+	// public function delete_master_opd($id, $tag1)
+	// {
+	// 	if ($this->MMasterOpd->delete($id)) {
+	// 		$this->session->set_flashdata('success-' . $tag1, 'OPD deleted.');
+	// 	} else {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Failed to delete OPD.');
+	// 	}
+	// 	redirect('admsistem');
+	// }
 
 	/* Branding handlers */
 	public function save_branding()

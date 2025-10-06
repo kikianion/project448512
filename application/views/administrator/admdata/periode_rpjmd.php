@@ -69,9 +69,9 @@ $tag1 = "form_perioderpjmd";
 					<?php if (!empty($periode_rpjmd)):
 						foreach ($periode_rpjmd as $pr): ?>
 							<tr>
-								<td><?php echo htmlspecialchars($pr->namaperiode); ?></td>
-								<td><?php echo htmlspecialchars($pr->tahun_awal . '-' . $pr->tahun_akhir); ?></td>
-								<td><?php echo htmlspecialchars($pr->status); ?></td>
+								<td><?= $pr->namaperiode ?></td>
+								<td><?= $pr->tahun_awal . '-' . $pr->tahun_akhir ?></td>
+								<td><?= $pr->status ?></td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default">Tindakan</button>

@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Master_program_model extends MY_Model {
+class MMasterProgram extends MY_Model {
 
-	protected $table = 'master_program';
+	protected $table = 'program';
 	protected $primary_key = 'id';
 	protected $status_field = 'status';
 

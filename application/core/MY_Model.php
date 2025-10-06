@@ -29,14 +29,14 @@ class MY_Model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
-	public function get_by_id($id)
+	public function byId($id)
 	{
 		$this->db->from($this->table);
 		$this->db->where($this->primary_key, $id);
 		return $this->db->get()->row();
 	}
 
-	public function insert($data)
+	public function insert($data)//main insert
 	{
 		$this->db->insert($this->table, $data);
 		if ($this->db->affected_rows() > 0) {
@@ -45,47 +45,47 @@ class MY_Model extends CI_Model {
 		return false;
 	}
 
-	public function update($id, $data)
+	public function update($id, $data)//main update
 	{
 		$this->db->where($this->primary_key, $id);
 		$this->db->update($this->table, $data);
 		return $this->db->affected_rows() > 0;
 	}
 
-	public function delete($id)
+	public function delete($id)//main delete
 	{
 		$this->db->where($this->primary_key, $id);
 		$this->db->delete($this->table);
 		return $this->db->affected_rows() > 0;
 	}
 
-	/**
-	 * Toggle enum status between 'Aktif' and 'Tidak Aktif'
-	 */
-	public function toggle_status($id)
-	{
-		if (!$this->status_field) { return false; }
-		$current = $this->get_by_id($id);
-		if (!$current) { return false; }
-		$current_status = isset($current->{$this->status_field}) ? $current->{$this->status_field} : null;
-		if ($current_status === null) { return false; }
-		$new_status = ($current_status === 'Aktif') ? 'Tidak Aktif' : 'Aktif';
-		return $this->update($id, array($this->status_field => $new_status));
-	}
+	// /**
+	//  * Toggle enum status between 'Aktif' and 'Tidak Aktif'
+	//  */
+	// public function toggle_status($id)
+	// {
+	// 	if (!$this->status_field) { return false; }
+	// 	$current = $this->get_by_id($id);
+	// 	if (!$current) { return false; }
+	// 	$current_status = isset($current->{$this->status_field}) ? $current->{$this->status_field} : null;
+	// 	if ($current_status === null) { return false; }
+	// 	$new_status = ($current_status === 'Aktif') ? 'Tidak Aktif' : 'Aktif';
+	// 	return $this->update($id, array($this->status_field => $new_status));
+	// }
 
 	/**
 	 * Check duplicate by a field
 	 */
-	protected function is_duplicate_field($field, $value, $exclude_id = null)
-	{
-		$this->db->select($this->primary_key);
-		$this->db->from($this->table);
-		$this->db->where('LOWER(' . $field . ')', strtolower($value));
-		if ($exclude_id !== null) {
-			$this->db->where($this->primary_key . ' !=', $exclude_id);
-		}
-		return $this->db->get()->num_rows() > 0;
-	}
+	// protected function is_duplicate_field($field, $value, $exclude_id = null)
+	// {
+	// 	$this->db->select($this->primary_key);
+	// 	$this->db->from($this->table);
+	// 	$this->db->where('LOWER(' . $field . ')', strtolower($value));
+	// 	if ($exclude_id !== null) {
+	// 		$this->db->where($this->primary_key . ' !=', $exclude_id);
+	// 	}
+	// 	return $this->db->get()->num_rows() > 0;
+	// }
 }
 
 

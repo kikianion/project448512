@@ -5,11 +5,26 @@ function widget_flash($tag1)
 	$CI = &get_instance();
 	$html = '';
 
+	// $d1=$CI->session->flashdata();
+	// log2(serialize($d1));
 	if ($CI->session->flashdata('success-' . $tag1)) {
 		$html .= '<div class="alert alert-success">' . $CI->session->flashdata('success-' . $tag1) . '</div>';
 	}
 	if ($CI->session->flashdata('error-' . $tag1)) {
 		$html .= '<div class="alert alert-danger">' . $CI->session->flashdata('error-' . $tag1) . '</div>';
+	}
+	if ($CI->session->flashdata('dlgsuccess-' . $tag1)) {
+		$msg=$CI->session->flashdata('dlgsuccess-' . $tag1);
+		$html .= <<<EEE
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				let dlg1='#ubah-status-common-res'
+				$(dlg1).appendTo('body').modal('show')
+				$(dlg1 + ' .modal-body #msg1').html(`$msg`);
+				
+			})
+		</script>
+EEE;
 	}
 
 	return $html;

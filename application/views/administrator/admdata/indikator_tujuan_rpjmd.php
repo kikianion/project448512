@@ -116,12 +116,12 @@ $tag1 = "form_indikatortujuanrpjmd";
 					<?php if (!empty($indikator_tujuan_rpjmd)):
 						foreach ($indikator_tujuan_rpjmd as $it): ?>
 							<tr>
-								<td><?php echo htmlspecialchars($it->tujuan); ?></td>
-								<td><?php echo htmlspecialchars($it->indikator); ?></td>
-								<td><?php echo htmlspecialchars($it->satuan); ?></td>
-								<td><?php echo htmlspecialchars($it->kondisi_awal); ?></td>
-								<td><?php echo htmlspecialchars(substr($it->formulasi, 0, 50)) . (strlen($it->formulasi) > 50 ? '...' : ''); ?></td>
-								<td><?php echo htmlspecialchars($it->status); ?></td>
+								<td><?= $it->tujuan ?></td>
+								<td><?= $it->indikator ?></td>
+								<td><?= $it->satuan ?></td>
+								<td><?= $it->kondisi_awal ?></td>
+								<td><?= substr($it->formulasi, 0, 50)) . (strlen($it->formulasi) > 50 ? '...' : '' ?></td>
+								<td><?= $it->status ?></td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default">Tindakan</button>

@@ -20,14 +20,16 @@ $tag1 = "form_masteropd";
 		<?= widget_flash($tag1) ?>
 
 		<div id="form-<?= $tag1 ?>">
-			<?php echo form_open('admsistem/save_master_opd'); ?>
+			<?php echo form_open('admsistem/opd/save'); ?>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">OPD</label>
 				<div class="col-sm-8">
-					<input type="text" name="namaopd" class="form-control" id="namaopd" placeholder="Masukan Nama OPD" value="<?php echo isset($edit_master_opd->namaopd) ? htmlspecialchars($edit_master_opd->namaopd) : ''; ?>" required maxlength="50" />
+					<input type="text" name="namaopd" class="form-control" id="namaopd" placeholder="Masukan Nama OPD"
+						value="<?php echo isset($edit_master_opd->namaopd) ? htmlspecialchars($edit_master_opd->namaopd) : ''; ?>" required maxlength="50" />
 				</div>
 				<div class="col-sm-2">
-					<input type="number" name="urut" class="form-control" id="urutanopd" placeholder="urut" value="<?php echo isset($edit_master_opd->urut) ? htmlspecialchars($edit_master_opd->urut) : ''; ?>">
+					<input type="number" name="urut" class="form-control" id="urutanopd" placeholder="urut"
+						value="<?php echo isset($edit_master_opd->urut) ? htmlspecialchars($edit_master_opd->urut) : ''; ?>">
 					<input type="hidden" name="id" value="<?php echo isset($edit_master_opd->id) ? htmlspecialchars($edit_master_opd->id) : ''; ?>">
 					<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 				</div>
@@ -50,22 +52,26 @@ $tag1 = "form_masteropd";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Pimpinan</label>
 				<div class="col-sm-10">
-					<input type="text" name="kepala" class="form-control" id="pimpinanopd" placeholder="Nama Pimpinan" value="<?php echo isset($edit_master_opd->kepala) ? htmlspecialchars($edit_master_opd->kepala) : ''; ?>" maxlength="50">
+					<input type="text" name="kepala" class="form-control" id="pimpinanopd" placeholder="Nama Pimpinan"
+						value="<?php echo isset($edit_master_opd->kepala) ? htmlspecialchars($edit_master_opd->kepala) : ''; ?>" maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NIP/Pang</label>
 				<div class="col-sm-5">
-					<input type="text" name="nipkepala" class="form-control" id="nip-opd" placeholder="NIP (196xxxxxxxxxxxx)" value="<?php echo isset($edit_master_opd->nipkepala) ? htmlspecialchars($edit_master_opd->nipkepala) : ''; ?>" maxlength="50">
+					<input type="text" name="nipkepala" class="form-control" id="nip-opd" placeholder="NIP (196xxxxxxxxxxxx)"
+						value="<?php echo isset($edit_master_opd->nipkepala) ? htmlspecialchars($edit_master_opd->nipkepala) : ''; ?>" maxlength="50">
 				</div>
 				<div class="col-sm-5">
-					<input type="text" name="pangkepala" class="form-control" id="pangkat-opd" placeholder="Pangkat (Pembina dll)" value="<?php echo isset($edit_master_opd->pangkepala) ? htmlspecialchars($edit_master_opd->pangkepala) : ''; ?>" maxlength="50">
+					<input type="text" name="pangkepala" class="form-control" id="pangkat-opd" placeholder="Pangkat (Pembina dll)"
+						value="<?php echo isset($edit_master_opd->pangkepala) ? htmlspecialchars($edit_master_opd->pangkepala) : ''; ?>" maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Jabatan</label>
 				<div class="col-sm-10">
-					<input type="text" name="jabatan" class="form-control" id="jabatan-opd" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)" value="<?php echo isset($edit_master_opd->jabatan) ? htmlspecialchars($edit_master_opd->jabatan) : ''; ?>" maxlength="50">
+					<input type="text" name="jabatan" class="form-control" id="jabatan-opd" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)"
+						value="<?php echo isset($edit_master_opd->jabatan) ? htmlspecialchars($edit_master_opd->jabatan) : ''; ?>" maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -99,8 +105,8 @@ $tag1 = "form_masteropd";
 				<?php if (!empty($master_opd)):
 					foreach ($master_opd as $o): ?>
 						<tr>
-							<td><?php echo htmlspecialchars($o->urut); ?></td>
-							<td><?php echo htmlspecialchars($o->namaopd); ?></td>
+							<td><?= $o->urut ?></td>
+							<td><?= $o->namaopd ?></td>
 							<td><?php
 							// Find mitra name by ID
 							$mitra_name = '';
@@ -114,11 +120,11 @@ $tag1 = "form_masteropd";
 							}
 							echo htmlspecialchars($mitra_name);
 							?></td>
-							<td><?php echo htmlspecialchars($o->kepala); ?></td>
-							<td><?php echo htmlspecialchars($o->nipkepala); ?></td>
-							<td><?php echo htmlspecialchars($o->pangkepala); ?></td>
-							<td><?php echo htmlspecialchars($o->jabatan); ?></td>
-							<td><?php echo htmlspecialchars($o->status); ?></td>
+							<td><?= $o->kepala ?></td>
+							<td><?= $o->nipkepala ?></td>
+							<td><?= $o->pangkepala ?></td>
+							<td><?= $o->jabatan ?></td>
+							<td><?= $o->status ?></td>
 							<td>
 								<div class="btn-group">
 									<button type="button" class="btn btn-default">Tindakan</button>
@@ -128,7 +134,7 @@ $tag1 = "form_masteropd";
 									<div class="dropdown-menu" role="menu">
 										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra" onclick="editModalOPD(<?= $o->id ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/setStatus_opd/' . $o->id) ?>" onclick="return confirm('Apakah Anda yakin ingin mengubah status OPD ini?')">
+										<a class="dropdown-item" href="<?= site_url('admsistem/opd/setStatus/' . $o->id) ?>">
 											Ubah Status</a>
 									</div>
 								</div>
@@ -148,41 +154,28 @@ $tag1 = "form_masteropd";
 	function editModalOPD(id) {
 
 		$.ajax({
-			url: 'admsistem/opdById/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
+			url: 'admsistem/opd/byId/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
 			success: function (res) {
 				if (res.status === 'success') {
-					$('#edit-record-common').appendTo('body').modal('show');
-					$('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
-					$('#edit-record-common .modal-title').html("Edit data OPD");
+					let e1 = "#edit-record-common"
 
-					$('#edit-record-common input[name=namaopd]').val(res.data.namaopd);
-					$('#edit-record-common select[name=mitra_id]').val(res.data.mitra);
-					$('#edit-record-common input[name=kepala]').val(res.data.kepala);
-					$('#edit-record-common input[name=nipkepala]').val(res.data.nipkepala);
-					$('#edit-record-common input[name=pangkepala]').val(res.data.pangkepala);
-					$('#edit-record-common input[name=jabatan]').val(res.data.jabatan);
-					$('#edit-record-common input[name=status]').val(res.data.status);
-					$('#edit-record-common input[name=urut]').val(res.data.urut);
-					$('#edit-record-common input[name=id]').val(res.data.id);
+					$(e1).appendTo('body').modal('show');
+					$(e1 + ' .modal-body').html($('#form-<?= $tag1 ?>').html());
+					$(e1 + ' .modal-title').html("Edit data OPD");
+
+					let d = res.data
+					$(e1 + ' input[name=namaopd]').val(d.namaopd);
+					$(e1 + ' select[name=mitra_id]').val(d.mitra);
+					$(e1 + ' input[name=kepala]').val(d.kepala);
+					$(e1 + ' input[name=nipkepala]').val(d.nipkepala);
+					$(e1 + ' input[name=pangkepala]').val(d.pangkepala);
+					$(e1 + ' input[name=jabatan]').val(d.jabatan);
+					$(e1 + ' input[name=status]').val(d.status);
+					$(e1 + ' input[name=urut]').val(d.urut);
+					$(e1 + ' input[name=id]').val(d.id);
 
 				}
 			},
 		});
 	}
-</script>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-		var f1 = document.querySelectorAll('#form-form_masteropd input');
-		// console.log(f1);
-		// if (f1.length > 0) {
-		//   f1[0].value = "sandi";
-		//   f1[1].value = 11;
-		//   // f1[2].value = "01112121212";
-		//   f1[4].value = "PLT1";
-		//   f1[5].value = "dsfewfewf";
-		//   f1[6].value = "dddgfdsf";
-		//   f1[7].value = "45gt54";
-		// }
-	});
 </script>

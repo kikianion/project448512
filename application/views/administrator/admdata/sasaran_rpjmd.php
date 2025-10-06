@@ -77,10 +77,10 @@ $tag1 = "form_sasaranrpjmd";
 					<?php if (!empty($sasaran_rpjmd)):
 						foreach ($sasaran_rpjmd as $sr): ?>
 							<tr>
-								<td><?php echo htmlspecialchars($sr->urut); ?></td>
-								<td><?php echo htmlspecialchars($sr->tujuan); ?></td>
-								<td><?php echo htmlspecialchars($sr->sasaran); ?></td>
-								<td><?php echo htmlspecialchars($sr->status); ?></td>
+								<td><?= $sr->urut ?></td>
+								<td><?= $sr->tujuan ?></td>
+								<td><?= $sr->sasaran ?></td>
+								<td><?= $sr->status ?></td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default">Tindakan</button>

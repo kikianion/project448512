@@ -9,13 +9,6 @@ $route['logout'] = 'login/logout';
 
 $route['admsistem'] = 'cAdmSistem';
 
-// $route['admsistem/users'] = 'admsistem/users';
-// $route['admsistem/users/create'] = 'admsistem/create_user';
-// $route['admsistem/users/edit/(:num)'] = 'admsistem/edit_user/$1';
-// $route['admsistem/users/delete/(:num)'] = 'admsistem/delete_user/$1';
-// $route['admsistem/settings'] = 'admsistem/settings';
-// $route['admsistem/logs'] = 'admsistem/logs';
-
 // Route for saving visi from the Master Visi form
 $route['admsistem/save_visi'] = 'admSistem/save_visi';
 $route['admsistem/visiById/(:num)'] = 'admSistem/visiById/$1';
@@ -36,31 +29,31 @@ $route['admsistem/save_grouping_periode'] = 'admSistem/save_grouping_periode';
 $route['admsistem/groupingPeriodeById/(:num)'] = 'admSistem/groupingPeriodeById/$1';
 $route['admsistem/setStatus_grouping_periode/(:num)'] = 'admSistem/setStatus_grouping_periode/$1';
 
-// Master user CRUD (table `user`)
+// >>>>>>>>>>>>>>>>>>>>> user
 $route['admsistem/user/save'] = 'cMasterUser/save';
-$route['admsistem/user/edit/(:any)'] = 'cMasterUser/edit/$1';
-$route['admsistem/user/delete/(:any)'] = 'cMasterUser/delete/$1';
-$route['admsistem/user/userById/(:num)'] = 'cMasterUser/userById/$1';
-$route['admsistem/user/setstatus/(:num)'] = 'cMasterUser/setStatus/$1';
+$route['admsistem/user/byId/(:num)'] = 'cMasterUser/byId/$1';
+$route['admsistem/user/setStatus/(:num)'] = 'cMasterUser/setStatus/$1';
 $route['admsistem/user/resetpassword'] = 'cMasterUser/resetpassword';
 
-// Master mitra CRUD (table `mitra`)
+// >>>>>>>>>>>>>>>>>>>>> mitra
 $route['admsistem/mitra/save'] = 'cMasterMitra/save';
+$route['admsistem/mitra/byId/(:num)'] = 'cMasterMitra/byId/$1';
+$route['admsistem/mitra/setStatus/(:num)'] = 'cMasterMitra/setStatus/$1';
+
 $route['admsistem/mitra/edit/(:num)'] = 'cMasterMitra/edit/$1';
 $route['admsistem/mitra/delete/(:num)/(:any)'] = 'cMasterMitra/delete/$1/$2';
-$route['admsistem/mitra/mitraById/(:num)'] = 'cMasterMitra/mitraById/$1';
-$route['admsistem/mitra/setStatus/(:num)'] = 'cMasterMitra/setStatus/$1';
-// Master opd CRUD 
-$route['admsistem/save_master_opd'] = 'admSistem/save_master_opd';
-$route['admsistem/edit_master_opd/(:num)'] = 'admSistem/edit_master_opd/$1';
-$route['admsistem/delete_master_opd/(:num)/(:any)'] = 'admSistem/delete_master_opd/$1/$2';
-$route['admsistem/opdById/(:num)'] = 'admSistem/opdById/$1';
-$route['admsistem/setStatus_opd/(:num)'] = 'admSistem/setStatus_opd/$1';
+
+// >>>>>>>>>>>>>>>>>>>>> opd
+$route['admsistem/opd/save'] = 'cMasterOpd/save';
+$route['admsistem/opd/byId/(:num)'] = 'cMasterOpd/byId/$1';
+$route['admsistem/opd/setStatus/(:num)'] = 'cMasterOpd/setStatus/$1';
+
 // Branding CRUD
 $route['admsistem/save_branding'] = 'admSistem/save_branding';
 $route['admsistem/delete_branding/(:any)'] = 'admSistem/delete_branding/$1';
 
-$route['admdata'] = 'admData';
+$route['admdata'] = 'cAdmData';
+
 // $route['admdata/dashboard'] = 'admdata/dashboard';
 // $route['admdata/import'] = 'admdata/import';
 // $route['admdata/export'] = 'admdata/export';
@@ -130,13 +123,13 @@ $route['admdata/setStatus_grouping_periode/(:num)'] = 'admData/setStatus_groupin
 $route['admdata/delete_grouping_periode/(:num)'] = 'admData/delete_grouping_periode/$1';
 
 // Master Branding CRUD routes
-$route['admdata/save_branding_nama'] = 'admData/save_branding_nama';
-$route['admdata/save_branding_subnote'] = 'admData/save_branding_subnote';
-$route['admdata/save_branding_background'] = 'admData/save_branding_background';
-$route['admdata/save_branding_logo'] = 'admData/save_branding_logo';
-$route['admdata/save_branding_favicon'] = 'admData/save_branding_favicon';
+$route['admdata/branding/save_nama'] = 'cBranding/save_branding_nama';
+$route['admdata/branding/save_subnote'] = 'cBranding/save_branding_subnote';
+$route['admdata/branding/save_background'] = 'cBranding/save_branding_background';
+$route['admdata/branding/save_logo'] = 'cBranding/save_branding_logo';
+$route['admdata/branding/save_favicon'] = 'cBranding/save_branding_favicon';
 
-$route['oprmaster'] = 'oprMaster';
+$route['oprmaster'] = 'cOprMaster';
 $route['oprmaster/users'] = 'oprmaster/users';
 $route['oprmaster/users/create'] = 'oprmaster/create_user';
 $route['oprmaster/users/edit/(:num)'] = 'oprmaster/edit_user/$1';
@@ -149,3 +142,5 @@ $route['mitraverdata'] = 'mitraVerData';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['test1'] = 'test/hi';

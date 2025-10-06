@@ -79,10 +79,10 @@ $tag1 = "form_masterprogram";
 					<?php if (!empty($master_program)):
 						foreach ($master_program as $p): ?>
 							<tr>
-								<td><?php echo htmlspecialchars($p->kode); ?></td>
-								<td><?php echo htmlspecialchars($p->namaprogram); ?></td>
-								<td><?php echo htmlspecialchars($p->urusan); ?></td>
-								<td><?php echo htmlspecialchars($p->status); ?></td>
+								<td><?= $p->kode ?></td>
+								<td><?= $p->namaprogram ?></td>
+								<td><?= $p->urusan ?></td>
+								<td><?= $p->status ?></td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default">Tindakan</button>

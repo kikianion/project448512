@@ -65,9 +65,9 @@ $tag1 = "form_mastergroupingperiode";
 					<?php if (!empty($master_grouping_periode)):
 						foreach ($master_grouping_periode as $gp): ?>
 							<tr>
-								<td><?php echo htmlspecialchars($gp->namagroup); ?></td>
-								<td><?php echo htmlspecialchars($gp->jumlah_bulan); ?></td>
-								<td><?php echo htmlspecialchars($gp->status); ?></td>
+								<td><?= $gp->namagroup ?></td>
+								<td><?= $gp->jumlah_bulan ?></td>
+								<td><?= $gp->status ?></td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default">Tindakan</button>

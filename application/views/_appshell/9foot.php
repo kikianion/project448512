@@ -15,13 +15,36 @@
 	</div>
 </div>
 
+<div class="modal fade" id="ubah-status-common-res">
+	<div class="modal-dialog modal-md modal-outline">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Perubahan Status Berhasil</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg1">
+					xxxxxxxxxxx xxxx kini berstatus <b>"Aktif"</b> / <b>"Tidak Aktif"</b>
+				</span>
+				<p>
+				<div class="modal-footer pull-right">
+					<button type="button" class="btn btn-info" data-dismiss="modal">Oke</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+</div>
 
 <script>
 	let lsPrefLayout = "pageLayout-"
 	let page_name = "x"
 
 	document.addEventListener('DOMContentLoaded', function () {
-		if(localStorage.getItem("auto_reload_do")==="1") {
+		if (localStorage.getItem("auto_reload_do") === "1") {
 			localStorage.removeItem("auto_reload_do")
 			$("#status1").html("auto reload done")
 			setTimeout(() => {
@@ -56,7 +79,7 @@
 			}
 
 			if (maxed == 1) {
-				let btnfs=$(card).find('.card-tools button').first();
+				let btnfs = $(card).find('.card-tools button').first();
 				setTimeout(() => {
 					btnfs.click()
 				}, 200);
@@ -159,7 +182,7 @@
 		if (autoReload === "1") {
 			localStorage.setItem("auto_reload_do", 1);
 			location.reload();
-			
+
 		}
 	};
 </script>
