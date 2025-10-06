@@ -13,7 +13,7 @@ class MY_Controller extends CI_Controller
 	{
 		parent::__construct();
 
-		$this->load->helper(array('url', 'form', 'text', 'log2','common'));
+		$this->load->helper(array('url', 'form', 'text', 'log2', 'common'));
 		$this->load->library(array('session'));
 		if ($this->defaultModel != 'xxx') {
 			$this->load->model($this->defaultModel);
@@ -61,7 +61,7 @@ class MY_Controller extends CI_Controller
 		}
 
 		$defaultModelName = $this->defaultModel;
-		if ($this->id) {
+		if ($this->id && $this->id != 0) {
 			$ok = $this->$defaultModelName->update($this->id, $this->_savedata);
 			if ($ok) {
 				$this->flash('success', $this->defaultName . ' updated.');

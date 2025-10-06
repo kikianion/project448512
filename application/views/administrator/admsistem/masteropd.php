@@ -9,7 +9,6 @@ $tag1 = "form_masteropd";
 			<button type="button" class="btn btn-tool btn-fs" xdata-card-widget="collapse">
 				[&nbsp;&nbsp;]
 			</button>
-
 			<button type="button" class="btn btn-tool" data-card-widget="collapse">
 				<i class="fas fa-plus"></i>
 			</button>
@@ -24,13 +23,11 @@ $tag1 = "form_masteropd";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">OPD</label>
 				<div class="col-sm-8">
-					<input type="text" name="namaopd" class="form-control" id="namaopd" placeholder="Masukan Nama OPD"
-						value="<?php echo isset($edit_master_opd->namaopd) ? htmlspecialchars($edit_master_opd->namaopd) : ''; ?>" required maxlength="50" />
+					<input type="text" class="form-control" placeholder="Masukan Nama OPD" <?= expandFieldAttr('namaopd') ?> required maxlength="50" />
 				</div>
 				<div class="col-sm-2">
-					<input type="number" name="urut" class="form-control" id="urutanopd" placeholder="urut"
-						value="<?php echo isset($edit_master_opd->urut) ? htmlspecialchars($edit_master_opd->urut) : ''; ?>">
-					<input type="hidden" name="id" value="<?php echo isset($edit_master_opd->id) ? htmlspecialchars($edit_master_opd->id) : ''; ?>">
+					<input type="number" class="form-control" placeholder="urut" <?= expandFieldAttr('urut') ?>>
+					<input type="hidden" name="id" <?= expandFieldAttr('id') ?>>
 					<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 				</div>
 			</div>
@@ -52,26 +49,22 @@ $tag1 = "form_masteropd";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Pimpinan</label>
 				<div class="col-sm-10">
-					<input type="text" name="kepala" class="form-control" id="pimpinanopd" placeholder="Nama Pimpinan"
-						value="<?php echo isset($edit_master_opd->kepala) ? htmlspecialchars($edit_master_opd->kepala) : ''; ?>" maxlength="50">
+					<input type="text" class="form-control" placeholder="Nama Pimpinan" <?= expandFieldAttr('kepala') ?> maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NIP/Pang</label>
 				<div class="col-sm-5">
-					<input type="text" name="nipkepala" class="form-control" id="nip-opd" placeholder="NIP (196xxxxxxxxxxxx)"
-						value="<?php echo isset($edit_master_opd->nipkepala) ? htmlspecialchars($edit_master_opd->nipkepala) : ''; ?>" maxlength="50">
+					<input type="text" class="form-control" placeholder="NIP (196xxxxxxxxxxxx)" <?= expandFieldAttr('nipkepala') ?> maxlength="50">
 				</div>
 				<div class="col-sm-5">
-					<input type="text" name="pangkepala" class="form-control" id="pangkat-opd" placeholder="Pangkat (Pembina dll)"
-						value="<?php echo isset($edit_master_opd->pangkepala) ? htmlspecialchars($edit_master_opd->pangkepala) : ''; ?>" maxlength="50">
+					<input type="text" class="form-control" placeholder="Pangkat (Pembina dll)" <?= expandFieldAttr('pangkepala') ?> maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Jabatan</label>
 				<div class="col-sm-10">
-					<input type="text" name="jabatan" class="form-control" id="jabatan-opd" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)"
-						value="<?php echo isset($edit_master_opd->jabatan) ? htmlspecialchars($edit_master_opd->jabatan) : ''; ?>" maxlength="50">
+					<input type="text" class="form-control" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)" <?= expandFieldAttr('jabatan') ?> maxlength="50">
 				</div>
 			</div>
 			<div class="form-group row">

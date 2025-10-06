@@ -161,12 +161,12 @@ $tag1 = 'form_masteruser';
 		$modal.find('input[name=password-baru2]').val('');
 		$modal.find('input[name=id]').val(id);
 		$modal.find('input[name=tag1]').val('<?= $tag1 ?>');
-		$modal.find('#reset-pass').attr('action', "admsistem/reset_password");
+		$modal.find('#reset-pass').attr('action', "admsistem/user/resetpassword");
 	}
 
 	function editModalUser(id) {
 		$.ajax({
-			url: 'admsistem/userById/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
+			url: 'admsistem/user/byId/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
 			success: function (res) {
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');

@@ -10,27 +10,35 @@ class MMasterUser extends MY_Model
 		return $this->db->get($this->table)->row();
 	}
 
-	public function get($id)
+	public function byId($id)
 	{
 		$this->db->select('id,username,nama,role,opd,status');
-		$this->db->where('id', $id);
-		return $this->db->get($this->table)->row();
+		$this->db->from($this->table);
+		$this->db->where($this->primary_key, $id);
+		return $this->db->get()->row();
 	}
 
-	public function insert($data)
-	{
-		return $this->db->insert($this->table, $data);
-	}
+	// public function get($id)
+	// {
+	// 	$this->db->select('id,username,nama,role,opd,status');
+	// 	$this->db->where('id', $id);
+	// 	return $this->db->get($this->table)->row();
+	// }
 
-	public function update($id, $data)
-	{
-		$this->db->where('id', $id);
-		return $this->db->update($this->table, $data);
-	}
+	// public function insert($data)
+	// {
+	// 	return $this->db->insert($this->table, $data);
+	// }
 
-	public function delete($username)
-	{
-		$this->db->where('username', $username);
-		return $this->db->delete($this->table);
-	}
+	// public function update($id, $data)
+	// {
+	// 	$this->db->where('id', $id);
+	// 	return $this->db->update($this->table, $data);
+	// }
+
+	// public function delete($username)
+	// {
+	// 	$this->db->where('username', $username);
+	// 	return $this->db->delete($this->table);
+	// }
 }

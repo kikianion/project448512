@@ -8,7 +8,6 @@ class CMasterMitra extends MY_Controller
 	protected $tag1 = "form_mastermitra";
 	public function save()
 	{
-
 		$this->form_validation->set_rules('namamitra', 'Nama Mitra', 'required|max_length[50]');
 		$this->form_validation->set_rules('urut', 'Urut', 'integer');
 		$this->form_validation->set_rules('kepala', 'Kepala', 'required|max_length[50]');

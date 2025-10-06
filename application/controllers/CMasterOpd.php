@@ -12,11 +12,10 @@ class CMasterOpd extends MY_Controller
 		$this->form_validation->set_rules('namaopd', 'Nama OPD', 'required|max_length[50]');
 		$this->form_validation->set_rules('urut', 'Urut', 'integer');
 		$this->form_validation->set_rules('mitra_id', 'Mitra', 'required|integer');
-		$this->form_validation->set_rules('kepala', 'Kepala', 'max_length[50]');
+		$this->form_validation->set_rules('kepala', 'Kepala', 'required|max_length[50]');
 		$this->form_validation->set_rules('nipkepala', 'NIP Kepala', 'max_length[50]');
 		$this->form_validation->set_rules('pangkepala', 'Pangkat Kepala', 'max_length[50]');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'max_length[50]');
-		$this->form_validation->set_rules('status', 'Status', 'max_length[50]');
 
 		$this->_savedata = array(
 			'urut' => $this->input->post('urut'),
