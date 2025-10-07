@@ -16,8 +16,7 @@ class CMisi extends MY_Controller
 		$this->_savedata = array(
 			'misi' => $this->input->post('misi'),
 			'urut' => $this->input->post('urut') ?: 0,
-			'visiinduk' => $this->input->post('visi_id'),
-			'status' => 'Aktif',
+			'visiinduk' => $this->input->post('visi_id')
 		);
 
 		parent::save();

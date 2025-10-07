@@ -23,11 +23,10 @@ $tag1 = 'form_masteruser';
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Username</label>
 				<div class="col-sm-8">
-					<input type="text" name="username" class="form-control" id="username" placeholder="e.g. user@example.com"
-						value="<?= $this->session->flashdata('username') ?>" required maxlength="30" />
+					<input type="text" class="form-control" placeholder="e.g. user@example.com" <?= expandFieldAttr('username') ?> required maxlength="30" />
 				</div>
 				<div class="col-sm-2">
-					<input type="hidden" name="id" value="<?= $this->session->flashdata('id') ?>">
+					<input type="hidden" <?= expandFieldAttr('id') ?>>
 					<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 				</div>
 			</div>
@@ -35,25 +34,14 @@ $tag1 = 'form_masteruser';
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama User</label>
 				<div class="col-sm-10">
-					<input type="text" name="nama" class="form-control" id="namauser" placeholder="Nama User" value="<?= $this->session->flashdata('nama') ?>"
-						required maxlength="50">
+					<input type="text" class="form-control" placeholder="Nama User" <?= expandFieldAttr('nama') ?> required maxlength="50">
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">OPD</label>
 				<div class="col-sm-10">
-					<select name="opd" class="form-control">
-						<option value="">Pilih salah satu OPD yang Aktif</option>
-						<?php if (!empty($master_opd)):
-							$current_opd = isset($edit_master_user->opd) ? $edit_master_user->opd : '';
-							foreach ($master_opd as $opd): ?>
-								<option value="<?php echo htmlspecialchars($opd->id); ?>" <?php echo $current_opd == $opd->id ? 'selected' : ''; ?>>
-									<?php echo htmlspecialchars($opd->namaopd); ?>
-								</option>
-							<?php endforeach;
-						endif; ?>
-					</select>
+					<?= expandFieldAttrSelectActive("opd", $master_opd, "namaopd") ?>
 				</div>
 			</div>
 

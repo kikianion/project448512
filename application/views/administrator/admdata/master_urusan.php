@@ -20,12 +20,13 @@ $tag1 = "form_masterurusan";
 			<?= widget_flash($tag1) ?>
 
 			<div id="form-<?= $tag1 ?>">
-				<?php echo form_open('admdata/save_master_urusan'); ?>
+				<?php echo form_open('admdata/urusan/save'); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Nama Urusan</label>
 					<div class="col-sm-8">
 						<input type="text" name="namaurusan" class="form-control" id="namaurusan" placeholder="Masukan Nama Urusan"
-							value="<?php echo isset($edit_master_urusan->namaurusan) ? htmlspecialchars($edit_master_urusan->namaurusan) : ''; ?>" required maxlength="100" />
+							value="<?php echo isset($edit_master_urusan->namaurusan) ? htmlspecialchars($edit_master_urusan->namaurusan) : ''; ?>" required
+							maxlength="100" />
 					</div>
 					<div class="col-sm-2">
 						<input type="text" name="kode" class="form-control" id="kodeurusan" placeholder="Kode"
@@ -37,10 +38,11 @@ $tag1 = "form_masterurusan";
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Fungsi</label>
 					<div class="col-sm-10">
-						<select name="fungsi_id" class="form-control">
+						<?= expandFieldAttrSelectActive("fungsi_id", $master_fungsi, "namafungsi") ?>
+						<!-- <select name="fungsi_id" class="form-control">
 							<option value="">Pilih salah satu fungsi yang Aktif</option>
 							<?php if (!empty($master_fungsi)):
-								foreach ($master_fungsi as $fungsi): 
+								foreach ($master_fungsi as $fungsi):
 									if ($fungsi->status === 'Aktif'): ?>
 										<option value="<?= $fungsi->id ?>" <?= (isset($edit_master_urusan->fungsi_id) && $edit_master_urusan->fungsi_id == $fungsi->id) ? 'selected' : '' ?>>
 											<?= htmlspecialchars($fungsi->namafungsi) ?>
@@ -48,7 +50,7 @@ $tag1 = "form_masterurusan";
 									<?php endif;
 								endforeach;
 							endif; ?>
-						</select>
+						</select> -->
 					</div>
 				</div>
 				<div class="form-group row">
@@ -80,7 +82,7 @@ $tag1 = "form_masterurusan";
 							<tr>
 								<td><?= $u->kode ?></td>
 								<td><?= $u->urusan ?></td>
-								<td><?= $u->namafungsi ?? '-' ?></td>
+								<td><?= getNameById($u->fungsi, $master_fungsi, "namafungsi") ?></td>
 								<td><?= $u->status ?></td>
 								<td>
 									<div class="btn-group">
@@ -91,8 +93,8 @@ $tag1 = "form_masterurusan";
 										<div class="dropdown-menu" role="menu">
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-urusan" onclick="editModalUrusan(<?= $u->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_urusan/' . $u->id) ?>"
-												onclick="return confirm('Apakah Anda yakin ingin mengubah status urusan ini?')">Ubah Status</a>
+											<a class="dropdown-item" href="<?= site_url('admdata/urusan/setStatus/' . $u->id) ?>"
+												>Ubah Status</a>
 										</div>
 									</div>
 								</td>
@@ -112,7 +114,7 @@ $tag1 = "form_masterurusan";
 <script>
 	function editModalUrusan(id) {
 		$.ajax({
-			url: 'admdata/urusanById/' + id,
+			url: 'admdata/urusan/byId/' + id,
 			success: function (res) {
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');
@@ -128,4 +130,3 @@ $tag1 = "form_masterurusan";
 		});
 	}
 </script>
-

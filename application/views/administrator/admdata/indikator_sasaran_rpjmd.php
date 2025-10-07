@@ -120,7 +120,7 @@ $tag1 = "form_indikatorsasaranrpjmd";
 								<td><?= $is->indikator ?></td>
 								<td><?= $is->satuan ?></td>
 								<td><?= $is->kondisi_awal ?></td>
-								<td><?= substr($is->formulasi, 0, 50)) . (strlen($is->formulasi) > 50 ? '...' : '' ?></td>
+								<td><?= substr($is->formulasi, 0, 50) . strlen($is->formulasi) > 50 ? '...' : '' ?></td>
 								<td><?= $is->status ?></td>
 								<td>
 									<div class="btn-group">

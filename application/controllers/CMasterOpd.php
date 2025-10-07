@@ -25,7 +25,6 @@ class CMasterOpd extends MY_Controller
 			'nipkepala' => $this->input->post('nipkepala'),
 			'pangkepala' => $this->input->post('pangkepala'),
 			'jabatan' => $this->input->post('jabatan'),
-			'status' => $this->input->post('status') ?: 'Aktif'
 		);
 
 		parent::save();

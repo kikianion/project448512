@@ -11,6 +11,10 @@
         {
             "path": "simela2\\application\\views\\administrator\\admdata\\",
             "color": "foldercustomization.AnsiColor51"
+        },
+        {
+            "path": "simela2\\application\\views\\administrator\\admsistem\\",
+            "color": "foldercustomization.AnsiColor108"
         }
     ]
 }

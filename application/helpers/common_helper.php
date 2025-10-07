@@ -20,10 +20,13 @@ if (!function_exists('getNameById')) {
 	{
 		if (!empty($objs)) {
 			foreach ($objs as $o) {
-				if ($id == $o->id)
-					return $o->$nameField;
+				if ($id == $o->id) {
+					$res = $o->$nameField;
+					return $res;
+				}
 			}
 		}
+		return "(".$id.")";
 
 	}
 }

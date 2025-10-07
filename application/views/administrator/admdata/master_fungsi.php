@@ -20,12 +20,13 @@ $tag1 = "form_masterfungsi";
 			<?= widget_flash($tag1) ?>
 
 			<div id="form-<?= $tag1 ?>">
-				<?php echo form_open('admdata/save_master_fungsi'); ?>
+				<?php echo form_open('admdata/fungsi/save'); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Nama Fungsi</label>
 					<div class="col-sm-8">
 						<input type="text" name="namafungsi" class="form-control" id="namafungsi" placeholder="Masukan Nama Fungsi"
-							value="<?php echo isset($edit_master_fungsi->namafungsi) ? htmlspecialchars($edit_master_fungsi->namafungsi) : ''; ?>" required maxlength="50" />
+							value="<?php echo isset($edit_master_fungsi->namafungsi) ? htmlspecialchars($edit_master_fungsi->namafungsi) : ''; ?>" required
+							maxlength="50" />
 					</div>
 					<div class="col-sm-2">
 						<input type="number" name="urut" class="form-control" id="urutanfungsi" placeholder="urut"
@@ -60,7 +61,7 @@ $tag1 = "form_masterfungsi";
 					<?php if (!empty($master_fungsi)):
 						foreach ($master_fungsi as $f): ?>
 							<tr>
-								<td><?php echo ($f->urut ?></td>
+								<td><?= $f->urut ?></td>
 								<td><?= $f->namafungsi ?></td>
 								<td><?= $f->status ?></td>
 								<td>
@@ -72,8 +73,7 @@ $tag1 = "form_masterfungsi";
 										<div class="dropdown-menu" role="menu">
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-fungsi" onclick="editModalFungsi(<?= $f->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_fungsi/' . $f->id) ?>"
-												onclick="return confirm('Apakah Anda yakin ingin mengubah status fungsi ini?')">Ubah Status</a>
+											<a class="dropdown-item" href="<?= site_url('admdata/fungsi/setStatus/' . $f->id) ?>">Ubah Status</a>
 										</div>
 									</div>
 								</td>
@@ -93,7 +93,7 @@ $tag1 = "form_masterfungsi";
 <script>
 	function editModalFungsi(id) {
 		$.ajax({
-			url: 'admdata/fungsiById/' + id,
+			url: 'admdata/fungsi/byId/' + id,
 			success: function (res) {
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');

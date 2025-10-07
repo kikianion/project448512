@@ -27,7 +27,7 @@ $tag1 = "form_masteropd";
 				</div>
 				<div class="col-sm-2">
 					<input type="number" class="form-control" placeholder="urut" <?= expandFieldAttr('urut') ?>>
-					<input type="hidden" name="id" <?= expandFieldAttr('id') ?>>
+					<input type="hidden" <?= expandFieldAttr('id') ?>>
 					<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 				</div>
 			</div>

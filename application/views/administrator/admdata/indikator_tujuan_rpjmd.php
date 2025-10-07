@@ -53,13 +53,15 @@ $tag1 = "form_indikatortujuanrpjmd";
 					<label class="col-sm-2 col-form-label">Awal</label>
 					<div class="col-sm-4">
 						<input type="number" name="kondisi_awal" class="form-control" xid="kondisi_awal" placeholder="Kondisi Awal Periode"
-							value="<?php echo isset($edit_indikator_tujuan->kondisi_awal) ? htmlspecialchars($edit_indikator_tujuan->kondisi_awal) : ''; ?>" step="0.01">
+							value="<?php echo isset($edit_indikator_tujuan->kondisi_awal) ? htmlspecialchars($edit_indikator_tujuan->kondisi_awal) : ''; ?>"
+							step="0.01">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Formulasi</label>
 					<div class="col-sm-10">
-						<textarea name="formulasi" class="form-control" rows="3" placeholder="Formulasi perhitungan indikator"><?php echo isset($edit_indikator_tujuan->formulasi) ? htmlspecialchars($edit_indikator_tujuan->formulasi) : ''; ?></textarea>
+						<textarea name="formulasi" class="form-control" rows="3"
+							placeholder="Formulasi perhitungan indikator"><?php echo isset($edit_indikator_tujuan->formulasi) ? htmlspecialchars($edit_indikator_tujuan->formulasi) : ''; ?></textarea>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -83,7 +85,8 @@ $tag1 = "form_indikatortujuanrpjmd";
 					<div class="col-sm-2">
 						<input type="number" name="target_5" class="form-control" placeholder="Tahun-5" step="0.01"
 							value="<?php echo isset($edit_indikator_tujuan->target_5) ? htmlspecialchars($edit_indikator_tujuan->target_5) : ''; ?>">
-						<input type="hidden" name="id" value="<?php echo isset($edit_indikator_tujuan->id) ? htmlspecialchars($edit_indikator_tujuan->id) : ''; ?>">
+						<input type="hidden" name="id"
+							value="<?php echo isset($edit_indikator_tujuan->id) ? htmlspecialchars($edit_indikator_tujuan->id) : ''; ?>">
 						<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 					</div>
 				</div>
@@ -120,7 +123,7 @@ $tag1 = "form_indikatortujuanrpjmd";
 								<td><?= $it->indikator ?></td>
 								<td><?= $it->satuan ?></td>
 								<td><?= $it->kondisi_awal ?></td>
-								<td><?= substr($it->formulasi, 0, 50)) . (strlen($it->formulasi) > 50 ? '...' : '' ?></td>
+								<td><?= substr($it->formulasi, 0, 50) . strlen($it->formulasi) > 50 ? '...' : '' ?></td>
 								<td><?= $it->status ?></td>
 								<td>
 									<div class="btn-group">
@@ -129,7 +132,8 @@ $tag1 = "form_indikatortujuanrpjmd";
 											<span class="sr-only"></span>
 										</button>
 										<div class="dropdown-menu" role="menu">
-											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-indikatortujuan" onclick="editModalIndikatorTujuan(<?= $it->id ?>)">Edit</a>
+											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-indikatortujuan"
+												onclick="editModalIndikatorTujuan(<?= $it->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_indikator_tujuan/' . $it->id) ?>"
 												onclick="return confirm('Apakah Anda yakin ingin mengubah status indikator tujuan ini?')">Ubah Status</a>
@@ -182,7 +186,7 @@ $tag1 = "form_indikatortujuanrpjmd";
 		var cardElement = document.getElementById('card-indikator-tujuan-rpjmd');
 		var collapseButton = cardElement.querySelector('[data-card-widget="collapse"]');
 		var maximizeButton = cardElement.querySelector('.btn-fs');
-		
+
 		// Restore card state from localStorage
 		var cardState = localStorage.getItem('card-indikator-tujuan-rpjmd-state');
 		if (cardState === 'expanded') {
@@ -193,7 +197,7 @@ $tag1 = "form_indikatortujuanrpjmd";
 				icon.classList.add('fa-minus');
 			}
 		}
-		
+
 		// Restore maximize state from localStorage
 		var maximizeState = localStorage.getItem('card-indikator-tujuan-rpjmd-maximize');
 		if (maximizeState === 'maximized') {
@@ -208,10 +212,10 @@ $tag1 = "form_indikatortujuanrpjmd";
 			cardElement.style.zIndex = '9999';
 			cardElement.style.margin = '0';
 		}
-		
+
 		// Handle collapse/expand state saving
-		collapseButton.addEventListener('click', function() {
-			setTimeout(function() {
+		collapseButton.addEventListener('click', function () {
+			setTimeout(function () {
 				if (cardElement.classList.contains('collapsed-card')) {
 					localStorage.setItem('card-indikator-tujuan-rpjmd-state', 'collapsed');
 				} else {
@@ -219,9 +223,9 @@ $tag1 = "form_indikatortujuanrpjmd";
 				}
 			}, 300); // Wait for animation to complete
 		});
-		
+
 		// Handle maximize/restore functionality
-		maximizeButton.addEventListener('click', function() {
+		maximizeButton.addEventListener('click', function () {
 			if (cardElement.classList.contains('maximized-card')) {
 				// Restore
 				cardElement.classList.remove('maximized-card');

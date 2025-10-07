@@ -7,7 +7,7 @@ class MY_Controller extends CI_Controller
 	protected $tag1 = "xxx";
 	protected $defaultModel = 'xxx';
 	protected $defaultName = 'xxx';
-
+	protected $defaultRedirect = "admsistem";
 
 	public function __construct()
 	{
@@ -56,11 +56,15 @@ class MY_Controller extends CI_Controller
 			$this->flash('error', validation_errors());
 			$this->session->set_flashdata($post_data);
 
-			redirect('admsistem');
-			return;
+			redirect($this->defaultRedirect);
 		}
 
 		$defaultModelName = $this->defaultModel;
+
+		if (!isset($this->_savedata['status'])) {
+			$this->_savedata['status'] = $this->input->post('status') ?: 'Aktif';
+		}
+
 		if ($this->id && $this->id != 0) {
 			$ok = $this->$defaultModelName->update($this->id, $this->_savedata);
 			if ($ok) {
@@ -77,7 +81,7 @@ class MY_Controller extends CI_Controller
 			}
 		}
 
-		redirect('admsistem');
+		redirect($this->defaultRedirect);
 	}
 	public function flash($key, $val)
 	{
@@ -85,11 +89,12 @@ class MY_Controller extends CI_Controller
 	}
 	public function setStatus($id)
 	{
+		$redirect = 'admsistem';
 		$defaultModelName = $this->defaultModel;
 		$obj = $this->$defaultModelName->byId($id);
 		if (!$obj) {
 			$this->flash('error', $this->defaultName . ' not found.');
-			redirect('admsistem');
+			redirect($this->defaultRedirect);
 			return;
 		}
 
@@ -104,7 +109,7 @@ class MY_Controller extends CI_Controller
 			$this->flash('error', 'Gagal mengubah status ' . $this->defaultName . '.');
 		}
 
-		redirect('admsistem');
+		redirect($this->defaultRedirect);
 	}
 
 	public function byId($id)

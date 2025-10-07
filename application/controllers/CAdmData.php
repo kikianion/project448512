@@ -25,7 +25,7 @@ class CAdmData extends MY_Controller
 		// Load data for all master components
 		$data['master_fungsi'] = $this->MMasterFungsi->getAll();
 		$data['master_urusan'] = $this->MMasterUrusan->getAll();
-		$data['master_urusan_active'] = $this->MMasterUrusan->get_active();
+		// $data['master_urusan_active'] = $this->MMasterUrusan->get_active();
 		$data['master_program'] = $this->MMasterProgram->getAll();
 
 		// Load edit data if editing
@@ -42,47 +42,47 @@ class CAdmData extends MY_Controller
 		$this->load->view('administrator/admdata', $data);
 	}
 
-	public function save_master_fungsi()
-	{
-		$this->form_validation->set_rules('namafungsi', 'Nama Fungsi', 'required|max_length[100]');
-		$this->form_validation->set_rules('urut', 'Urutan', 'integer');
-		$this->form_validation->set_rules('tag1', 'Tag', 'required');
+	// public function save_master_fungsi()
+	// {
+	// 	$this->form_validation->set_rules('namafungsi', 'Nama Fungsi', 'required|max_length[100]');
+	// 	$this->form_validation->set_rules('urut', 'Urutan', 'integer');
+	// 	$this->form_validation->set_rules('tag1', 'Tag', 'required');
 
-		if ($this->form_validation->run() === FALSE) {
-			$tag = $this->input->post('tag1');
-			$this->session->set_flashdata('error-' . $tag, 'Validasi gagal: ' . validation_errors());
-			redirect('admdata');
-			return;
-		}
+	// 	if ($this->form_validation->run() === FALSE) {
+	// 		$tag = $this->input->post('tag1');
+	// 		$this->session->set_flashdata('error-' . $tag, 'Validasi gagal: ' . validation_errors());
+	// 		redirect('admdata');
+	// 		return;
+	// 	}
 
-		$data = array(
-			'namafungsi' => $this->input->post('namafungsi'),
-			'urut' => $this->input->post('urut')
-		);
+	// 	$data = array(
+	// 		'namafungsi' => $this->input->post('namafungsi'),
+	// 		'urut' => $this->input->post('urut')
+	// 	);
 
-		$id = $this->input->post('id');
-		$tag = $this->input->post('tag1');
+	// 	$id = $this->input->post('id');
+	// 	$tag = $this->input->post('tag1');
 
-		if ($id) {
-			// Update
-			$result = $this->MMasterFungsi->update($id, $data);
-			if ($result) {
-				$this->session->set_flashdata('success-' . $tag, 'Data fungsi berhasil diperbarui.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag, 'Gagal memperbarui data fungsi. Nama mungkin sudah ada.');
-			}
-		} else {
-			// Create
-			$result = $this->MMasterFungsi->insert($data);
-			if ($result) {
-				$this->session->set_flashdata('success-' . $tag, 'Data fungsi berhasil ditambahkan.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag, 'Gagal menambahkan data fungsi. Nama mungkin sudah ada.');
-			}
-		}
+	// 	if ($id) {
+	// 		// Update
+	// 		$result = $this->MMasterFungsi->update($id, $data);
+	// 		if ($result) {
+	// 			$this->session->set_flashdata('success-' . $tag, 'Data fungsi berhasil diperbarui.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag, 'Gagal memperbarui data fungsi. Nama mungkin sudah ada.');
+	// 		}
+	// 	} else {
+	// 		// Create
+	// 		$result = $this->MMasterFungsi->insert($data);
+	// 		if ($result) {
+	// 			$this->session->set_flashdata('success-' . $tag, 'Data fungsi berhasil ditambahkan.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag, 'Gagal menambahkan data fungsi. Nama mungkin sudah ada.');
+	// 		}
+	// 	}
 
-		redirect('admdata');
-	}
+	// 	redirect('admdata');
+	// }
 
 	/**
 	 * Get fungsi by ID (AJAX)
@@ -111,31 +111,31 @@ class CAdmData extends MY_Controller
 	/**
 	 * Toggle fungsi status
 	 */
-	public function setStatus_fungsi($id)
-	{
-		$result = $this->MMasterFungsi->toggle_status($id);
+	// public function setStatus_fungsi($id)
+	// {
+	// 	$result = $this->MMasterFungsi->toggle_status($id);
 
-		if ($result) {
-			$this->session->set_flashdata('success', 'Status fungsi berhasil diubah.');
-		} else {
-			$this->session->set_flashdata('error', 'Gagal mengubah status fungsi.');
-		}
+	// 	if ($result) {
+	// 		$this->session->set_flashdata('success', 'Status fungsi berhasil diubah.');
+	// 	} else {
+	// 		$this->session->set_flashdata('error', 'Gagal mengubah status fungsi.');
+	// 	}
 
-		redirect('admdata');
-	}
+	// 	redirect('admdata');
+	// }
 
-	public function delete_fungsi($id)
-	{
-		$result = $this->MMasterFungsi->delete($id);
+	// public function delete_fungsi($id)
+	// {
+	// 	$result = $this->MMasterFungsi->delete($id);
 
-		if ($result) {
-			$this->session->set_flashdata('success', 'Data fungsi berhasil dihapus.');
-		} else {
-			$this->session->set_flashdata('error', 'Gagal menghapus data fungsi. Data mungkin masih digunakan.');
-		}
+	// 	if ($result) {
+	// 		$this->session->set_flashdata('success', 'Data fungsi berhasil dihapus.');
+	// 	} else {
+	// 		$this->session->set_flashdata('error', 'Gagal menghapus data fungsi. Data mungkin masih digunakan.');
+	// 	}
 
-		redirect('admdata');
-	}
+	// 	redirect('admdata');
+	// }
 
 	// ========================================
 	// MASTER URUSAN CRUD METHODS

@@ -20,7 +20,7 @@ $tag1 = "form_masterprogram";
 			<?= widget_flash($tag1) ?>
 
 			<div id="form-<?= $tag1 ?>">
-				<?php echo form_open('admdata/save_master_program'); ?>
+				<?php echo form_open('admdata/program/save'); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Program</label>
 					<div class="col-sm-8">
@@ -40,7 +40,7 @@ $tag1 = "form_masterprogram";
 					<div class="col-sm-10">
 						<select name="urusan_id" class="form-control">
 							<option value="">Pilih salah satu urusan yang Aktif</option>
-						<?php 
+							<?php
 							$urusan_list = !empty($master_urusan_active) ? $master_urusan_active : (isset($master_urusan) ? $master_urusan : []);
 							if (!empty($urusan_list)):
 								foreach ($urusan_list as $urusan): ?>
@@ -92,8 +92,7 @@ $tag1 = "form_masterprogram";
 										<div class="dropdown-menu" role="menu">
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-program" onclick="editModalProgram(<?= $p->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_program/' . $p->id) ?>"
-												onclick="return confirm('Apakah Anda yakin ingin mengubah status program ini?')">Ubah Status</a>
+											<a class="dropdown-item" href="<?= site_url('admdata/program/setStatus/' . $p->id) ?>">Ubah Status</a>
 										</div>
 									</div>
 								</td>
@@ -113,7 +112,7 @@ $tag1 = "form_masterprogram";
 <script>
 	function editModalProgram(id) {
 		$.ajax({
-			url: 'admdata/programById/' + id,
+			url: 'admdata/program/byId/' + id,
 			success: function (res) {
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');
@@ -129,4 +128,3 @@ $tag1 = "form_masterprogram";
 		});
 	}
 </script>
-

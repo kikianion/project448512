@@ -4,11 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class MMasterUser extends MY_Model
 {
 	protected $table = 'user';
-	public function getByUsername($username)
-	{
-		$this->db->where('username', $username);
-		return $this->db->get($this->table)->row();
-	}
+	// public function getByUsername($username)
+	// {
+	// 	$this->db->where('username', $username);
+	// 	return $this->db->get($this->table)->row();
+	// }
 
 	public function byId($id)//override to remove password on select
 	{
