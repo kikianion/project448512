@@ -34,16 +34,7 @@ $tag1 = "form_masteropd";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Mitra</label>
 				<div class="col-sm-10">
-					<select name="mitra_id" class="form-control" required>
-						<option value="">Pilih salah satu Mitra yang Aktif</option>
-						<?php if (!empty($master_mitra)):
-							foreach ($master_mitra as $m): ?>
-								<option value="<?php echo $m->id; ?>" <?php echo (isset($edit_master_opd->mitra_id) && $edit_master_opd->mitra_id == $m->id) ? 'selected' : ''; ?>>
-									<?php echo htmlspecialchars($m->namamitra); ?>
-								</option>
-							<?php endforeach;
-						endif; ?>
-					</select>
+					<?= expandFieldAttrSelectActive("mitra_id", $master_mitra, "namamitra") ?>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -100,19 +91,7 @@ $tag1 = "form_masteropd";
 						<tr>
 							<td><?= $o->urut ?></td>
 							<td><?= $o->namaopd ?></td>
-							<td><?php
-							// Find mitra name by ID
-							$mitra_name = '';
-							if (!empty($master_mitra)) {
-								foreach ($master_mitra as $m) {
-									if ($m->id == $o->mitra) {
-										$mitra_name = $m->namamitra;
-										break;
-									}
-								}
-							}
-							echo htmlspecialchars($mitra_name);
-							?></td>
+							<td><?= getNameById($o->mitra, $master_mitra, "namamitra") ?></td>
 							<td><?= $o->kepala ?></td>
 							<td><?= $o->nipkepala ?></td>
 							<td><?= $o->pangkepala ?></td>
@@ -127,8 +106,7 @@ $tag1 = "form_masteropd";
 									<div class="dropdown-menu" role="menu">
 										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra" onclick="editModalOPD(<?= $o->id ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/opd/setStatus/' . $o->id) ?>">
-											Ubah Status</a>
+										<a class="dropdown-item" href="<?= site_url('admsistem/opd/setStatus/' . $o->id) ?>"> Ubah Status</a>
 									</div>
 								</div>
 							</td>

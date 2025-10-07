@@ -9,15 +9,15 @@ $route['logout'] = 'login/logout';
 
 $route['admsistem'] = 'cAdmSistem';
 
-// Route for saving visi from the Master Visi form
-$route['admsistem/save_visi'] = 'admSistem/save_visi';
-$route['admsistem/visiById/(:num)'] = 'admSistem/visiById/$1';
-$route['admsistem/setStatus_visi/(:num)'] = 'admSistem/setStatus_visi/$1';
+// visi
+$route['admsistem/visi/save'] = 'cVisi/save';
+$route['admsistem/visi/byId/(:num)'] = 'cVisi/byId/$1';
+$route['admsistem/visi/setStatus/(:num)'] = 'cVisi/setStatus/$1';
 
 // Master misi CRUD
-$route['admsistem/save_misi'] = 'admSistem/save_misi';
-$route['admsistem/misiById/(:num)'] = 'admSistem/misiById/$1';
-$route['admsistem/setStatus_misi/(:num)'] = 'admSistem/setStatus_misi/$1';
+$route['admsistem/misi/save'] = 'cMisi/save';
+$route['admsistem/misi/byId/(:num)'] = 'cMisi/byId/$1';
+$route['admsistem/misi/setStatus/(:num)'] = 'cMisi/setStatus/$1';
 
 // Master periode CRUD
 $route['admsistem/save_periode'] = 'admSistem/save_periode';

@@ -20,7 +20,7 @@ $tag1 = "form_mastervisi";
 
 		<div id="form-<?= $tag1 ?>">
 
-			<form method="post" action="<?php echo site_url('admsistem/save_visi'); ?>">
+			<form method="post" action="<?php echo site_url('admsistem/visi/save'); ?>">
 				<div class="form-group row">
 					<label for="visi" class="col-sm-2 col-form-label">Visi</label>
 					<div class="col-sm-10">
@@ -57,8 +57,8 @@ $tag1 = "form_mastervisi";
 				<?php if (!empty($visi_list) && is_array($visi_list)): ?>
 					<?php foreach ($visi_list as $visi): ?>
 						<tr>
-							<td class="align-middle"><?php echo htmlspecialchars($visi->visi); ?></td>
-							<td class="align-middle"><?php echo ($visi->status == 1) ? 'Aktif' : 'Tidak Aktif'; ?></td>
+							<td class="align-middle"><?= htmlspecialchars($visi->visi) ?></td>
+							<td class="align-middle"><?= $visi->status ?></td>
 							<td class="align-middle">
 								<div class="btn-group">
 									<button type="button" class="btn btn-default">Tindakan</button>
@@ -68,8 +68,7 @@ $tag1 = "form_mastervisi";
 									<div class="dropdown-menu" role="menu">
 										<a class="dropdown-item" data-toggle="modal" onclick="editModalVisi(<?= $visi->id ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/setStatus_visi/' . $visi->id) ?>"
-											onclick="return confirm('Ubah status visi ini?')">Ubah Status</a>
+										<a class="dropdown-item" href="<?= site_url('admsistem/visi/setStatus/' . $visi->id) ?>">Ubah Status</a>
 									</div>
 								</div>
 							</td>
@@ -87,22 +86,10 @@ $tag1 = "form_mastervisi";
 <script>
 	function editModalVisi(id) {
 		$.ajax({
-			url: 'admsistem/visiById/' + id,
+			url: 'admsistem/visi/byId/' + id,
 			success: function (res) {
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');
-					// Build a simple edit form inside the common modal using the same layout
-					// var body = '<form method="post" action="<?= site_url('admsistem/save_visi') ?>">' +
-					//            '<div class="form-group">' +
-					//            '<label>Visi</label>' +
-					//            '<textarea class="form-control" name="visi" rows="3"></textarea>' +
-					//            '<input type="hidden" name="tag1" value="form_mastervisi">' +
-					//            '</div>' +
-					//            '<div class="text-right">' +
-					//            '<button type="submit" class="btn btn-primary">Simpan</button>' +
-					//            '</div>' +
-					//            '</form>';
-					// $('#edit-record-common .modal-body').html(body);
 					$('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
 					$('#edit-record-common .modal-title').html('Edit data visi');
 					$('#edit-record-common textarea[name=visi]').val(res.data.visi);

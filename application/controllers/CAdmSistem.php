@@ -47,96 +47,96 @@ class CAdmSistem extends MY_Controller
 		$this->load->view('administrator/admsistem', $data);
 	}
 
-	public function save_misi()
-	{
-		if ($this->input->method() !== 'post') {
-			show_error('Method not allowed', 405);
-			return;
-		}
+	// public function save_misi()
+	// {
+	// 	if ($this->input->method() !== 'post') {
+	// 		show_error('Method not allowed', 405);
+	// 		return;
+	// 	}
 
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('misi', 'Misi', 'required|max_length[5000]|trim');
-		$this->form_validation->set_rules('urut', 'Urut', 'integer');
-		$this->form_validation->set_rules('visi_id', 'Visi', 'required|integer');
+	// 	$this->load->library('form_validation');
+	// 	$this->form_validation->set_rules('misi', 'Misi', 'required|max_length[5000]|trim');
+	// 	$this->form_validation->set_rules('urut', 'Urut', 'integer');
+	// 	$this->form_validation->set_rules('visi_id', 'Visi', 'required|integer');
 
-		$id = $this->input->post('id');
-		$tag1 = $this->input->post('tag1');
+	// 	$id = $this->input->post('id');
+	// 	$tag1 = $this->input->post('tag1');
 
-		if ($this->form_validation->run() === FALSE) {
-			$this->session->set_flashdata('error-' . $tag1, validation_errors());
-			// also keep old values
-			$this->session->set_flashdata('old_misi', $this->input->post('misi'));
-			$this->session->set_flashdata('old_urut', $this->input->post('urut'));
-			$this->session->set_flashdata('old_visi_id', $this->input->post('visi_id'));
-			redirect('admsistem');
-			return;
-		}
+	// 	if ($this->form_validation->run() === FALSE) {
+	// 		$this->session->set_flashdata('error-' . $tag1, validation_errors());
+	// 		// also keep old values
+	// 		$this->session->set_flashdata('old_misi', $this->input->post('misi'));
+	// 		$this->session->set_flashdata('old_urut', $this->input->post('urut'));
+	// 		$this->session->set_flashdata('old_visi_id', $this->input->post('visi_id'));
+	// 		redirect('admsistem');
+	// 		return;
+	// 	}
 
-		$data = array(
-			'misi' => $this->input->post('misi'),
-			'urut' => $this->input->post('urut') ?: 0,
-			'visiinduk' => $this->input->post('visi_id'),
-			'status' => 1,
-		);
+	// 	$data = array(
+	// 		'misi' => $this->input->post('misi'),
+	// 		'urut' => $this->input->post('urut') ?: 0,
+	// 		'visiinduk' => $this->input->post('visi_id'),
+	// 		'status' => 1,
+	// 	);
 
-		if ($id) {
-			$ok = $this->MMisi->update($id, $data);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'Misi berhasil disimpan.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan misi.');
-			}
-		} else {
-			$ok = $this->MMisi->insert($data);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'Misi berhasil disimpan.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan misi.');
-			}
-		}
+	// 	if ($id) {
+	// 		$ok = $this->MMisi->update($id, $data);
+	// 		if ($ok) {
+	// 			$this->session->set_flashdata('success-' . $tag1, 'Misi berhasil disimpan.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan misi.');
+	// 		}
+	// 	} else {
+	// 		$ok = $this->MMisi->insert($data);
+	// 		if ($ok) {
+	// 			$this->session->set_flashdata('success-' . $tag1, 'Misi berhasil disimpan.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan misi.');
+	// 		}
+	// 	}
 
-		redirect('admsistem');
-	}
+	// 	redirect('admsistem');
+	// }
 
-	public function misiById($id)
-	{
-		if (!$id) {
-			$misi = ['error' => 'Misi ID is required.'];
-			$status_code = 400;
-		} else {
-			$misi = $this->MMisi->get($id);
-			$status_code = 200;
-		}
+	// public function misiById($id)
+	// {
+	// 	if (!$id) {
+	// 		$misi = ['error' => 'Misi ID is required.'];
+	// 		$status_code = 400;
+	// 	} else {
+	// 		$misi = $this->MMisi->get($id);
+	// 		$status_code = 200;
+	// 	}
 
-		$res = [
-			'status' => 'success',
-			'data' => $misi
-		];
-		$this->output
-			->set_content_type('application/json')
-			->set_status_header($status_code)
-			->set_output(json_encode($res));
-	}
+	// 	$res = [
+	// 		'status' => 'success',
+	// 		'data' => $misi
+	// 	];
+	// 	$this->output
+	// 		->set_content_type('application/json')
+	// 		->set_status_header($status_code)
+	// 		->set_output(json_encode($res));
+	// }
 
-	public function setStatus_misi($id)
-	{
-		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
-		$misi = $this->MMisi->get($id);
-		if (!$misi) {
-			$this->session->set_flashdata('error-' . $tag1, 'Misi not found.');
-			redirect('admsistem');
-			return;
-		}
+	// public function setStatus_misi($id)
+	// {
+	// 	$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+	// 	$misi = $this->MMisi->get($id);
+	// 	if (!$misi) {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Misi not found.');
+	// 		redirect('admsistem');
+	// 		return;
+	// 	}
 
-		$new_status = ((int) $misi->status === 1) ? 0 : 1;
-		$ok = $this->MMisi->update($id, ['status' => $new_status]);
-		if ($ok) {
-			$this->session->set_flashdata('success-' . $tag1, 'Status misi berhasil diubah.');
-		} else {
-			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status misi.');
-		}
-		redirect('admsistem');
-	}
+	// 	$new_status = ((int) $misi->status === 1) ? 0 : 1;
+	// 	$ok = $this->MMisi->update($id, ['status' => $new_status]);
+	// 	if ($ok) {
+	// 		$this->session->set_flashdata('success-' . $tag1, 'Status misi berhasil diubah.');
+	// 	} else {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status misi.');
+	// 	}
+	// 	redirect('admsistem');
+	// }
 
 	/**
 	 * Periode handlers
@@ -352,123 +352,123 @@ class CAdmSistem extends MY_Controller
 	// 		->set_output(json_encode($res));
 	// }
 
-	public function userById($id)
-	{
-		// Check if an ID was provided
-		if ($id != 0 && !$id) {
-			// Handle the case where no ID is provided (e.g., return an error or empty array)
-			$user = ['error' => 'User ID is required.'];
-			$status_code = 400;  // Bad Request
-		} else {
-			// Call the model method to get a single record by ID
-			$user = $this->MMasterUser->get($id);
-			$status_code = 200;
-		}
+	// public function userById($id)
+	// {
+	// 	// Check if an ID was provided
+	// 	if ($id != 0 && !$id) {
+	// 		// Handle the case where no ID is provided (e.g., return an error or empty array)
+	// 		$user = ['error' => 'User ID is required.'];
+	// 		$status_code = 400;  // Bad Request
+	// 	} else {
+	// 		// Call the model method to get a single record by ID
+	// 		$user = $this->MMasterUser->get($id);
+	// 		$status_code = 200;
+	// 	}
 
-		$res = [
-			'status' => 'success',
-			'data' => $user
-		];
-		// Set the JSON response
-		$this
-			->output
-			->set_content_type('application/json')
-			->set_status_header($status_code)
-			->set_output(json_encode($res));
-	}
+	// 	$res = [
+	// 		'status' => 'success',
+	// 		'data' => $user
+	// 	];
+	// 	// Set the JSON response
+	// 	$this
+	// 		->output
+	// 		->set_content_type('application/json')
+	// 		->set_status_header($status_code)
+	// 		->set_output(json_encode($res));
+	// }
 
 
 	/**
 	 * Handle POST to save visi
 	 */
-	public function save_visi()
-	{
-		if ($this->input->method() !== 'post') {
-			show_error('Method not allowed', 405);
-			return;
-		}
+	// public function save_visi()
+	// {
+	// 	if ($this->input->method() !== 'post') {
+	// 		show_error('Method not allowed', 405);
+	// 		return;
+	// 	}
 
-		$id = $this->input->post('id');  // optional for update
+	// 	$id = $this->input->post('id');  // optional for update
 
-		$this->load->library('form_validation');
-		// Allow up to 1000 characters for visi; trim input
-		$this->form_validation->set_rules('visi', 'Visi', 'required|max_length[5000]|trim');
+	// 	$this->load->library('form_validation');
+	// 	// Allow up to 1000 characters for visi; trim input
+	// 	$this->form_validation->set_rules('visi', 'Visi', 'required|max_length[5000]|trim');
 
-		// Preserve old input so the form can be repopulated in case of error
-		$old_visi = $this->input->post('visi');
-		$tag1 = $this->input->post('tag1');
+	// 	// Preserve old input so the form can be repopulated in case of error
+	// 	$old_visi = $this->input->post('visi');
+	// 	$tag1 = $this->input->post('tag1');
 
-		if ($this->form_validation->run() === FALSE) {
-			$this->session->set_flashdata('error-' . $tag1, validation_errors());
-			$this->session->set_flashdata('old_visi', $old_visi);
-			redirect('admsistem');
-			return;
-		}
+	// 	if ($this->form_validation->run() === FALSE) {
+	// 		$this->session->set_flashdata('error-' . $tag1, validation_errors());
+	// 		$this->session->set_flashdata('old_visi', $old_visi);
+	// 		redirect('admsistem');
+	// 		return;
+	// 	}
 
-		$visi_new = $this->input->post('visi');
-		$data = array(
-			'visi' => $this->input->post('visi'),
-		);
+	// 	$visi_new = $this->input->post('visi');
+	// 	$data = array(
+	// 		'visi' => $this->input->post('visi'),
+	// 	);
 
-		if ($id) {
-			$ok = $this->MVisi->update($id, $data);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'Visi berhasil disimpan.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan visi.');
-			}
-		} else {
-			$ok = $this->MVisi->insert($visi_new);
-			if ($ok) {
-				$this->session->set_flashdata('success-' . $tag1, 'Visi berhasil disimpan.');
-			} else {
-				$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan visi.');
-			}
-		}
-		// Clean input (XSS filter) before inserting
+	// 	if ($id) {
+	// 		$ok = $this->MVisi->update($id, $data);
+	// 		if ($ok) {
+	// 			$this->session->set_flashdata('success-' . $tag1, 'Visi berhasil disimpan.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan visi.');
+	// 		}
+	// 	} else {
+	// 		$ok = $this->MVisi->insert($visi_new);
+	// 		if ($ok) {
+	// 			$this->session->set_flashdata('success-' . $tag1, 'Visi berhasil disimpan.');
+	// 		} else {
+	// 			$this->session->set_flashdata('error-' . $tag1, 'Gagal menyimpan visi.');
+	// 		}
+	// 	}
+	// 	// Clean input (XSS filter) before inserting
 
-		redirect('admsistem');
-	}
+	// 	redirect('admsistem');
+	// }
 
-	public function visiById($id)
-	{
-		if (!$id) {
-			$visi = ['error' => 'Visi ID is required.'];
-			$status_code = 400;
-		} else {
-			$visi = $this->MVisi->get($id);
-			$status_code = 200;
-		}
+	// public function visiById($id)
+	// {
+	// 	if (!$id) {
+	// 		$visi = ['error' => 'Visi ID is required.'];
+	// 		$status_code = 400;
+	// 	} else {
+	// 		$visi = $this->MVisi->get($id);
+	// 		$status_code = 200;
+	// 	}
 
-		$res = [
-			'status' => 'success',
-			'data' => $visi
-		];
-		$this->output
-			->set_content_type('application/json')
-			->set_status_header($status_code)
-			->set_output(json_encode($res));
-	}
+	// 	$res = [
+	// 		'status' => 'success',
+	// 		'data' => $visi
+	// 	];
+	// 	$this->output
+	// 		->set_content_type('application/json')
+	// 		->set_status_header($status_code)
+	// 		->set_output(json_encode($res));
+	// }
 
-	public function setStatus_visi($id)
-	{
-		$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
-		$visi = $this->MVisi->get($id);
-		if (!$visi) {
-			$this->session->set_flashdata('error-' . $tag1, 'Visi not found.');
-			redirect('admsistem');
-			return;
-		}
+	// public function setStatus_visi($id)
+	// {
+	// 	$tag1 = $this->input->post('tag1') ?? $this->input->get('tag1') ?? '';
+	// 	$visi = $this->MVisi->get($id);
+	// 	if (!$visi) {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Visi not found.');
+	// 		redirect('admsistem');
+	// 		return;
+	// 	}
 
-		$new_status = ((int) $visi->status === 1) ? 0 : 1;
-		$ok = $this->MVisi->update($id, ['status' => $new_status]);
-		if ($ok) {
-			$this->session->set_flashdata('success-' . $tag1, 'Status visi berhasil diubah.');
-		} else {
-			$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status visi.');
-		}
-		redirect('admsistem');
-	}
+	// 	$new_status = ((int) $visi->status === 1) ? 0 : 1;
+	// 	$ok = $this->MVisi->update($id, ['status' => $new_status]);
+	// 	if ($ok) {
+	// 		$this->session->set_flashdata('success-' . $tag1, 'Status visi berhasil diubah.');
+	// 	} else {
+	// 		$this->session->set_flashdata('error-' . $tag1, 'Gagal mengubah status visi.');
+	// 	}
+	// 	redirect('admsistem');
+	// }
 
 	/* Master Mitra CRUD */
 	// public function save_master_mitra()
@@ -602,30 +602,30 @@ class CAdmSistem extends MY_Controller
 	// }
 
 	/* Master OPD CRUD */
-	public function opdById($id)
-	{
-		// Check if an ID was provided
-		if (!$id) {
-			// Handle the case where no ID is provided (e.g., return an error or empty array)
-			$opd = ['error' => 'OPD ID is required.'];
-			$status_code = 400;  // Bad Request
-		} else {
-			// Call the model method to get a single record by ID
-			$opd = $this->MMasterOpd->get($id);
-			$status_code = 200;
-		}
+	// public function opdById($id)
+	// {
+	// 	// Check if an ID was provided
+	// 	if (!$id) {
+	// 		// Handle the case where no ID is provided (e.g., return an error or empty array)
+	// 		$opd = ['error' => 'OPD ID is required.'];
+	// 		$status_code = 400;  // Bad Request
+	// 	} else {
+	// 		// Call the model method to get a single record by ID
+	// 		$opd = $this->MMasterOpd->get($id);
+	// 		$status_code = 200;
+	// 	}
 
-		$res = [
-			'status' => 'success',
-			'data' => $opd
-		];
-		// Set the JSON response
-		$this
-			->output
-			->set_content_type('application/json')
-			->set_status_header($status_code)
-			->set_output(json_encode($res));
-	}
+	// 	$res = [
+	// 		'status' => 'success',
+	// 		'data' => $opd
+	// 	];
+	// 	// Set the JSON response
+	// 	$this
+	// 		->output
+	// 		->set_content_type('application/json')
+	// 		->set_status_header($status_code)
+	// 		->set_output(json_encode($res));
+	// }
 
 	// public function save_master_opd()
 	// {

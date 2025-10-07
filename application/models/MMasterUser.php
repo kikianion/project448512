@@ -10,7 +10,7 @@ class MMasterUser extends MY_Model
 		return $this->db->get($this->table)->row();
 	}
 
-	public function byId($id)
+	public function byId($id)//override to remove password on select
 	{
 		$this->db->select('id,username,nama,role,opd,status');
 		$this->db->from($this->table);
