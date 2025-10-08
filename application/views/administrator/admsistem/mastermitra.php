@@ -65,7 +65,7 @@ $tag1 = "form_mastermitra";
 		</div>
 		<hr class="hr hr-blurry">
 		</hr>
-		<table id="tabelmitra" class="table table-bordered table-responsive">
+		<table id="tabelmitra" class="table table-bordered table-responsive table-data-init">
 			<thead>
 				<tr>
 					<th>urut</th>

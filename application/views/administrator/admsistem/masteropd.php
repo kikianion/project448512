@@ -71,7 +71,7 @@ $tag1 = "form_masteropd";
 		</div>
 		<hr class="hr hr-blurry">
 		</hr>
-		<table id="tabelopd" class="table table-bordered table-responsive">
+		<table id="tabelopd" class="table table-bordered table-responsive table-data-init">
 			<thead>
 				<tr>
 					<th>Urut</th>

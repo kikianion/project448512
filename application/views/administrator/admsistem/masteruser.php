@@ -78,7 +78,7 @@ $tag1 = 'form_masteruser';
 
 		<hr class="hr hr-blurry">
 		</hr>
-		<table id="tabeluser" class="table table-bordered table-responsive">
+		<table id="tabeluser" class="table table-bordered table-responsive table-data-init">
 			<thead>
 				<tr>
 					<th>Username</th>

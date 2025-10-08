@@ -300,31 +300,10 @@
 
 <script>
 	$(function () {
-		$("#tabeluser").DataTable({
-			"pageLength": 3,
-			"autoWidth": true
-		});
-		$("#tabelopd").DataTable({
-			"pageLength": 3,
-			"autoWidth": true
-		});
-		$("#tabelmitra").DataTable({
-			"pageLength": 3,
-			"autoWidth": true
-		});
-		$("#tabelvisi").DataTable({
-			"pageLength": 3,
-			"autoWidth": true
-		});
-		$("#tabelmisi").DataTable({
-			"pageLength": 3,
-			"autoWidth": true
-		});
-		$("#tabelanggaran").DataTable({
-			"pageLength": 3,
-			"autoWidth": true
-		});
-		$("#tabelgroup").DataTable({
+		// $(".table-data-init")).forEach(element => {
+			
+		// });
+		$(".table-data-init").DataTable({
 			"pageLength": 3,
 			"autoWidth": true
 		});

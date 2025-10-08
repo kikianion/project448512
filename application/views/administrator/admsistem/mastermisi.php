@@ -54,7 +54,7 @@ $tag1 = "form_mastermisi";
 		</div>
 		<hr class="hr hr-blurry">
 		</hr>
-		<table id="tabelmisi" class="table table-bordered table-responsive">
+		<table id="tabelmisi" class="table table-bordered table-responsive table-data-init">
 			<thead>
 				<tr>
 					<th>Urut</th>

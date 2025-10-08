@@ -45,7 +45,7 @@ $tag1 = "form_mastervisi";
 
 		<hr class="hr hr-blurry">
 		</hr>
-		<table id="tabelvisi" class="table table-bordered table-responsive">
+		<table id="tabelvisi" class="table table-bordered table-responsive table-data-init">
 			<thead>
 				<tr>
 					<th>Visi</th>

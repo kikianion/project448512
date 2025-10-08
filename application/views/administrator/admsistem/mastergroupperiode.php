@@ -19,7 +19,7 @@ $tag1 = "form_mastergroupperiode";
         <?= widget_flash($tag1) ?>
 
         <div id="form-<?= $tag1 ?>">
-            <form method="post" action="<?php echo site_url('admsistem/save_grouping_periode'); ?>">
+            <form method="post" action="<?php echo site_url('admsistem/groupperiode/save'); ?>">
                 <div class="form-group row">
                     <label for="group" class="col-sm-3 col-form-label">Group</label>
                     <div class="col-sm-9">
@@ -49,7 +49,7 @@ $tag1 = "form_mastergroupperiode";
 
         <hr class="hr hr-blurry">
         </hr>
-        <table id="tabelgroup" class="table table-bordered table-responsive">
+        <table id="tabelgroup" class="table table-bordered table-responsive table-data-init">
             <thead>
                 <tr>
                     <th>Grouping</th>
@@ -74,7 +74,7 @@ $tag1 = "form_mastergroupperiode";
                                     <div class="dropdown-menu" role="menu">
                                         <a class="dropdown-item" data-toggle="modal" onclick="editModalGrouping(<?= $grouping->id ?>)">Edit</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="<?= site_url('admsistem/setStatus_grouping_periode/' . $grouping->id) ?>" onclick="return confirm('Ubah status grouping periode ini?')">Ubah Status</a>
+                                        <a class="dropdown-item" href="<?= site_url('admsistem/groupperiode/setStatus/' . $grouping->id) ?>" >Ubah Status</a>
                                     </div>
                                 </div>
                             </td>
@@ -90,7 +90,7 @@ $tag1 = "form_mastergroupperiode";
         <script>
         function editModalGrouping(id) {
             $.ajax({
-                url: 'admsistem/groupingPeriodeById/' + id,
+                url: 'admsistem/groupperiode/byId/' + id,
                 success: function (res) {
                     if (res.status === 'success') {
                         $('#edit-record-common').appendTo('body').modal('show');
