@@ -1,78 +1,137 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-/*
-| -------------------------------------------------------------------------
-| URI ROUTING
-| -------------------------------------------------------------------------
-| This file lets you re-map URI requests to specific controller functions.
-|
-| Typically there is a one-to-one relationship between a URL string
-| and its corresponding controller class/method. The segments in a
-| URL normally follow this pattern:
-|
-|	example.com/class/method/id/
-|
-| In some instances, however, you may want to remap this relationship
-| so that a different class/function is called than the one
-| corresponding to the URL.
-|
-| Please see the user guide for complete details:
-|
-|	https://codeigniter.com/userguide3/general/routing.html
-|
-| -------------------------------------------------------------------------
-| RESERVED ROUTES
-| -------------------------------------------------------------------------
-|
-| There are three reserved routes:
-|
-|	$route['default_controller'] = 'welcome';
-|
-| This route indicates which controller class should be loaded if the
-| URI contains no data. In the above example, the "welcome" class
-| would be loaded.
-|
-|	$route['404_override'] = 'errors/page_missing';
-|
-| This route will tell the Router which controller/method to use if those
-| provided in the URL cannot be matched to a valid route.
-|
-|	$route['translate_uri_dashes'] = FALSE;
-|
-| This is not exactly a route, but allows you to automatically route
-| controller and method names that contain dashes. '-' isn't a valid
-| class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
-| controller and method URI segments.
-|
-| Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
-*/
 $route['default_controller'] = 'login';
 $route['login'] = 'login';
 $route['login/authenticate'] = 'login/authenticate';
 $route['logout'] = 'login/logout';
-$route['dashboard'] = 'dashboard';
+// $route['dashboard'] = 'dashboard';
 
-$route['admsistem'] = 'admSistem';
-$route['admsistem/users'] = 'admsistem/users';
-$route['admsistem/users/create'] = 'admsistem/create_user';
-$route['admsistem/users/edit/(:num)'] = 'admsistem/edit_user/$1';
-$route['admsistem/users/delete/(:num)'] = 'admsistem/delete_user/$1';
-$route['admsistem/settings'] = 'admsistem/settings';
-$route['admsistem/logs'] = 'admsistem/logs';
+$route['admsistem'] = 'cAdmSistem';
 
-$route['admdata'] = 'admData';
-$route['admdata/dashboard'] = 'admdata/dashboard';
-$route['admdata/import'] = 'admdata/import';
-$route['admdata/export'] = 'admdata/export';
-$route['admdata/backup'] = 'admdata/backup';
-$route['admdata/restore'] = 'admdata/restore';
-$route['admdata/cleanup'] = 'admdata/cleanup';
-$route['admdata/statistics'] = 'admdata/statistics';
+$objs = ['Visi', 'Misi', 'User','Mitra','Opd'];
+foreach ($objs as $obj) {
+	$lobj=strtolower($obj);
+	$route["admsistem/$lobj/save"] = "cMaster$obj/save";
+	$route["admsistem/$lobj/byId/(:num)"] = "cMaster$obj/byId/$1";
+	$route["admsistem/$lobj/setStatus/(:num)"] = "cMaster$obj/setStatus/$1";
+}
 
-$route['oprmaster'] = 'oprMaster';
+$route['admsistem/user/resetpassword'] = 'cMasterUser/resetpassword';
+
+
+// visi
+// $route['admsistem/visi/save'] = 'cVisi/save';
+// $route['admsistem/visi/byId/(:num)'] = 'cVisi/byId/$1';
+// $route['admsistem/visi/setStatus/(:num)'] = 'cVisi/setStatus/$1';
+
+// Master misi CRUD
+// $route['admsistem/misi/save'] = 'cMisi/save';
+// $route['admsistem/misi/byId/(:num)'] = 'cMisi/byId/$1';
+// $route['admsistem/misi/setStatus/(:num)'] = 'cMisi/setStatus/$1';
+
+// Master periode CRUD
+$route['admsistem/save_periode'] = 'admSistem/save_periode';
+$route['admsistem/periodeById/(:num)'] = 'admSistem/periodeById/$1';
+$route['admsistem/setStatus_periode/(:num)'] = 'admSistem/setStatus_periode/$1';
+
+// Master grouping periode CRUD
+$route['admsistem/save_grouping_periode'] = 'admSistem/save_grouping_periode';
+$route['admsistem/groupingPeriodeById/(:num)'] = 'admSistem/groupingPeriodeById/$1';
+$route['admsistem/setStatus_grouping_periode/(:num)'] = 'admSistem/setStatus_grouping_periode/$1';
+
+// >>>>>>>>>>>>>>>>>>>>> user
+// $route['admsistem/user/save'] = 'cMasterUser/save';
+// $route['admsistem/user/byId/(:num)'] = 'cMasterUser/byId/$1';
+// $route['admsistem/user/setStatus/(:num)'] = 'cMasterUser/setStatus/$1';
+// $route['admsistem/user/resetpassword'] = 'cMasterUser/resetpassword';
+
+// >>>>>>>>>>>>>>>>>>>>> mitra
+// $route['admsistem/mitra/save'] = 'cMasterMitra/save';
+// $route['admsistem/mitra/byId/(:num)'] = 'cMasterMitra/byId/$1';
+// $route['admsistem/mitra/setStatus/(:num)'] = 'cMasterMitra/setStatus/$1';
+
+// $route['admsistem/mitra/edit/(:num)'] = 'cMasterMitra/edit/$1';
+// $route['admsistem/mitra/delete/(:num)/(:any)'] = 'cMasterMitra/delete/$1/$2';
+
+// >>>>>>>>>>>>>>>>>>>>> opd
+// $route['admsistem/opd/save'] = 'cMasterOpd/save';
+// $route['admsistem/opd/byId/(:num)'] = 'cMasterOpd/byId/$1';
+// $route['admsistem/opd/setStatus/(:num)'] = 'cMasterOpd/setStatus/$1';
+
+// Branding CRUD
+$route['admsistem/save_branding'] = 'admSistem/save_branding';
+$route['admsistem/delete_branding/(:any)'] = 'admSistem/delete_branding/$1';
+
+$route['admdata'] = 'cAdmData';
+
+// $route['admdata/dashboard'] = 'admdata/dashboard';
+// $route['admdata/import'] = 'admdata/import';
+// $route['admdata/export'] = 'admdata/export';
+// $route['admdata/backup'] = 'admdata/backup';
+// $route['admdata/restore'] = 'admdata/restore';
+// $route['admdata/cleanup'] = 'admdata/cleanup';
+// $route['admdata/statistics'] = 'admdata/statistics';
+
+
+$objs = ['Fungsi', 'Urusan', 'Program'];
+foreach ($objs as $obj) {
+	$lobj=strtolower($obj);
+	$route["admdata/$lobj/save"] = "cMaster$obj/save";
+	$route["admdata/$lobj/byId/(:num)"] = "cMaster$obj/byId/$1";
+	$route["admdata/$lobj/setStatus/(:num)"] = "cMaster$obj/setStatus/$1";
+}
+
+// Periode RPJMD CRUD routes
+$route['admdata/save_periode_rpjmd'] = 'admData/save_periode_rpjmd';
+$route['admdata/periodeRPJMDById/(:num)'] = 'admData/periodeRPJMDById/$1';
+$route['admdata/setStatus_periode_rpjmd/(:num)'] = 'admData/setStatus_periode_rpjmd/$1';
+$route['admdata/delete_periode_rpjmd/(:num)'] = 'admData/delete_periode_rpjmd/$1';
+
+// Tujuan RPJMD CRUD routes
+$route['admdata/save_tujuan_rpjmd'] = 'admData/save_tujuan_rpjmd';
+$route['admdata/tujuanRPJMDById/(:num)'] = 'admData/tujuanRPJMDById/$1';
+$route['admdata/setStatus_tujuan_rpjmd/(:num)'] = 'admData/setStatus_tujuan_rpjmd/$1';
+$route['admdata/delete_tujuan_rpjmd/(:num)'] = 'admData/delete_tujuan_rpjmd/$1';
+
+// Sasaran RPJMD CRUD routes
+$route['admdata/save_sasaran_rpjmd'] = 'admData/save_sasaran_rpjmd';
+$route['admdata/sasaranRPJMDById/(:num)'] = 'admData/sasaranRPJMDById/$1';
+$route['admdata/setStatus_sasaran_rpjmd/(:num)'] = 'admData/setStatus_sasaran_rpjmd/$1';
+$route['admdata/delete_sasaran_rpjmd/(:num)'] = 'admData/delete_sasaran_rpjmd/$1';
+
+// Indikator Tujuan RPJMD CRUD routes
+$route['admdata/save_indikator_tujuan_rpjmd'] = 'admData/save_indikator_tujuan_rpjmd';
+$route['admdata/indikatorTujuanById/(:num)'] = 'admData/indikatorTujuanById/$1';
+$route['admdata/setStatus_indikator_tujuan/(:num)'] = 'admData/setStatus_indikator_tujuan/$1';
+$route['admdata/delete_indikator_tujuan/(:num)'] = 'admData/delete_indikator_tujuan/$1';
+
+// Indikator Sasaran RPJMD CRUD routes
+$route['admdata/save_indikator_sasaran_rpjmd'] = 'admData/save_indikator_sasaran_rpjmd';
+$route['admdata/indikatorSasaranById/(:num)'] = 'admData/indikatorSasaranById/$1';
+$route['admdata/setStatus_indikator_sasaran/(:num)'] = 'admData/setStatus_indikator_sasaran/$1';
+$route['admdata/delete_indikator_sasaran/(:num)'] = 'admData/delete_indikator_sasaran/$1';
+
+// Master Periode Anggaran CRUD routes
+$route['admdata/save_master_periode_anggaran'] = 'admData/save_master_periode_anggaran';
+$route['admdata/periodeAnggaranById/(:num)'] = 'admData/periodeAnggaranById/$1';
+$route['admdata/setStatus_periode_anggaran/(:num)'] = 'admData/setStatus_periode_anggaran/$1';
+$route['admdata/delete_periode_anggaran/(:num)'] = 'admData/delete_periode_anggaran/$1';
+
+// Master Grouping Periode CRUD routes
+$route['admdata/save_master_grouping_periode'] = 'admData/save_master_grouping_periode';
+$route['admdata/groupingPeriodeById/(:num)'] = 'admData/groupingPeriodeById/$1';
+$route['admdata/setStatus_grouping_periode/(:num)'] = 'admData/setStatus_grouping_periode/$1';
+$route['admdata/delete_grouping_periode/(:num)'] = 'admData/delete_grouping_periode/$1';
+
+// Master Branding CRUD routes
+$route['admdata/branding/save_nama'] = 'cBranding/save_branding_nama';
+$route['admdata/branding/save_subnote'] = 'cBranding/save_branding_subnote';
+$route['admdata/branding/save_background'] = 'cBranding/save_branding_background';
+$route['admdata/branding/save_logo'] = 'cBranding/save_branding_logo';
+$route['admdata/branding/save_favicon'] = 'cBranding/save_branding_favicon';
+
+$route['oprmaster'] = 'cOprMaster';
 $route['oprmaster/users'] = 'oprmaster/users';
 $route['oprmaster/users/create'] = 'oprmaster/create_user';
 $route['oprmaster/users/edit/(:num)'] = 'oprmaster/edit_user/$1';
@@ -85,3 +144,5 @@ $route['mitraverdata'] = 'mitraVerData';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['test1'] = 'test/hi';
