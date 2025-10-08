@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class CVisi extends MY_Controller
+class CMasterVisi extends MY_Controller
 {
 	protected $defaultModel = 'MVisi';
 	protected $defaultName = 'Visi';

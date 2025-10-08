@@ -9,26 +9,15 @@ $route['logout'] = 'login/logout';
 
 $route['admsistem'] = 'cAdmSistem';
 
-$objs = ['Visi', 'Misi', 'User','Mitra','Opd'];
+$objs = ['Visi', 'Misi', 'User', 'Mitra', 'Opd', 'Periode', 'Groupperiode'];
 foreach ($objs as $obj) {
-	$lobj=strtolower($obj);
+	$lobj = strtolower($obj);
 	$route["admsistem/$lobj/save"] = "cMaster$obj/save";
 	$route["admsistem/$lobj/byId/(:num)"] = "cMaster$obj/byId/$1";
 	$route["admsistem/$lobj/setStatus/(:num)"] = "cMaster$obj/setStatus/$1";
 }
 
 $route['admsistem/user/resetpassword'] = 'cMasterUser/resetpassword';
-
-
-// visi
-// $route['admsistem/visi/save'] = 'cVisi/save';
-// $route['admsistem/visi/byId/(:num)'] = 'cVisi/byId/$1';
-// $route['admsistem/visi/setStatus/(:num)'] = 'cVisi/setStatus/$1';
-
-// Master misi CRUD
-// $route['admsistem/misi/save'] = 'cMisi/save';
-// $route['admsistem/misi/byId/(:num)'] = 'cMisi/byId/$1';
-// $route['admsistem/misi/setStatus/(:num)'] = 'cMisi/setStatus/$1';
 
 // Master periode CRUD
 $route['admsistem/save_periode'] = 'admSistem/save_periode';
@@ -39,25 +28,6 @@ $route['admsistem/setStatus_periode/(:num)'] = 'admSistem/setStatus_periode/$1';
 $route['admsistem/save_grouping_periode'] = 'admSistem/save_grouping_periode';
 $route['admsistem/groupingPeriodeById/(:num)'] = 'admSistem/groupingPeriodeById/$1';
 $route['admsistem/setStatus_grouping_periode/(:num)'] = 'admSistem/setStatus_grouping_periode/$1';
-
-// >>>>>>>>>>>>>>>>>>>>> user
-// $route['admsistem/user/save'] = 'cMasterUser/save';
-// $route['admsistem/user/byId/(:num)'] = 'cMasterUser/byId/$1';
-// $route['admsistem/user/setStatus/(:num)'] = 'cMasterUser/setStatus/$1';
-// $route['admsistem/user/resetpassword'] = 'cMasterUser/resetpassword';
-
-// >>>>>>>>>>>>>>>>>>>>> mitra
-// $route['admsistem/mitra/save'] = 'cMasterMitra/save';
-// $route['admsistem/mitra/byId/(:num)'] = 'cMasterMitra/byId/$1';
-// $route['admsistem/mitra/setStatus/(:num)'] = 'cMasterMitra/setStatus/$1';
-
-// $route['admsistem/mitra/edit/(:num)'] = 'cMasterMitra/edit/$1';
-// $route['admsistem/mitra/delete/(:num)/(:any)'] = 'cMasterMitra/delete/$1/$2';
-
-// >>>>>>>>>>>>>>>>>>>>> opd
-// $route['admsistem/opd/save'] = 'cMasterOpd/save';
-// $route['admsistem/opd/byId/(:num)'] = 'cMasterOpd/byId/$1';
-// $route['admsistem/opd/setStatus/(:num)'] = 'cMasterOpd/setStatus/$1';
 
 // Branding CRUD
 $route['admsistem/save_branding'] = 'admSistem/save_branding';
@@ -76,7 +46,7 @@ $route['admdata'] = 'cAdmData';
 
 $objs = ['Fungsi', 'Urusan', 'Program'];
 foreach ($objs as $obj) {
-	$lobj=strtolower($obj);
+	$lobj = strtolower($obj);
 	$route["admdata/$lobj/save"] = "cMaster$obj/save";
 	$route["admdata/$lobj/byId/(:num)"] = "cMaster$obj/byId/$1";
 	$route["admdata/$lobj/setStatus/(:num)"] = "cMaster$obj/setStatus/$1";

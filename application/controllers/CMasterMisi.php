@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class CMisi extends MY_Controller
+class CMasterMisi extends MY_Controller
 {
 	protected $defaultModel = 'MMisi';
 	protected $defaultName = 'Misi';
@@ -16,7 +16,7 @@ class CMisi extends MY_Controller
 		$this->_savedata = array(
 			'misi' => $this->input->post('misi'),
 			'urut' => $this->input->post('urut') ?: 0,
-			'visiinduk' => $this->input->post('visi_id')
+			'visi_id' => $this->input->post('visi_id')
 		);
 
 		parent::save();

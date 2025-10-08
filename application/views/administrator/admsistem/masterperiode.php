@@ -19,7 +19,7 @@ $tag1 = "form_masterperiode";
         <?= widget_flash($tag1) ?>
 
         <div id="form-<?= $tag1 ?>">
-            <form method="post" action="<?php echo site_url('admsistem/save_periode'); ?>">
+            <form method="post" action="<?php echo site_url('admsistem/periode/save'); ?>">
                 <div class="form-group row">
                     <label for="kode" class="col-sm-2 col-form-label">Kode</label>
                     <div class="col-sm-10">

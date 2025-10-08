@@ -37,20 +37,7 @@ $tag1 = "form_mastermisi";
 				<div class="form-group row">
 					<label for="visi_id" class="col-sm-2 col-form-label">Visi</label>
 					<div class="col-sm-10">
-						<select class="form-control" id="visi_id" name="visi_id">
-							<?php if (!empty($visi_list) && is_array($visi_list)): ?>
-								<?php $old_visi_id = $this->session->flashdata('old_visi_id'); ?>
-								<?php foreach ($visi_list as $visi): ?>
-									<?php if ((int) $visi->status === 1): ?>
-										<option value="<?php echo (int) $visi->id; ?>" <?php echo ($old_visi_id && (int) $old_visi_id === (int) $visi->id) ? 'selected' : ''; ?>>
-											<?php echo htmlspecialchars($visi->visi); ?>
-										</option>
-									<?php endif; ?>
-								<?php endforeach; ?>
-							<?php else: ?>
-								<option value="">Tidak ada visi aktif</option>
-							<?php endif; ?>
-						</select>
+						<?= expandFieldAttrSelectActive("visi_id", $visi_list, "visi") ?>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -89,7 +76,7 @@ $tag1 = "form_mastermisi";
 								$visi_name = '';
 								if (!empty($visi_list)) {
 									foreach ($visi_list as $v) {
-										if ($v->id == $misi->visiinduk) {
+										if ($v->id == $misi->visi_id) {
 											$visi_name = $v->visi;
 											break;
 										}
@@ -100,7 +87,7 @@ $tag1 = "form_mastermisi";
 								?>
 							</td>
 
-							<td class="align-middle"><?php echo ((int) $misi->status === 1) ? 'Aktif' : 'Tidak Aktif'; ?></td>
+							<td class="align-middle"><?= $misi->status ?></td>
 							<td class="align-middle">
 								<div class="btn-group">
 									<button type="button" class="btn btn-default">Tindakan</button>
@@ -110,8 +97,7 @@ $tag1 = "form_mastermisi";
 									<div class="dropdown-menu" role="menu">
 										<a class="dropdown-item" data-toggle="modal" onclick="editModalMisi(<?= $misi->id ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/misi/setStatus/' . $misi->id) ?>"
-											onclick="return confirm('Ubah status misi ini?')">Ubah Status</a>
+										<a class="dropdown-item" href="<?= site_url('admsistem/misi/setStatus/' . $misi->id) ?>">Ubah Status</a>
 									</div>
 								</div>
 							</td>
