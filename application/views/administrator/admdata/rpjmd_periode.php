@@ -1,5 +1,5 @@
 <?php
-$tag1 = "form_perioderpjmd";
+$tag1 = "form_rpjmdperiode";
 ?>
 
 <div class="col-lg-4">
@@ -20,7 +20,7 @@ $tag1 = "form_perioderpjmd";
 			<?= widget_flash($tag1) ?>
 
 			<div id="form-<?= $tag1 ?>">
-				<?php echo form_open('admdata/save_periode_rpjmd'); ?>
+				<?php echo form_open('admdata/rpjmdperiode/save'); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Nama</label>
 					<div class="col-sm-10">
@@ -35,12 +35,14 @@ $tag1 = "form_perioderpjmd";
 					<label class="col-sm-2 col-form-label">Awal</label>
 					<div class="col-sm-4">
 						<input type="number" name="tahun_awal" class="form-control" id="awalperiode" placeholder="Tahun awal RPJMD"
-							value="<?php echo isset($edit_periode_rpjmd->tahun_awal) ? htmlspecialchars($edit_periode_rpjmd->tahun_awal) : ''; ?>" min="2020" max="2050">
+							value="<?php echo isset($edit_periode_rpjmd->tahun_awal) ? htmlspecialchars($edit_periode_rpjmd->tahun_awal) : ''; ?>" min="2020"
+							max="2050">
 					</div>
 					<label class="col-sm-2 col-form-label">Akhir</label>
 					<div class="col-sm-4">
 						<input type="number" name="tahun_akhir" class="form-control" id="akhirperiode" placeholder="Tahun akhir RPJMD"
-							value="<?php echo isset($edit_periode_rpjmd->tahun_akhir) ? htmlspecialchars($edit_periode_rpjmd->tahun_akhir) : ''; ?>" min="2020" max="2050">
+							value="<?php echo isset($edit_periode_rpjmd->tahun_akhir) ? htmlspecialchars($edit_periode_rpjmd->tahun_akhir) : ''; ?>" min="2020"
+							max="2050">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -79,10 +81,10 @@ $tag1 = "form_perioderpjmd";
 											<span class="sr-only"></span>
 										</button>
 										<div class="dropdown-menu" role="menu">
-											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-rpjmd" onclick="editModalPeriodeRPJMD(<?= $pr->id ?>)">Edit</a>
+											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-rpjmd"
+												onclick="editModalPeriodeRPJMD(<?= $pr->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_periode_rpjmd/' . $pr->id) ?>"
-												>Ubah Status</a>
+											<a class="dropdown-item" href="<?= site_url('admdata/rpjmdperiode/setStatus/' . $pr->id) ?>">Ubah Status</a>
 										</div>
 									</div>
 								</td>
@@ -102,7 +104,7 @@ $tag1 = "form_perioderpjmd";
 <script>
 	function editModalPeriodeRPJMD(id) {
 		$.ajax({
-			url: 'admdata/periodeRPJMDById/' + id,
+			url: 'admdata/rpjmdperiode/byId/' + id,
 			success: function (res) {
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');
@@ -119,77 +121,3 @@ $tag1 = "form_perioderpjmd";
 	}
 </script>
 
-<script>
-	// localStorage state management for card collapse/expand
-	document.addEventListener('DOMContentLoaded', function () {
-		var cardElement = document.getElementById('card-periode-rpjmd');
-		var collapseButton = cardElement.querySelector('[data-card-widget="collapse"]');
-		var maximizeButton = cardElement.querySelector('.btn-fs');
-		
-		// Restore card state from localStorage
-		var cardState = localStorage.getItem('card-periode-rpjmd-state');
-		if (cardState === 'expanded') {
-			cardElement.classList.remove('collapsed-card');
-			var icon = collapseButton.querySelector('i');
-			if (icon) {
-				icon.classList.remove('fa-plus');
-				icon.classList.add('fa-minus');
-			}
-		}
-		
-		// Restore maximize state from localStorage
-		var maximizeState = localStorage.getItem('card-periode-rpjmd-maximize');
-		if (maximizeState === 'maximized') {
-			cardElement.classList.add('maximized-card');
-			maximizeButton.innerHTML = '[__]';
-			// Apply maximized styles
-			cardElement.style.position = 'fixed';
-			cardElement.style.top = '0';
-			cardElement.style.left = '0';
-			cardElement.style.width = '100vw';
-			cardElement.style.height = '100vh';
-			cardElement.style.zIndex = '9999';
-			cardElement.style.margin = '0';
-		}
-		
-		// Handle collapse/expand state saving
-		collapseButton.addEventListener('click', function() {
-			setTimeout(function() {
-				if (cardElement.classList.contains('collapsed-card')) {
-					localStorage.setItem('card-periode-rpjmd-state', 'collapsed');
-				} else {
-					localStorage.setItem('card-periode-rpjmd-state', 'expanded');
-				}
-			}, 300); // Wait for animation to complete
-		});
-		
-		// Handle maximize/restore functionality
-		maximizeButton.addEventListener('click', function() {
-			if (cardElement.classList.contains('maximized-card')) {
-				// Restore
-				cardElement.classList.remove('maximized-card');
-				maximizeButton.innerHTML = '[&nbsp;&nbsp;]';
-				cardElement.style.position = '';
-				cardElement.style.top = '';
-				cardElement.style.left = '';
-				cardElement.style.width = '';
-				cardElement.style.height = '';
-				cardElement.style.zIndex = '';
-				cardElement.style.margin = '';
-				localStorage.setItem('card-periode-rpjmd-maximize', 'restored');
-			} else {
-				// Maximize
-				cardElement.classList.add('maximized-card');
-				maximizeButton.innerHTML = '[__]';
-				cardElement.style.position = 'fixed';
-				cardElement.style.top = '0';
-				cardElement.style.left = '0';
-				cardElement.style.width = '100vw';
-				cardElement.style.height = '100vh';
-				cardElement.style.zIndex = '9999';
-				cardElement.style.margin = '0';
-				localStorage.setItem('card-periode-rpjmd-maximize', 'maximized');
-			}
-		});
-	});
-</script>

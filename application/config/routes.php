@@ -42,35 +42,44 @@ foreach ($objs as $obj) {
 	$route["admdata/$lobj/setStatus/(:num)"] = "cMaster$obj/setStatus/$1";
 }
 
+
 // Periode RPJMD CRUD routes
-$route['admdata/save_periode_rpjmd'] = 'admData/save_periode_rpjmd';
-$route['admdata/periodeRPJMDById/(:num)'] = 'admData/periodeRPJMDById/$1';
-$route['admdata/setStatus_periode_rpjmd/(:num)'] = 'admData/setStatus_periode_rpjmd/$1';
-$route['admdata/delete_periode_rpjmd/(:num)'] = 'admData/delete_periode_rpjmd/$1';
+// $route['admdata/save_periode_rpjmd'] = 'admData/save_periode_rpjmd';
+// $route['admdata/periodeRPJMDById/(:num)'] = 'admData/periodeRPJMDById/$1';
+// $route['admdata/setStatus_periode_rpjmd/(:num)'] = 'admData/setStatus_periode_rpjmd/$1';
+// $route['admdata/delete_periode_rpjmd/(:num)'] = 'admData/delete_periode_rpjmd/$1';
+
+$objs = ['periode', 'tujuan', 'sasaran', 'indikatortujuan', 'indikatorsasaran'];
+foreach ($objs as $obj) {
+	$route["admdata/rpjmd$obj/save"] = "crpjmd$obj/save";
+	$route["admdata/rpjmd$obj/byId/(:num)"] = "crpjmd$obj/byId/$1";
+	$route["admdata/rpjmd$obj/setStatus/(:num)"] = "crpjmd$obj/setStatus/$1";
+}
+
 
 // Tujuan RPJMD CRUD routes
-$route['admdata/save_tujuan_rpjmd'] = 'admData/save_tujuan_rpjmd';
-$route['admdata/tujuanRPJMDById/(:num)'] = 'admData/tujuanRPJMDById/$1';
-$route['admdata/setStatus_tujuan_rpjmd/(:num)'] = 'admData/setStatus_tujuan_rpjmd/$1';
-$route['admdata/delete_tujuan_rpjmd/(:num)'] = 'admData/delete_tujuan_rpjmd/$1';
+// $route['admdata/save_tujuan_rpjmd'] = 'admData/save_tujuan_rpjmd';
+// $route['admdata/tujuanRPJMDById/(:num)'] = 'admData/tujuanRPJMDById/$1';
+// $route['admdata/setStatus_tujuan_rpjmd/(:num)'] = 'admData/setStatus_tujuan_rpjmd/$1';
+// $route['admdata/delete_tujuan_rpjmd/(:num)'] = 'admData/delete_tujuan_rpjmd/$1';
 
 // Sasaran RPJMD CRUD routes
-$route['admdata/save_sasaran_rpjmd'] = 'admData/save_sasaran_rpjmd';
-$route['admdata/sasaranRPJMDById/(:num)'] = 'admData/sasaranRPJMDById/$1';
-$route['admdata/setStatus_sasaran_rpjmd/(:num)'] = 'admData/setStatus_sasaran_rpjmd/$1';
-$route['admdata/delete_sasaran_rpjmd/(:num)'] = 'admData/delete_sasaran_rpjmd/$1';
+// $route['admdata/save_sasaran_rpjmd'] = 'admData/save_sasaran_rpjmd';
+// $route['admdata/sasaranRPJMDById/(:num)'] = 'admData/sasaranRPJMDById/$1';
+// $route['admdata/setStatus_sasaran_rpjmd/(:num)'] = 'admData/setStatus_sasaran_rpjmd/$1';
+// $route['admdata/delete_sasaran_rpjmd/(:num)'] = 'admData/delete_sasaran_rpjmd/$1';
 
 // Indikator Tujuan RPJMD CRUD routes
-$route['admdata/save_indikator_tujuan_rpjmd'] = 'admData/save_indikator_tujuan_rpjmd';
-$route['admdata/indikatorTujuanById/(:num)'] = 'admData/indikatorTujuanById/$1';
-$route['admdata/setStatus_indikator_tujuan/(:num)'] = 'admData/setStatus_indikator_tujuan/$1';
-$route['admdata/delete_indikator_tujuan/(:num)'] = 'admData/delete_indikator_tujuan/$1';
+// $route['admdata/save_indikator_tujuan_rpjmd'] = 'admData/save_indikator_tujuan_rpjmd';
+// $route['admdata/indikatorTujuanById/(:num)'] = 'admData/indikatorTujuanById/$1';
+// $route['admdata/setStatus_indikator_tujuan/(:num)'] = 'admData/setStatus_indikator_tujuan/$1';
+// $route['admdata/delete_indikator_tujuan/(:num)'] = 'admData/delete_indikator_tujuan/$1';
 
 // Indikator Sasaran RPJMD CRUD routes
-$route['admdata/save_indikator_sasaran_rpjmd'] = 'admData/save_indikator_sasaran_rpjmd';
-$route['admdata/indikatorSasaranById/(:num)'] = 'admData/indikatorSasaranById/$1';
-$route['admdata/setStatus_indikator_sasaran/(:num)'] = 'admData/setStatus_indikator_sasaran/$1';
-$route['admdata/delete_indikator_sasaran/(:num)'] = 'admData/delete_indikator_sasaran/$1';
+// $route['admdata/save_indikator_sasaran_rpjmd'] = 'admData/save_indikator_sasaran_rpjmd';
+// $route['admdata/indikatorSasaranById/(:num)'] = 'admData/indikatorSasaranById/$1';
+// $route['admdata/setStatus_indikator_sasaran/(:num)'] = 'admData/setStatus_indikator_sasaran/$1';
+// $route['admdata/delete_indikator_sasaran/(:num)'] = 'admData/delete_indikator_sasaran/$1';
 
 // Master Periode Anggaran CRUD routes
 $route['admdata/save_master_periode_anggaran'] = 'admData/save_master_periode_anggaran';
