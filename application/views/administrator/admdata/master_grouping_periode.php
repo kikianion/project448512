@@ -78,7 +78,7 @@ $tag1 = "form_mastergroupingperiode";
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-group" onclick="editModalGroupingPeriode(<?= $gp->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_grouping_periode/' . $gp->id) ?>"
-												onclick="return confirm('Apakah Anda yakin ingin mengubah status grouping periode ini?')">Ubah Status</a>
+												>Ubah Status</a>
 										</div>
 									</div>
 								</td>

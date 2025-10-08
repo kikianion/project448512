@@ -91,7 +91,7 @@ $tag1 = "form_tujuanrpjmd";
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-tujuanrpjmd" onclick="editModalTujuanRPJMD(<?= $tr->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_tujuan_rpjmd/' . $tr->id) ?>"
-												onclick="return confirm('Apakah Anda yakin ingin mengubah status tujuan RPJMD ini?')">Ubah Status</a>
+												>Ubah Status</a>
 										</div>
 									</div>
 								</td>

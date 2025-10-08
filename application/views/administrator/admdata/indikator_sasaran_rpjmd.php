@@ -132,7 +132,7 @@ $tag1 = "form_indikatorsasaranrpjmd";
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-indikatorsasaran" onclick="editModalIndikatorSasaran(<?= $is->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_indikator_sasaran/' . $is->id) ?>"
-												onclick="return confirm('Apakah Anda yakin ingin mengubah status indikator sasaran ini?')">Ubah Status</a>
+												>Ubah Status</a>
 										</div>
 									</div>
 								</td>

@@ -136,7 +136,7 @@ $tag1 = "form_indikatortujuanrpjmd";
 												onclick="editModalIndikatorTujuan(<?= $it->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_indikator_tujuan/' . $it->id) ?>"
-												onclick="return confirm('Apakah Anda yakin ingin mengubah status indikator tujuan ini?')">Ubah Status</a>
+												>Ubah Status</a>
 										</div>
 									</div>
 								</td>

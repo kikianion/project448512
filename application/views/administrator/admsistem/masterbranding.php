@@ -29,7 +29,7 @@ $tag1 = "form_masterbranding";
       </thead>
       <tbody>
         <!--  #region form nama  -->
-        <?php echo form_open('admsistem/save_branding'); ?>
+        <?php echo form_open('admsistem/branding/save'); ?>
         <tr>
           <td>
             <b>Nama</b>
@@ -52,7 +52,7 @@ $tag1 = "form_masterbranding";
         <!--  #endregion  -->
 
         <!-- #region form subnote -->
-        <?php echo form_open('admsistem/save_branding'); ?>
+        <?php echo form_open('admsistem/branding/save'); ?>
         <tr>
           <td><b>Subnote</b></td>
           <td>
@@ -74,7 +74,7 @@ $tag1 = "form_masterbranding";
         <!--  #endregion  -->
 
         <!--  #region form background -->
-        <?php echo form_open_multipart('admsistem/save_branding'); ?>
+        <?php echo form_open_multipart('admsistem/branding/save'); ?>
         <tr>
           <td><b>Background</b></td>
           <td>
@@ -98,7 +98,7 @@ $tag1 = "form_masterbranding";
         <!--  #endregion  -->
 
         <!-- #region form logo -->
-        <?php echo form_open_multipart('admsistem/save_branding'); ?>
+        <?php echo form_open_multipart('admsistem/branding/save'); ?>
         <tr>
           <td><b>Logo</b></td>
           <td>
@@ -122,7 +122,7 @@ $tag1 = "form_masterbranding";
         <!--  #endregion  -->
 
         <!--  #region form fav  -->
-        <?php echo form_open_multipart('admsistem/save_branding'); ?>
+        <?php echo form_open_multipart('admsistem/branding/save'); ?>
         <tr>
           <td><b>favicon</b></td>
           <td>

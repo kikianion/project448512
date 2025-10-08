@@ -78,7 +78,7 @@ $tag1 = "form_masterperiodeanggaran";
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-periodeanggaran" onclick="editModalPeriodeAnggaran(<?= $pa->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_periode_anggaran/' . $pa->id) ?>"
-												onclick="return confirm('Apakah Anda yakin ingin mengubah status periode anggaran ini?')">Ubah Status</a>
+												>Ubah Status</a>
 										</div>
 									</div>
 								</td>

@@ -19,6 +19,9 @@ foreach ($objs as $obj) {
 
 $route['admsistem/user/resetpassword'] = 'cMasterUser/resetpassword';
 
+// Branding CRUD
+$route['admsistem/branding/save'] = 'CMasterBranding/save';
+
 // Master periode CRUD
 $route['admsistem/save_periode'] = 'admSistem/save_periode';
 $route['admsistem/periodeById/(:num)'] = 'admSistem/periodeById/$1';
@@ -29,20 +32,7 @@ $route['admsistem/save_grouping_periode'] = 'admSistem/save_grouping_periode';
 $route['admsistem/groupingPeriodeById/(:num)'] = 'admSistem/groupingPeriodeById/$1';
 $route['admsistem/setStatus_grouping_periode/(:num)'] = 'admSistem/setStatus_grouping_periode/$1';
 
-// Branding CRUD
-$route['admsistem/save_branding'] = 'admSistem/save_branding';
-$route['admsistem/delete_branding/(:any)'] = 'admSistem/delete_branding/$1';
-
 $route['admdata'] = 'cAdmData';
-
-// $route['admdata/dashboard'] = 'admdata/dashboard';
-// $route['admdata/import'] = 'admdata/import';
-// $route['admdata/export'] = 'admdata/export';
-// $route['admdata/backup'] = 'admdata/backup';
-// $route['admdata/restore'] = 'admdata/restore';
-// $route['admdata/cleanup'] = 'admdata/cleanup';
-// $route['admdata/statistics'] = 'admdata/statistics';
-
 
 $objs = ['Fungsi', 'Urusan', 'Program'];
 foreach ($objs as $obj) {

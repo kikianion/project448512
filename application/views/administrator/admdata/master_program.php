@@ -80,8 +80,8 @@ $tag1 = "form_masterprogram";
 						foreach ($master_program as $p): ?>
 							<tr>
 								<td><?= $p->kode ?></td>
-								<td><?= $p->namaprogram ?></td>
-								<td><?= $p->urusan ?></td>
+								<td><?= $p->nama ?></td>
+								<td><?= getNameById($p->urusan_id, $master_urusan, "urusan") ?></td>
 								<td><?= $p->status ?></td>
 								<td>
 									<div class="btn-group">
@@ -119,7 +119,7 @@ $tag1 = "form_masterprogram";
 					$('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
 					$('#edit-record-common .modal-title').html("Edit data program");
 
-					$('#edit-record-common input[name=namaprogram]').val(res.data.namaprogram);
+					$('#edit-record-common input[name=namaprogram]').val(res.data.nama);
 					$('#edit-record-common input[name=kode]').val(res.data.kode);
 					$('#edit-record-common select[name=urusan_id]').val(res.data.urusan_id);
 					$('#edit-record-common input[name=id]').val(res.data.id);
