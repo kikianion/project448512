@@ -20,23 +20,29 @@ $tag1 = "form_mastermitra";
 
 		<div id="form-<?= $tag1 ?>">
 			<?php echo form_open('admsistem/mitra/save'); ?>
+
+			<input type="hidden" <?= expandFieldAttr('id') ?>>
+			<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Mitra</label>
+
 				<div class="col-sm-8">
-					<input type="text" class="form-control" placeholder="Masukan Nama Mitra" <?= expandFieldAttr('namamitra') ?> maxlength="50" required/>
+					<input type="text" class="form-control" placeholder="Masukan Nama Mitra" <?= expandFieldAttr('namamitra') ?> maxlength="50" required />
 				</div>
+
 				<div class="col-sm-2">
 					<input type="number" class="form-control" placeholder="urut" <?= expandFieldAttr('urut') ?>>
-					<input type="hidden" <?= expandFieldAttr('id') ?>>
-					<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 				</div>
 			</div>
+
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Pimpinan</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" placeholder="Nama Pimpinan" <?= expandFieldAttr('kepala') ?> maxlength="50">
 				</div>
 			</div>
+
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">NIP/Pang</label>
 				<div class="col-sm-5">

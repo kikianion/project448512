@@ -1,0 +1,1 @@
+"K:\xampp7.4.26-1,simela\mysql\bin\mysqldump.exe" --no-data -h db1.vm1.dev -u root -p1 simela-gen2 > simela-gen2.sql

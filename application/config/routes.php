@@ -115,3 +115,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['test1'] = 'test/hi';
+$route['__listtables'] = 'CTools/list_tables';
+
+$route['handler/save/(:any)'] = 'CHandler/save/$1';
+$route['card1'] = 'CHandler/card1';
