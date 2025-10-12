@@ -1,5 +1,11 @@
 <?php
-$tag1 = "form_rpjmdperiode";
+$tag1 = "rpjmdperiode";
+
+//name field,name display,type, attr;
+$fields = [
+	"nama",
+	"namaperiode"
+];
 ?>
 
 <div class="col-lg-4">
@@ -20,7 +26,7 @@ $tag1 = "form_rpjmdperiode";
 			<?= widget_flash($tag1) ?>
 
 			<div id="form-<?= $tag1 ?>">
-				<?php echo form_open('admdata/rpjmdperiode/save'); ?>
+				<?php echo form_open("admdata/$tag1/save"); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Nama</label>
 					<div class="col-sm-10">
@@ -58,7 +64,7 @@ $tag1 = "form_rpjmdperiode";
 			</div>
 			<hr class="hr hr-blurry">
 			</hr>
-			<table id="tabelperioderpjmd" class="table table-bordered table-responsive">
+			<table id="tabelperioderpjmd" class="table table-bordered table-responsive table-data-init">
 				<thead>
 					<tr>
 						<th>Nama Periode</th>
@@ -68,11 +74,11 @@ $tag1 = "form_rpjmdperiode";
 					</tr>
 				</thead>
 				<tbody>
-					<?php if (!empty($periode_rpjmd)):
-						foreach ($periode_rpjmd as $pr): ?>
+					<?php if (!empty($rpjmdperiode)):
+						foreach ($rpjmdperiode as $pr): ?>
 							<tr>
-								<td><?= $pr->namaperiode ?></td>
-								<td><?= $pr->tahun_awal . '-' . $pr->tahun_akhir ?></td>
+								<td><?= $pr->nama ?></td>
+								<td><?= $pr->awal . '-' . $pr->akhir ?></td>
 								<td><?= $pr->status ?></td>
 								<td>
 									<div class="btn-group">
@@ -82,9 +88,9 @@ $tag1 = "form_rpjmdperiode";
 										</button>
 										<div class="dropdown-menu" role="menu">
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-rpjmd"
-												onclick="editModalPeriodeRPJMD(<?= $pr->id ?>)">Edit</a>
+												onclick="editModal<?= $tag1 ?>(<?= $pr->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="<?= site_url('admdata/rpjmdperiode/setStatus/' . $pr->id) ?>">Ubah Status</a>
+											<a class="dropdown-item" href="admdata/<?= $tag1 ?>/setStatus/<?= $pr->id ?> ">Ubah Status</a>
 										</div>
 									</div>
 								</td>
@@ -102,22 +108,25 @@ $tag1 = "form_rpjmdperiode";
 	</div>
 </div>
 <script>
-	function editModalPeriodeRPJMD(id) {
+	function editModal<?= $tag1 ?>(id) {
 		$.ajax({
-			url: 'admdata/rpjmdperiode/byId/' + id,
+			url: 'admdata/<?= $tag1 ?>/byId/' + id,
 			success: function (res) {
 				if (res.status === 'success') {
-					$('#edit-record-common').appendTo('body').modal('show');
-					$('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
-					$('#edit-record-common .modal-title').html("Edit data periode RPJMD");
+					let id1 = '#edit-record-common'
+					$(id1).appendTo('body').modal('show');
+					$(id1 + ' .modal-body').html($('#form-<?= $tag1 ?>').html());
+					$(id1 + ' .modal-title').html("Edit data periode RPJMD");
 
-					$('#edit-record-common input[name=namaperiode]').val(res.data.namaperiode);
-					$('#edit-record-common input[name=tahun_awal]').val(res.data.tahun_awal);
-					$('#edit-record-common input[name=tahun_akhir]').val(res.data.tahun_akhir);
-					$('#edit-record-common input[name=id]').val(res.data.id);
+					// $("form-<?=$tag1?> input").array.forEach(e => {
+					// 	$(id1 + ' input[name=namaperiode]').val(res.data.namaperiode);
+					// })
+					$(id1 + ' input[name=namaperiode]').val(res.data.nama);
+					$(id1 + ' input[name=tahun_awal]').val(res.data.awal);
+					$(id1 + ' input[name=tahun_akhir]').val(res.data.akhir);
+					$(id1 + ' input[name=id]').val(res.data.id);
 				}
 			},
 		});
 	}
 </script>
-

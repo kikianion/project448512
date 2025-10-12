@@ -26,14 +26,14 @@
 			<!-- /.row -->
 			<!-- Second Row: Periode RPJMD, Tujuan RPJMD, Sasaran RPJMD -->
 			<div class="row">
-				<?php $this->load->view('administrator/admdata/periode_rpjmd'); ?>
-				<?php $this->load->view('administrator/admdata/tujuan_rpjmd'); ?>
-				<?php $this->load->view('administrator/admdata/sasaran_rpjmd'); ?>
+				<?php $this->load->view('administrator/admdata/rpjmd_periode'); ?>
+				<?php $this->load->view('administrator/admdata/rpjmd_tujuan'); ?>
+				<?php $this->load->view('administrator/admdata/rpjmd_sasaran'); ?>
 			</div>
 			<!-- Third Row: Indikator Tujuan RPJMD, Indikator Sasaran RPJMD, Master Periode Anggaran -->
 			<div class="row">
-				<?php $this->load->view('administrator/admdata/indikator_tujuan_rpjmd'); ?>
-				<?php $this->load->view('administrator/admdata/indikator_sasaran_rpjmd'); ?>
+				<?php $this->load->view('administrator/admdata/rpjmd_indikator_tujuan'); ?>
+				<?php $this->load->view('administrator/admdata/rpjmd_indikator_sasaran'); ?>
 				<?php $this->load->view('administrator/admdata/master_periode_anggaran'); ?>
 			</div>
 
@@ -484,31 +484,6 @@
 
 <script>
 	$(function () {
-		$("#tabeluser").DataTable({
-			"responsive": true, "lengthChange": true, "autoWidth": true, "pageLength": 3
-		});
-		$("#tabelopd").DataTable({
-			"responsive": true, "lengthChange": false, "autoWidth": false, "pageLength": 3
-		});
-		$("#tabelmitra").DataTable({
-			"responsive": true, "lengthChange": false, "autoWidth": false, "pageLength": 3
-		});
-		$("#tabelvisi").DataTable({
-			"responsive": true, "lengthChange": false, "autoWidth": false, "pageLength": 3
-		});
-		$("#tabelmisi").DataTable({
-			"responsive": true, "lengthChange": false, "autoWidth": false, "pageLength": 3
-		});
-		$("#tabelanggaran").DataTable({
-			"responsive": true, "lengthChange": false, "autoWidth": false, "pageLength": 3
-		});
-		$("#tabelgroup").DataTable({
-			"responsive": true, "lengthChange": false, "autoWidth": false, "pageLength": 3
-		});
-	});
-</script>
-<script>
-	$(function () {
 		//Initialize Select2 Elements
 		$('.select2').select2()
 
@@ -642,5 +617,15 @@
 	// DropzoneJS Demo Code End
 
 </script>
+
+<script>
+	$(function () {
+		$(".table-data-init").DataTable({
+			"pageLength": 3,
+			"autoWidth": true
+		});
+	});
+</script>
+
 
 <?php $this->load->view('_appshell/9foot'); ?>

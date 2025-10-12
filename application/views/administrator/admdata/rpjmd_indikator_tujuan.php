@@ -1,5 +1,5 @@
 <?php
-$tag1 = "form_indikatortujuanrpjmd";
+$tag1 = "rpjmdindikatortujuan";
 ?>
 
 <div class="col-lg-4">
@@ -20,7 +20,7 @@ $tag1 = "form_indikatortujuanrpjmd";
 			<?= widget_flash($tag1) ?>
 
 			<div id="form-<?= $tag1 ?>">
-				<?php echo form_open('admdata/save_indikator_tujuan_rpjmd'); ?>
+				<?php echo form_open("admdata/$tag1/save"); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Indikator</label>
 					<div class="col-sm-10">
@@ -103,7 +103,7 @@ $tag1 = "form_indikatortujuanrpjmd";
 			</div>
 			<hr class="hr hr-blurry">
 			</hr>
-			<table id="tabelindikatortujuan" class="table table-bordered table-responsive">
+			<table id="tabelindikatortujuan" class="table table-bordered table-responsive table-data-init">
 				<thead>
 					<tr>
 						<th>Tujuan</th>
@@ -135,8 +135,7 @@ $tag1 = "form_indikatortujuanrpjmd";
 											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-indikatortujuan"
 												onclick="editModalIndikatorTujuan(<?= $it->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_indikator_tujuan/' . $it->id) ?>"
-												>Ubah Status</a>
+											<a class="dropdown-item" href="<?= site_url('admdata/setStatus_indikator_tujuan/' . $it->id) ?>">Ubah Status</a>
 										</div>
 									</div>
 								</td>
@@ -178,79 +177,4 @@ $tag1 = "form_indikatortujuanrpjmd";
 			},
 		});
 	}
-</script>
-
-<script>
-	// localStorage state management for card collapse/expand
-	document.addEventListener('DOMContentLoaded', function () {
-		var cardElement = document.getElementById('card-indikator-tujuan-rpjmd');
-		var collapseButton = cardElement.querySelector('[data-card-widget="collapse"]');
-		var maximizeButton = cardElement.querySelector('.btn-fs');
-
-		// Restore card state from localStorage
-		var cardState = localStorage.getItem('card-indikator-tujuan-rpjmd-state');
-		if (cardState === 'expanded') {
-			cardElement.classList.remove('collapsed-card');
-			var icon = collapseButton.querySelector('i');
-			if (icon) {
-				icon.classList.remove('fa-plus');
-				icon.classList.add('fa-minus');
-			}
-		}
-
-		// Restore maximize state from localStorage
-		var maximizeState = localStorage.getItem('card-indikator-tujuan-rpjmd-maximize');
-		if (maximizeState === 'maximized') {
-			cardElement.classList.add('maximized-card');
-			maximizeButton.innerHTML = '[__]';
-			// Apply maximized styles
-			cardElement.style.position = 'fixed';
-			cardElement.style.top = '0';
-			cardElement.style.left = '0';
-			cardElement.style.width = '100vw';
-			cardElement.style.height = '100vh';
-			cardElement.style.zIndex = '9999';
-			cardElement.style.margin = '0';
-		}
-
-		// Handle collapse/expand state saving
-		collapseButton.addEventListener('click', function () {
-			setTimeout(function () {
-				if (cardElement.classList.contains('collapsed-card')) {
-					localStorage.setItem('card-indikator-tujuan-rpjmd-state', 'collapsed');
-				} else {
-					localStorage.setItem('card-indikator-tujuan-rpjmd-state', 'expanded');
-				}
-			}, 300); // Wait for animation to complete
-		});
-
-		// Handle maximize/restore functionality
-		maximizeButton.addEventListener('click', function () {
-			if (cardElement.classList.contains('maximized-card')) {
-				// Restore
-				cardElement.classList.remove('maximized-card');
-				maximizeButton.innerHTML = '[&nbsp;&nbsp;]';
-				cardElement.style.position = '';
-				cardElement.style.top = '';
-				cardElement.style.left = '';
-				cardElement.style.width = '';
-				cardElement.style.height = '';
-				cardElement.style.zIndex = '';
-				cardElement.style.margin = '';
-				localStorage.setItem('card-indikator-tujuan-rpjmd-maximize', 'restored');
-			} else {
-				// Maximize
-				cardElement.classList.add('maximized-card');
-				maximizeButton.innerHTML = '[__]';
-				cardElement.style.position = 'fixed';
-				cardElement.style.top = '0';
-				cardElement.style.left = '0';
-				cardElement.style.width = '100vw';
-				cardElement.style.height = '100vh';
-				cardElement.style.zIndex = '9999';
-				cardElement.style.margin = '0';
-				localStorage.setItem('card-indikator-tujuan-rpjmd-maximize', 'maximized');
-			}
-		});
-	});
 </script>

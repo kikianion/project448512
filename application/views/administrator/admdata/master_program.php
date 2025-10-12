@@ -65,7 +65,7 @@ $tag1 = "form_masterprogram";
 			</div>
 			<hr class="hr hr-blurry">
 			</hr>
-			<table id="tabelprogram" class="table table-bordered table-responsive">
+			<table id="tabelprogram" class="table table-bordered table-responsive table-data-init">
 				<thead>
 					<tr>
 						<th>Kode</th>

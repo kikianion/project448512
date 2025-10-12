@@ -52,7 +52,7 @@ $tag1 = "form_mastergroupingperiode";
 			</div>
 			<hr class="hr hr-blurry">
 			</hr>
-			<table id="tabelgroupingperiode" class="table table-bordered table-responsive">
+			<table id="tabelgroupingperiode" class="table table-bordered table-responsive table-data-init">
 				<thead>
 					<tr>
 						<th>Grouping</th>

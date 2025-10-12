@@ -1,11 +1,11 @@
 <?php
-$tag1 = "form_masterfungsi";
+$tag1 = "rpjmdtujuan";
 ?>
 
 <div class="col-lg-4">
-	<div class="card card-info card-outline collapsed-card" id="card-master-fungsi">
+	<div class="card card-info card-outline collapsed-card" id="card-tujuan-rpjmd">
 		<div class="card-header" data-card-widget="collapse">
-			<h5 class="card-title m-0"><b>Master Fungsi</b></h5>
+			<h5 class="card-title m-0"><b>Tujuan RPJMD</b></h5>
 			<div class="card-tools">
 				<button type="button" class="btn btn-tool btn-fs" xdata-card-widget="collapse">
 					[&nbsp;&nbsp;]
@@ -16,22 +16,31 @@ $tag1 = "form_masterfungsi";
 			</div>
 		</div>
 		<div class="card-body">
+			<?php
 
+			$a = 1;
+			?>
 			<?= widget_flash($tag1) ?>
 
 			<div id="form-<?= $tag1 ?>">
-				<?php echo form_open('admdata/fungsi/save'); ?>
+				<?php echo form_open("admdata/$tag1/save"); ?>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Nama Fungsi</label>
+					<label class="col-sm-2 col-form-label">Misi</label>
+					<div class="col-sm-10">
+						<?= expandFieldAttrSelectActive("misi_id", $misi_list, "misi") ?>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">Tujuan</label>
 					<div class="col-sm-8">
-						<input type="text" name="namafungsi" class="form-control" id="namafungsi" placeholder="Masukan Nama Fungsi"
-							value="<?php echo isset($edit_master_fungsi->namafungsi) ? htmlspecialchars($edit_master_fungsi->namafungsi) : ''; ?>" required
-							maxlength="50" />
+						<input type="text" name="tujuan" class="form-control" id="tujuanrpjmd" placeholder="Tujuan RPJMD"
+							value="<?php echo isset($edit_tujuan_rpjmd->tujuan) ? htmlspecialchars($edit_tujuan_rpjmd->tujuan) : ''; ?>" required
+							maxlength="200" />
 					</div>
 					<div class="col-sm-2">
-						<input type="number" name="urut" class="form-control" id="urutanfungsi" placeholder="urut"
-							value="<?php echo isset($edit_master_fungsi->urut) ? htmlspecialchars($edit_master_fungsi->urut) : ''; ?>">
-						<input type="hidden" name="id" value="<?php echo isset($edit_master_fungsi->id) ? htmlspecialchars($edit_master_fungsi->id) : ''; ?>">
+						<input type="number" name="urut" class="form-control" id="urutantujuan" placeholder="urut"
+							value="<?php echo isset($edit_tujuan_rpjmd->urut) ? htmlspecialchars($edit_tujuan_rpjmd->urut) : ''; ?>">
+						<input type="hidden" name="id" value="<?php echo isset($edit_tujuan_rpjmd->id) ? htmlspecialchars($edit_tujuan_rpjmd->id) : ''; ?>">
 						<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 					</div>
 				</div>
@@ -48,22 +57,24 @@ $tag1 = "form_masterfungsi";
 			</div>
 			<hr class="hr hr-blurry">
 			</hr>
-			<table id="tabelfungsi" class="table table-bordered table-responsive table-data-init">
+			<table id="tabeltujuanrpjmd" class="table table-bordered table-responsive table-data-init">
 				<thead>
 					<tr>
 						<th>Urut</th>
-						<th>Nama Fungsi</th>
+						<th>Misi</th>
+						<th>Tujuan</th>
 						<th>Status</th>
 						<th>Tindakan</th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php if (!empty($master_fungsi)):
-						foreach ($master_fungsi as $f): ?>
+					<?php if (!empty($rpjmdtujuan_list)):
+						foreach ($rpjmdtujuan_list as $tr): ?>
 							<tr>
-								<td><?= $f->urut ?></td>
-								<td><?= $f->namafungsi ?></td>
-								<td><?= $f->status ?></td>
+								<td><?= $tr->urut ?></td>
+								<td><?= getNameById($tr->misi_id, $misi_list, "misi") ?></td>
+								<td><?= $tr->tujuan ?></td>
+								<td><?= $tr->status ?></td>
 								<td>
 									<div class="btn-group">
 										<button type="button" class="btn btn-default">Tindakan</button>
@@ -71,9 +82,10 @@ $tag1 = "form_masterfungsi";
 											<span class="sr-only"></span>
 										</button>
 										<div class="dropdown-menu" role="menu">
-											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-fungsi" onclick="editModalFungsi(<?= $f->id ?>)">Edit</a>
+											<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-tujuanrpjmd"
+												onclick="editModal<?= $tag1 ?>(<?= $tr->id ?>)">Edit</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="<?= site_url('admdata/fungsi/setStatus/' . $f->id) ?>">Ubah Status</a>
+											<a class="dropdown-item" href="admdata/<?= $tag1 ?>/setStatus/<?= $tr->id ?>">Ubah Status</a>
 										</div>
 									</div>
 								</td>
@@ -81,7 +93,7 @@ $tag1 = "form_masterfungsi";
 						<?php endforeach;
 					else: ?>
 						<tr>
-							<td colspan="5">Tidak ada fungsi.
+							<td colspan="5">Tidak ada tujuan RPJMD.
 							</td>
 						</tr>
 					<?php endif; ?>
@@ -91,18 +103,17 @@ $tag1 = "form_masterfungsi";
 	</div>
 </div>
 <script>
-	function editModalFungsi(id) {
+	function editModal<?= $tag1 ?>(id) {
 		$.ajax({
-			url: 'admdata/fungsi/byId/' + id,
+			url: 'admdata/<?= $tag1 ?>/byId/' + id,
 			success: function (res) {
 				if (res.status === 'success') {
 					$('#edit-record-common').appendTo('body').modal('show');
 					$('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
-					$('#edit-record-common .modal-title').html("Edit data fungsi");
+					$('#edit-record-common .modal-title').html("Edit data tujuan RPJMD");
 
-					$('#edit-record-common input[name=namafungsi]').val(res.data.namafungsi);
-					$('#edit-record-common input[name=deskripsi]').val(res.data.deskripsi);
-					$('#edit-record-common input[name=status]').val(res.data.status);
+					$('#edit-record-common select[name=misi_id]').val(res.data.misi_id);
+					$('#edit-record-common input[name=tujuan]').val(res.data.tujuan);
 					$('#edit-record-common input[name=urut]').val(res.data.urut);
 					$('#edit-record-common input[name=id]').val(res.data.id);
 				}

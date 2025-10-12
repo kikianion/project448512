@@ -52,7 +52,7 @@ $tag1 = "form_masterperiodeanggaran";
 			</div>
 			<hr class="hr hr-blurry">
 			</hr>
-			<table id="tabelperiodeanggaran" class="table table-bordered table-responsive">
+			<table id="tabelperiodeanggaran" class="table table-bordered table-responsive table-data-init">
 				<thead>
 					<tr>
 						<th>Kode</th>

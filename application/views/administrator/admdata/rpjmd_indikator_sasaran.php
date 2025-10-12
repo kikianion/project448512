@@ -100,7 +100,7 @@ $tag1 = "form_indikatorsasaranrpjmd";
 			</div>
 			<hr class="hr hr-blurry">
 			</hr>
-			<table id="tabelindikatorsasaran" class="table table-bordered table-responsive">
+			<table id="tabelindikatorsasaran" class="table table-bordered table-responsive table-data-init">
 				<thead>
 					<tr>
 						<th>Sasaran</th>
