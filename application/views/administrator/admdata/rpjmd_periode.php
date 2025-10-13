@@ -23,9 +23,9 @@ $fields = [
 		</div>
 		<div class="card-body">
 
-			<?= widget_flash($tag1) ?>
+			<?= widget_flash($table_name) ?>
 
-			<div id="form-<?= $tag1 ?>">
+			<div id="form-<?= $table_name ?>">
 				<?php echo form_open("admdata/$tag1/save"); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Nama</label>
@@ -34,7 +34,7 @@ $fields = [
 							value="<?php echo isset($edit_periode_rpjmd->namaperiode) ? htmlspecialchars($edit_periode_rpjmd->namaperiode) : ''; ?>" required
 							maxlength="100" />
 						<input type="hidden" name="id" value="<?php echo isset($edit_periode_rpjmd->id) ? htmlspecialchars($edit_periode_rpjmd->id) : ''; ?>">
-						<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+						
 					</div>
 				</div>
 				<div class="form-group row">

@@ -17,9 +17,9 @@ $tag1 = "form_masterprogram";
 		</div>
 		<div class="card-body">
 
-			<?= widget_flash($tag1) ?>
+			<?= widget_flash($table_name) ?>
 
-			<div id="form-<?= $tag1 ?>">
+			<div id="form-<?= $table_name ?>">
 				<?php echo form_open('admdata/program/save'); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Program</label>
@@ -32,7 +32,7 @@ $tag1 = "form_masterprogram";
 						<input type="text" name="kode" class="form-control" id="kodeprogram" placeholder="Kode"
 							value="<?php echo isset($edit_master_program->kode) ? htmlspecialchars($edit_master_program->kode) : ''; ?>">
 						<input type="hidden" name="id" value="<?php echo isset($edit_master_program->id) ? htmlspecialchars($edit_master_program->id) : ''; ?>">
-						<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+						
 					</div>
 				</div>
 				<div class="form-group row">

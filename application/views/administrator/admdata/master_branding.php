@@ -17,7 +17,7 @@ $tag1 = "form_masterbranding";
 		</div>
 		<div class="card-body">
 
-			<?= widget_flash($tag1) ?>
+			<?= widget_flash($table_name) ?>
 
 			<table class="table table-bordered table-responsive">
 				<thead>
@@ -38,7 +38,7 @@ $tag1 = "form_masterbranding";
 							<?php echo form_open('admdata/save_branding_nama'); ?>
 							<input type="text" name="nama_aplikasi" class="form-control" id="nama-aplikasi" placeholder="Nama Aplikasi"
 								value="<?php echo isset($branding->nama_aplikasi) ? htmlspecialchars($branding->nama_aplikasi) : ''; ?>">
-							<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+							
 						</td>
 						<td>
 							<button type="submit" class="btn btn-primary">Simpan</button>
@@ -54,7 +54,7 @@ $tag1 = "form_masterbranding";
 							<?php echo form_open('admdata/save_branding_subnote'); ?>
 							<input type="text" name="subnote" class="form-control" id="subnote" placeholder="Subnote Aplikasi"
 								value="<?php echo isset($branding->subnote) ? htmlspecialchars($branding->subnote) : ''; ?>">
-							<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+							
 						</td>
 						<td>
 							<button type="submit" class="btn btn-primary">Simpan</button>
@@ -69,7 +69,7 @@ $tag1 = "form_masterbranding";
 						<td>
 							<?php echo form_open_multipart('admdata/save_branding_background'); ?>
 							<input class="form-control" type="file" name="background" id="background" accept="image/*">
-							<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+							
 						</td>
 						<td>
 							<button type="submit" class="btn btn-primary">Simpan</button>
@@ -84,7 +84,7 @@ $tag1 = "form_masterbranding";
 						<td>
 							<?php echo form_open_multipart('admdata/save_branding_logo'); ?>
 							<input class="form-control" type="file" name="logo" id="logo" accept="image/*">
-							<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+							
 						</td>
 						<td>
 							<button type="submit" class="btn btn-primary">Simpan</button>
@@ -99,7 +99,7 @@ $tag1 = "form_masterbranding";
 						<td>
 							<?php echo form_open_multipart('admdata/save_branding_favicon'); ?>
 							<input class="form-control" type="file" name="favicon" id="favicon" accept="image/*">
-							<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+							
 						</td>
 						<td>
 							<button type="submit" class="btn btn-primary">Simpan</button>

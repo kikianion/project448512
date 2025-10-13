@@ -1,20 +1,20 @@
 <?php
 
-function widget_flash($tag1)
+function widget_flash($table_name)
 {
 	$CI = &get_instance();
 	$html = '';
 
 	// $d1=$CI->session->flashdata();
 	// log2(serialize($d1));
-	if ($CI->session->flashdata('success-' . $tag1)) {
-		$html .= '<div class="alert alert-success">' . $CI->session->flashdata('success-' . $tag1) . '</div>';
+	if ($CI->session->flashdata('success---' . $table_name)) {
+		$html .= '<div class="alert alert-success">' . $CI->session->flashdata('success---' . $table_name) . '</div>';
 	}
-	if ($CI->session->flashdata('error-' . $tag1)) {
-		$html .= '<div class="alert alert-danger">' . $CI->session->flashdata('error-' . $tag1) . '</div>';
+	if ($CI->session->flashdata('error---' . $table_name)) {
+		$html .= '<div class="alert alert-danger">' . $CI->session->flashdata('error---' . $table_name) . '</div>';
 	}
-	if ($CI->session->flashdata('dlgsuccess-' . $tag1)) {
-		$msg=$CI->session->flashdata('dlgsuccess-' . $tag1);
+	if ($CI->session->flashdata('dlgsuccess---' . $table_name)) {
+		$msg=$CI->session->flashdata('dlgsuccess---' . $table_name);
 		$html .= <<<EEE
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {

@@ -1,5 +1,5 @@
 <?php
-$tag1 = "form_masteropd";
+$table_name = "opd";
 ?>
 
 <div class="card card-info card-outline collapsed-card">
@@ -16,25 +16,25 @@ $tag1 = "form_masteropd";
 	</div>
 	<div class="card-body">
 
-		<?= widget_flash($tag1) ?>
+		<?= widget_flash($table_name) ?>
 
-		<div id="form-<?= $tag1 ?>">
-			<?php echo form_open('admsistem/opd/save'); ?>
+		<div id="form-<?= $table_name ?>">
+			<?php echo form_open('handler/save/' . $table_name); ?>
+			<input type="hidden" <?= expandFieldAttr('id') ?>>
+
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">OPD</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" placeholder="Masukan Nama OPD" <?= expandFieldAttr('namaopd') ?> required maxlength="50" />
+					<input type="text" class="form-control" placeholder="Masukan Nama OPD" <?= expandFieldAttr('nama') ?> required maxlength="50" />
 				</div>
 				<div class="col-sm-2">
 					<input type="number" class="form-control" placeholder="urut" <?= expandFieldAttr('urut') ?>>
-					<input type="hidden" <?= expandFieldAttr('id') ?>>
-					<input type="hidden" name="tag1" value="<?= $tag1 ?>">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Mitra</label>
 				<div class="col-sm-10">
-					<?= expandFieldAttrSelectActive("mitra_id", $master_mitra, "namamitra") ?>
+					<?= expandFieldAttrSelectActive("mitra___id___nama") ?>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -86,67 +86,8 @@ $tag1 = "form_masteropd";
 				</tr>
 			</thead>
 			<tbody>
-				<?php if (!empty($master_opd)):
-					foreach ($master_opd as $o): ?>
-						<tr>
-							<td><?= $o->urut ?></td>
-							<td><?= $o->namaopd ?></td>
-							<td><?= getNameById($o->mitra, $master_mitra, "namamitra") ?></td>
-							<td><?= $o->kepala ?></td>
-							<td><?= $o->nipkepala ?></td>
-							<td><?= $o->pangkepala ?></td>
-							<td><?= $o->jabatan ?></td>
-							<td><?= $o->status ?></td>
-							<td>
-								<div class="btn-group">
-									<button type="button" class="btn btn-default">Tindakan</button>
-									<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
-										<span class="sr-only"></span>
-									</button>
-									<div class="dropdown-menu" role="menu">
-										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra" onclick="editModalOPD(<?= $o->id ?>)">Edit</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/opd/setStatus/' . $o->id) ?>"> Ubah Status</a>
-									</div>
-								</div>
-							</td>
-						</tr>
-					<?php endforeach;
-				else: ?>
-					<tr>
-						<td colspan="9">Tidak ada OPD.</td>
-					</tr>
-				<?php endif; ?>
+				<?= $f_expandTableCard($table_name) ?>
 			</tbody>
 		</table>
 	</div>
 </div>
-<script>
-	function editModalOPD(id) {
-
-		$.ajax({
-			url: 'admsistem/opd/byId/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
-			success: function (res) {
-				if (res.status === 'success') {
-					let e1 = "#edit-record-common"
-
-					$(e1).appendTo('body').modal('show');
-					$(e1 + ' .modal-body').html($('#form-<?= $tag1 ?>').html());
-					$(e1 + ' .modal-title').html("Edit data OPD");
-
-					let d = res.data
-					$(e1 + ' input[name=namaopd]').val(d.namaopd);
-					$(e1 + ' select[name=mitra_id]').val(d.mitra);
-					$(e1 + ' input[name=kepala]').val(d.kepala);
-					$(e1 + ' input[name=nipkepala]').val(d.nipkepala);
-					$(e1 + ' input[name=pangkepala]').val(d.pangkepala);
-					$(e1 + ' input[name=jabatan]').val(d.jabatan);
-					$(e1 + ' input[name=status]').val(d.status);
-					$(e1 + ' input[name=urut]').val(d.urut);
-					$(e1 + ' input[name=id]').val(d.id);
-
-				}
-			},
-		});
-	}
-</script>

@@ -16,17 +16,17 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `_master_11__Mitra`
+-- Table structure for table `_master_11__mitra`
 --
 
-DROP TABLE IF EXISTS `_master_11__Mitra`;
+DROP TABLE IF EXISTS `_master_11__mitra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `_master_11__Mitra` (
+CREATE TABLE `_master_11__mitra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `urut` int(11) DEFAULT NULL,
   `nama` varchar(50) NOT NULL COMMENT 'masukkan nama mitra::8',
-  `kepala` varchar(50) DEFAULT NULL,
+  `pimpinan` varchar(50) NOT NULL,
   `nipkepala` varchar(50) DEFAULT NULL,
   `pangkepala` varchar(50) DEFAULT NULL,
   `jabatan` varchar(50) DEFAULT NULL,
@@ -500,4 +500,4 @@ CREATE TABLE `subkegiatanpd` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-13  6:34:06
+-- Dump completed on 2025-10-13  9:21:12

@@ -1,5 +1,5 @@
 <?php
-$tag1 = 'form_masteruser';
+$table_name = "user";
 ?>
 
 <div class="card card-info card-outline collapsed-card">
@@ -16,18 +16,19 @@ $tag1 = 'form_masteruser';
 	</div>
 	<div class="card-body">
 
-		<?= widget_flash($tag1) ?>
+		<?= widget_flash($table_name) ?>
 
-		<div id="form-<?= $tag1 ?>">
-			<?php echo form_open('admsistem/user/save'); ?>
+		<div id="form-<?= $table_name ?>">
+			<?php echo form_open('handler/save/' . $table_name); ?>
+			<input type="hidden" <?= expandFieldAttr('id') ?>>
+
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Username</label>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" placeholder="e.g. user@example.com" <?= expandFieldAttr('username') ?> required maxlength="30" />
 				</div>
 				<div class="col-sm-2">
-					<input type="hidden" <?= expandFieldAttr('id') ?>>
-					<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+
 				</div>
 			</div>
 
@@ -41,7 +42,7 @@ $tag1 = 'form_masteruser';
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">OPD</label>
 				<div class="col-sm-10">
-					<?= expandFieldAttrSelectActive("opd", $master_opd, "namaopd") ?>
+					<?= expandFieldAttrSelectActive("opd___id___nama") ?>
 				</div>
 			</div>
 
@@ -90,27 +91,22 @@ $tag1 = 'form_masteruser';
 				</tr>
 			</thead>
 			<tbody>
+				<?php
+				$table_real = real_table_name('user');
+				$master_users = $GLOBALS[$table_real];
+				?>
 				<?php if (!empty($master_users)):
 					foreach ($master_users as $u): ?>
 						<tr>
-							<td><?= $u->username ?></td>
-							<td><?= $u->nama ?></td>
+							<td><?= $u['username'] ?></td>
+							<td><?= $u['nama'] ?></td>
 							<td>
 								<?php
-								$opd_name = '';
-								if (!empty($master_opd)) {
-									foreach ($master_opd as $opd) {
-										if ($opd->id == $u->opd) {
-											$opd_name = $opd->namaopd;
-											break;
-										}
-									}
-								}
-								echo htmlspecialchars($opd_name ?: $u->opd);
+								echo $f_tabel_fk_display('opd___id___nama',$u['opd___id___nama']);
 								?>
 							</td>
-							<td><?= $u->role ?></td>
-							<td><?= $u->status ?></td>
+							<td><?= $u['role'] ?></td>
+							<td><?= $u['status'] ?></td>
 							<td>
 								<div class="btn-group">
 									<button type="button" class="btn btn-default">Tindakan</button>
@@ -118,10 +114,10 @@ $tag1 = 'form_masteruser';
 										<span class="sr-only"></span>
 									</button>
 									<div class="dropdown-menu" role="menu">
-										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-user" onclick="editModalUser(<?= $u->id ?>)">Edit</a>
+										<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-user" onclick="editModal('user',<?= $u['id'] ?>)">Edit</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="<?= site_url('admsistem/user/setStatus/' . $u->id) ?>">Ubah Status</a>
-										<a class="dropdown-item" onclick="resetPassUser(<?= $u->id ?>)">Reset Password
+										<a class="dropdown-item" href="<?= site_url('handler/set_status/user/' . $u['id']) ?>">Ubah Status</a>
+										<a class="dropdown-item" onclick="resetPassUser(<?= $u['id'] ?>)">Reset Password
 										</a>
 									</div>
 								</div>
@@ -148,29 +144,8 @@ $tag1 = 'form_masteruser';
 		$modal.find('input[name=password-baru]').val('');
 		$modal.find('input[name=password-baru2]').val('');
 		$modal.find('input[name=id]').val(id);
-		$modal.find('input[name=tag1]').val('<?= $tag1 ?>');
+		// $modal.find('input[name=tag1]').val('<?= "" ?>');
 		$modal.find('#reset-pass').attr('action', "admsistem/user/resetpassword");
 	}
 
-	function editModalUser(id) {
-		$.ajax({
-			url: 'admsistem/user/byId/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
-			success: function (res) {
-				if (res.status === 'success') {
-					$('#edit-record-common').appendTo('body').modal('show');
-					$('#edit-record-common .modal-body').html($('#form-<?= $tag1 ?>').html());
-					$('#edit-record-common .modal-body').find("input[name=password]").first().remove();
-					$('#edit-record-common .modal-title').html("Edit data user");
-
-					$('#edit-record-common input[name=username]').val(res.data.username);
-					$('#edit-record-common input[name=nama]').val(res.data.nama);
-					$('#edit-record-common select[name=opd]').val(res.data.opd);
-					$('#edit-record-common select[name=role]').val(res.data.role);
-					$('#edit-record-common input[name=status]').val(res.data.status);
-					$('#edit-record-common input[name=id]').val(res.data.id);
-					$('#edit-record-common input[name=original_username]').val(res.data.username);
-				}
-			},
-		});
-	}
 </script>

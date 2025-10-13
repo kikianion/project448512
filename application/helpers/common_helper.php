@@ -26,19 +26,25 @@ if (!function_exists('getNameById')) {
 				}
 			}
 		}
-		return "(".$id.")";
+		return "(" . $id . ")";
 
 	}
 }
 
 if (!function_exists('expandFieldAttrSelectActive')) {
-	function expandFieldAttrSelectActive($f, $objs, $nameField)
+	function expandFieldAttrSelectActive($f)
 	{
 		$CI = &get_instance();
 		$flash = $CI->session->flashdata();
 
 		$currentVal = isset($flash[$f]) ? $flash[$f] : "";
 
+		$pos1 = strrpos($f, '___');
+		$nameField = substr($f, $pos1+3);
+
+		$master_table = substr($f, 0, strpos($f, '___'));
+		$real1 = real_table_name($master_table);
+		$objs = $GLOBALS[$real1];
 		$res = <<<EOD
 			<select name="$f" class="form-control" required>
 				<option value="">Pilih salah satu $nameField yang Aktif</option>
@@ -46,11 +52,12 @@ if (!function_exists('expandFieldAttrSelectActive')) {
 
 		if (!empty($objs)) {
 			foreach ($objs as $m) {
-				if ($m->status == 'Aktif') {
-					$isSelected = $m->id == $currentVal ? 'selected' : '';
-					$namaVal = $m->$nameField;
+				if ($m['status'] == 'Aktif') {
+					$m_id = $m['id'];
+					$isSelected = $m_id == $currentVal ? 'selected' : '';
+					$namaVal = $m[$nameField];
 					$res .= <<<EOD
-					<option value="$m->id" $isSelected>
+					<option value="$m_id" $isSelected>
 						$namaVal
 					</option>
 					EOD;

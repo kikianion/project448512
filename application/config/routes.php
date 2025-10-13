@@ -118,4 +118,50 @@ $route['test1'] = 'test/hi';
 $route['__listtables'] = 'CTools/list_tables';
 
 $route['handler/save/(:any)'] = 'CHandler/save/$1';
+$route['handler/by_id/(:any)/(:any)'] = 'CHandler/by_id/$1/$2';
+$route['handler/set_status/(:any)/(:any)'] = 'CHandler/set_status/$1/$2';
+$route['handler/columns/(:any)'] = 'CHandler/columns/$1';
+// $route['handler/columns/(:any)'] = 'CHandler/card1';
 $route['card1'] = 'CHandler/card1';
+
+
+define("DEBUG1", 1);
+function ___($s)
+{
+	if (DEBUG1 == 1)
+		return $s . ": ";
+
+	return "";
+}
+
+function real_table_name($s)
+{
+	$file_path = APPPATH . '../_db/simela-gen2.sql';
+	if (!file_exists($file_path)) {
+		echo json_encode(['error' => 'File not found']);
+		return;
+	}
+	$sqlContent = file_get_contents($file_path);
+	$fullTableName = $s;
+
+	$lines = explode("\n", $sqlContent);
+
+	$pattern = "/CREATE TABLE\s+`?([^`]+)`?\s*\(/i";
+
+	// Iterate through each line to find CREATE TABLE statements
+	foreach ($lines as $line) {
+		if (preg_match($pattern, $line, $matches)) {
+			$tableName = trim($matches[1]);
+			// Check if the partial name is contained in the table name
+			if (stripos($tableName, $s) !== false) {
+				$fullTableName = $tableName;
+				break;
+			}
+		}
+	}
+
+	return $fullTableName;
+
+}
+
+

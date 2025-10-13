@@ -20,30 +20,30 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-4  ">
-					<?php $this->load->view('administrator/admsistem/masteruser'); ?>
+					<?php $this->load->view('administrator/admsistem/master_user'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem/masteropd'); ?>
+					<?php $this->load->view('administrator/admsistem/master_opd'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem/mastermitra'); ?>
+					<?php $this->load->view('administrator/admsistem/master_mitra'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 			</div>
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem/mastervisi'); ?>
+					<?php $this->load->view('administrator/admsistem/master_visi'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem/mastermisi'); ?>
+					<?php $this->load->view('administrator/admsistem/master_misi'); ?>
 				</div>
 				<!-- /.col-md-6 -->
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem/masterperiode'); ?>
+					<?php $this->load->view('administrator/admsistem/master_periodeanggaran'); ?>
 				</div>
 
 				<!-- /.col-md-6 -->
@@ -51,11 +51,11 @@
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admsistem/mastergroupperiode'); ?>
+					<?php $this->load->view('administrator/admsistem/master_groupperiode'); ?>
 				</div>
 
 				<div class="col-lg-8">
-					<?php $this->load->view('administrator/admsistem/masterbranding'); ?>
+					<?php $this->load->view('administrator/admsistem/master_branding'); ?>
 				</div>
 			</div>
 		</div><!-- /.container-fluid -->
@@ -300,9 +300,6 @@
 
 <script>
 	$(function () {
-		// $(".table-data-init")).forEach(element => {
-			
-		// });
 		$(".table-data-init").DataTable({
 			"pageLength": 3,
 			"autoWidth": true

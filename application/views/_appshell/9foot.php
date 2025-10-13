@@ -14,6 +14,33 @@
 		<!-- /.modal-dialog -->
 	</div>
 </div>
+<script>
+	function editModal(table_name, id) {
+		$.ajax({
+			url: 'handler/by_id/' + table_name + '/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
+			success: function (res) {
+				if (res.status === 'success') {
+
+					let e1 = "#edit-record-common"
+					$(e1).appendTo('body').modal('show');
+					$(e1 + ' .modal-body').html($('#form-' + table_name).html());
+					$(e1 + ' .modal-title').html("Edit data " + table_name);
+
+					let d = res.data
+					$(e1 + ' input[name], ' + e1 + ' select[name]').each((i, e) => {
+						console.log(e.name)
+						console.log(d[e.name])
+						$(e).val(d[e.name]);
+					
+
+						$(e).css('border-bottom', "1px solid #99f")
+					});
+				}
+			},
+		});
+	}
+</script>
+
 
 <div class="modal fade" id="ubah-status-common-res">
 	<div class="modal-dialog modal-md modal-outline">

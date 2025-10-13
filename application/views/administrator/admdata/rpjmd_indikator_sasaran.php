@@ -17,9 +17,9 @@ $tag1 = "form_indikatorsasaranrpjmd";
 		</div>
 		<div class="card-body">
 
-			<?= widget_flash($tag1) ?>
+			<?= widget_flash($table_name) ?>
 
-			<div id="form-<?= $tag1 ?>">
+			<div id="form-<?= $table_name ?>">
 				<?php echo form_open('admdata/save_indikator_sasaran_rpjmd'); ?>
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label">Indikator</label>
@@ -84,7 +84,7 @@ $tag1 = "form_indikatorsasaranrpjmd";
 						<input type="number" name="target_5" class="form-control" placeholder="Tahun-5" step="0.01"
 							value="<?php echo isset($edit_indikator_sasaran->target_5) ? htmlspecialchars($edit_indikator_sasaran->target_5) : ''; ?>">
 						<input type="hidden" name="id" value="<?php echo isset($edit_indikator_sasaran->id) ? htmlspecialchars($edit_indikator_sasaran->id) : ''; ?>">
-						<input type="hidden" name="tag1" value="<?= $tag1 ?>">
+						
 					</div>
 				</div>
 				<div class="form-group row">
