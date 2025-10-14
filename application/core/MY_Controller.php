@@ -218,8 +218,10 @@ class MY_Controller extends CI_Controller
 		$table_id = real_table_name($table_name);
 		$rows = $GLOBALS[$table_id];
 		?>
+		<?=___($table_name)?>
 		<?php if (!empty($rows)):
 			foreach ($rows as $r): ?>
+				
 				<tr>
 					<?php
 					foreach ($r as $k => $col) {

@@ -96,6 +96,7 @@ class CHandler extends MY_Controller
 
 
 		if ($id && $id != 0) {
+			$this->cut_section_array_compare($post_data, $cols);
 			$ok = $this->db->update($table_id, $post_data, ['id' => $id]);
 			if ($ok) {
 				$this->flash('success---' . $table_name, $table_name . ' updated.');
@@ -106,17 +107,18 @@ class CHandler extends MY_Controller
 			$post_data['urut'] = isset($post_data['urut']) ? $post_data['urut'] : 0;
 			$post_data['status'] = 'Aktif';
 
-			foreach ($post_data as $k => $p1) {
-				$rel = 0;
-				foreach ($cols as $k2 => $p2) {
-					if ($p2['name'] == $k) {
-						$rel = 1;
-					}
-				}
-				if ($rel == 0) {
-					unset($post_data[$k]);
-				}
-			}
+			$this->cut_section_array_compare($post_data, $cols);
+			// foreach ($post_data as $k => $p1) {
+			// 	$rel = 0;
+			// 	foreach ($cols as $k2 => $p2) {
+			// 		if ($p2['name'] == $k) {
+			// 			$rel = 1;
+			// 		}
+			// 	}
+			// 	if ($rel == 0) {
+			// 		unset($post_data[$k]);
+			// 	}
+			// }
 	
 			$ok = $this->db->insert($table_id, $post_data);
 			if ($ok) {
@@ -129,5 +131,19 @@ class CHandler extends MY_Controller
 		$this->redirectBack();
 	}
 
+
+	function cut_section_array_compare(&$post_data, $cols){
+		foreach ($post_data as $k => $p1) {
+			$rel = 0;
+			foreach ($cols as $k2 => $p2) {
+				if ($p2['name'] == $k) {
+					$rel = 1;
+				}
+			}
+			if ($rel == 0) {
+				unset($post_data[$k]);
+			}
+		}
+	}
 
 }
