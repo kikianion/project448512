@@ -6,7 +6,7 @@ class CBranding extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('MMasterBranding');
+		// $this->load->model('MMasterBranding');
 	}
 
 	public function save_branding()

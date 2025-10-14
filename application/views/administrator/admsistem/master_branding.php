@@ -1,5 +1,9 @@
 <?php
 $table_name = "branding";
+$real_name = real_table_name('branding');
+$master_branding=$GLOBALS[$real_name];
+$a=1;
+
 ?>
 
 <div class="card card-info card-outline collapsed-card" id="branding">
@@ -37,7 +41,7 @@ $table_name = "branding";
 					</td>
 					<td>
 						<?php
-						echo isset($master_branding) && count($master_branding) ? htmlspecialchars($master_branding[0]->nama) : '-';
+						echo isset($master_branding) && count($master_branding) ? htmlspecialchars($master_branding[0]['nama']) : '-';
 						?>
 					</td>
 					<td>
@@ -58,7 +62,7 @@ $table_name = "branding";
 					<td><b>Subnote</b></td>
 					<td>
 						<?php
-						echo isset($master_branding[0]->subnote) ? htmlspecialchars($master_branding[0]->subnote) : '-';
+						echo isset($master_branding[0]['subnote']) ? htmlspecialchars($master_branding[0]['subnote']) : '-';
 						?>
 					</td>
 					<td>
@@ -79,8 +83,8 @@ $table_name = "branding";
 				<tr>
 					<td><b>Background</b></td>
 					<td>
-						<?php if (isset($master_branding[0]->background) && $master_branding[0]->background): ?>
-							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]->background)); ?>" width="500" alt="Backgroud" class="img-thumbnail">
+						<?php if (isset($master_branding[0]['background']) && $master_branding[0]['background']): ?>
+							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]['background'])); ?>" width="500" alt="Backgroud" class="img-thumbnail">
 						<?php else: ?>
 							<img src="<?php echo base_url('assets/img/background.jpg'); ?>" width="500" alt="Backgroud" class="img-thumbnail">
 						<?php endif; ?>
@@ -103,8 +107,8 @@ $table_name = "branding";
 				<tr>
 					<td><b>Logo</b></td>
 					<td>
-						<?php if (isset($master_branding[0]->logo) && $master_branding[0]->logo): ?>
-							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]->logo)); ?>" width="200" alt="Logo" class="img-thumbnail">
+						<?php if (isset($master_branding[0]['logo']) && $master_branding[0]['logo']): ?>
+							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]['logo'])); ?>" width="200" alt="Logo" class="img-thumbnail">
 						<?php else: ?>
 							<img src="<?php echo base_url('assets/img/background.jpg'); ?>" width="200" alt="Logo" class="img-thumbnail">
 						<?php endif; ?>
@@ -127,8 +131,8 @@ $table_name = "branding";
 				<tr>
 					<td><b>favicon</b></td>
 					<td>
-						<?php if (isset($master_branding[0]->favicon) && $master_branding[0]->favicon): ?>
-							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]->favicon)); ?>" width="100" alt="Favicon" class="img-thumbnail">
+						<?php if (isset($master_branding[0]['favicon']) && $master_branding[0]['favicon']): ?>
+							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]['favicon'])); ?>" width="100" alt="Favicon" class="img-thumbnail">
 						<?php else: ?>
 							<img src="<?php echo base_url('assets/img/background.jpg'); ?>" width="100" alt="Favicon" class="img-thumbnail">
 						<?php endif; ?>

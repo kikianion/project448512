@@ -5,7 +5,7 @@ function widget_flash($table_name)
 	$CI = &get_instance();
 	$html = '';
 
-	// $d1=$CI->session->flashdata();
+	$d1=$CI->session->flashdata();
 	// log2(serialize($d1));
 	if ($CI->session->flashdata('success---' . $table_name)) {
 		$html .= '<div class="alert alert-success">' . $CI->session->flashdata('success---' . $table_name) . '</div>';

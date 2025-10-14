@@ -2,8 +2,7 @@
 $table_name = "misi";
 ?>
 
-<div class="col-lg-4">
-	<div class="card card-info card-outline collapsed-card" id="card-master-periode-anggaran">
+<div class="card card-info card-outline collapsed-card" id="card-master-periode-anggaran">
 		<div class="card-header" data-card-widget="collapse">
 			<h5 class="card-title m-0"><b>Master Periode Anggaran</b></h5>
 			<div class="card-tools">
@@ -64,4 +63,3 @@ $table_name = "misi";
 			</table>
 		</div>
 	</div>
-</div>

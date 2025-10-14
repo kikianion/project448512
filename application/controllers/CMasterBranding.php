@@ -5,8 +5,12 @@ class CMasterBranding extends MY_Controller
 {
 	protected $defaultModel = 'MBranding';
 	protected $defaultName = 'Branding';
-	protected $tag1 = "form_masterbranding";
+	protected $tag1 = "branding";
 
+	public function __construct(){
+		parent::__construct();
+		$this->load->model('MBranding');
+	}
 	public function save()
 	{
 		if ($this->input->method() !== 'post') {

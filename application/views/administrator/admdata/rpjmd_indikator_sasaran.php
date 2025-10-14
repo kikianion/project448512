@@ -2,8 +2,7 @@
 $tag1 = "form_indikatorsasaranrpjmd";
 ?>
 
-<div class="col-lg-4">
-	<div class="card card-info card-outline collapsed-card" id="card-indikator-sasaran-rpjmd">
+<div class="card card-info card-outline collapsed-card" id="card-indikator-sasaran-rpjmd">
 		<div class="card-header" data-card-widget="collapse">
 			<h5 class="card-title m-0"><b>Indikator Sasaran RPJMD</b></h5>
 			<div class="card-tools">
@@ -148,7 +147,6 @@ $tag1 = "form_indikatorsasaranrpjmd";
 			</table>
 		</div>
 	</div>
-</div>
 <script>
 	function editModalIndikatorSasaran(id) {
 		$.ajax({

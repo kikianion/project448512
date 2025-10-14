@@ -9,7 +9,6 @@ $table_name = "misi";
 			<button type="button" class="btn btn-tool btn-fs" xdata-card-widget="collapse">
 				[&nbsp;&nbsp;]
 			</button>
-
 			<button type="button" class="btn btn-tool" data-card-widget="collapse">
 				<i class="fas fa-plus"></i>
 			</button>

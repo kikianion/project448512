@@ -2,8 +2,7 @@
 $tag1 = "form_masterprogram";
 ?>
 
-<div class="col-lg-4">
-	<div class="card card-info card-outline collapsed-card" id="card-master-program">
+<div class="card card-info card-outline collapsed-card" id="card-master-program">
 		<div class="card-header" data-card-widget="collapse">
 			<h5 class="card-title m-0"><b>Master Program</b></h5>
 			<div class="card-tools">
@@ -108,7 +107,6 @@ $tag1 = "form_masterprogram";
 			</table>
 		</div>
 	</div>
-</div>
 <script>
 	function editModalProgram(id) {
 		$.ajax({

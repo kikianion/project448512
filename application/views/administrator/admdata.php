@@ -19,28 +19,50 @@
 		<div class="container-fluid">
 			<!-- First Row: Master Fungsi, Master Urusan, Master Program -->
 			<div class="row">
-				<?php $this->load->view('administrator/admdata/master_fungsi'); ?>
-				<?php $this->load->view('administrator/admdata/master_urusan'); ?>
-				<?php $this->load->view('administrator/admdata/master_program'); ?>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/master_fungsi'); ?>
+				</div>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/master_urusan'); ?>
+				</div>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/master_program'); ?>
+				</div>
 			</div>
 			<!-- /.row -->
 			<!-- Second Row: Periode RPJMD, Tujuan RPJMD, Sasaran RPJMD -->
 			<div class="row">
-				<?php $this->load->view('administrator/admdata/rpjmd_periode'); ?>
-				<?php $this->load->view('administrator/admdata/rpjmd_tujuan'); ?>
-				<?php $this->load->view('administrator/admdata/rpjmd_sasaran'); ?>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/rpjmd_periode'); ?>
+				</div>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/rpjmd_tujuan'); ?>
+				</div>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/rpjmd_sasaran'); ?>
+				</div>
 			</div>
 			<!-- Third Row: Indikator Tujuan RPJMD, Indikator Sasaran RPJMD, Master Periode Anggaran -->
 			<div class="row">
-				<?php $this->load->view('administrator/admdata/rpjmd_indikator_tujuan'); ?>
-				<?php $this->load->view('administrator/admdata/rpjmd_indikator_sasaran'); ?>
-				<?php $this->load->view('administrator/admdata/master_periode_anggaran'); ?>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/rpjmd_indikator_tujuan'); ?>
+				</div>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/rpjmd_indikator_sasaran'); ?>
+				</div>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/master_periode_anggaran'); ?>
+				</div>
 			</div>
 
 			<!-- Fourth Row: Master Grouping Periode and Master Branding -->
 			<div class="row">
-				<?php $this->load->view('administrator/admdata/master_grouping_periode'); ?>
-				<?php $this->load->view('administrator/admdata/master_branding'); ?>
+				<div class="col-lg-4">
+					<?php $this->load->view('administrator/admdata/master_grouping_periode'); ?>
+				</div>
+				<div class="col-lg-8">
+					<?php $this->load->view('administrator/admdata/master_branding'); ?>
+				</div>
 			</div>
 		</div><!-- /.container-fluid -->
 	</div>

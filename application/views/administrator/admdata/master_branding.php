@@ -1,9 +1,11 @@
 <?php
 $tag1 = "form_masterbranding";
+$real_name = real_table_name('branding');
+$data=$GLOBALS[$real_name];
+$a=1;
 ?>
 
-<div class="col-lg-8">
-	<div class="card card-info card-outline collapsed-card" id="card-master-branding">
+<div class="card card-info card-outline collapsed-card" id="card-master-branding">
 		<div class="card-header" data-card-widget="collapse">
 			<h5 class="card-title m-0"><b>Master Branding</b></h5>
 			<div class="card-tools">
@@ -110,7 +112,6 @@ $tag1 = "form_masterbranding";
 			</table>
 		</div>
 	</div>
-</div>
 
 <script>
 	// localStorage state management for card collapse/expand

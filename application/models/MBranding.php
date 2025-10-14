@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class MBranding extends MY_Model
 {
-	protected $table = 'branding';
+	protected $table = '_master_99__branding';
 
 	public function get($nama)
 	{

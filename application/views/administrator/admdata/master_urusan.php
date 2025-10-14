@@ -2,8 +2,7 @@
 $tag1 = "form_masterurusan";
 ?>
 
-<div class="col-lg-4">
-	<div class="card card-info card-outline collapsed-card" id="card-master-urusan">
+<div class="card card-info card-outline collapsed-card" id="card-master-urusan">
 		<div class="card-header" data-card-widget="collapse">
 			<h5 class="card-title m-0"><b>Master Urusan</b></h5>
 			<div class="card-tools">
@@ -110,7 +109,6 @@ $tag1 = "form_masterurusan";
 			</table>
 		</div>
 	</div>
-</div>
 <script>
 	function editModalUrusan(id) {
 		$.ajax({

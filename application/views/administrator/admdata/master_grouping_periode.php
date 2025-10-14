@@ -2,8 +2,7 @@
 $table_name = "grup_periode";
 ?>
 
-<div class="col-lg-4">
-	<div class="card card-info card-outline collapsed-card" id="card-master-grouping-periode">
+<div class="card card-info card-outline collapsed-card" id="card-master-grouping-periode">
 		<div class="card-header" data-card-widget="collapse">
 			<h5 class="card-title m-0"><b>Master Grouping Periode</b></h5>
 			<div class="card-tools">
@@ -65,4 +64,3 @@ $table_name = "grup_periode";
 			</table>
 		</div>
 	</div>
-</div>

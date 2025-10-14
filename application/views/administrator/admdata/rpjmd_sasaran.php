@@ -2,8 +2,7 @@
 $tag1 = "rpjmdsasaran";
 ?>
 
-<div class="col-lg-4">
-	<div class="card card-info card-outline collapsed-card" id="card-sasaran-rpjmd">
+<div class="card card-info card-outline collapsed-card" id="card-sasaran-rpjmd">
 		<div class="card-header" data-card-widget="collapse">
 			<h5 class="card-title m-0"><b>Sasaran RPJMD</b></h5>
 			<div class="card-tools">
@@ -98,7 +97,6 @@ $tag1 = "rpjmdsasaran";
 			</table>
 		</div>
 	</div>
-</div>
 <script>
 	function editModal<?= $tag1 ?>(id) {
 		$.ajax({
