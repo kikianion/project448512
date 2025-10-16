@@ -1,11 +1,14 @@
 <div class="card card-info card-outline collapsed-card">
     <div class="card-header" data-card-widget="collapse">
       <h5 class="card-title m-0"><b>Indikator Program Perangkat Daerah</b></h5>
-      <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-          <i class="fas fa-minus"></i>
-        </button>
-      </div>
+		<div class="card-tools">
+			<button type="button" class="btn btn-tool btn-fs" xdata-card-widget="collapse">
+				[&nbsp;&nbsp;]
+			</button>
+			<button type="button" class="btn btn-tool" data-card-widget="collapse">
+				<i class="fas fa-plus"></i>
+			</button>
+		</div>
     </div>
     <div class="card-body">
       <div class="form-group row">

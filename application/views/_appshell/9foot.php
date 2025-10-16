@@ -15,23 +15,44 @@
 	</div>
 </div>
 <script>
-	function editModal(table_name, id) {
+	function editModal(table_name, id, size_class = '') {
+		console.log(size_class)
 		$.ajax({
 			url: 'handler/by_id/' + table_name + '/' + id, // *** CHANGE THIS TO YOUR SERVER URL ***
 			success: function (res) {
 				if (res.status === 'success') {
 
 					let e1 = "#edit-record-common"
-					$(e1).appendTo('body').modal('show');
-					$(e1 + ' .modal-body').html($('#form-' + table_name).html());
-					$(e1 + ' .modal-title').html("Edit data " + table_name);
+					$(e1).appendTo('body').modal('show')
+					$('body>' + e1 + ' div.modal-dialog.modal-outline').removeClass('modal-lg modal-md')
+					$('body>' + e1 + ' div.modal-dialog.modal-outline').addClass(size_class)
+					$(e1 + ' .modal-body').html($('#form-' + table_name).html())
+					$(e1 + ' .modal-title').html("Edit data " + table_name)
 
 					let d = res.data
-					$(e1 + ' input[name], ' + e1 + ' select[name]').each((i, e) => {
+					$(e1 + ' input[name], ' + e1 + ' select[name], ' + e1 + ' textarea[name]').each((i, e) => {
+						if (e.className.indexOf('summernote') > -1) {
+							$(e1 + ' textarea.summernote').first().next().remove()
+							$(e).summernote('code', d[e.name]);
+							// $(e).val(d[e.name]); // Set value on the original textarea
+							// $(e).summernote({
+							// 	// height: 200
+							// });
+							// console.log("summernode set val detect")
+							// $(e).summernote('code', d[e.name]);
+							// $(e).summernote('code', 'ccsss');
+
+
+						}
+						else {
+							$(e).val(d[e.name]);
+
+						}
+						console.log('----------------------')
 						console.log(e.name)
+						console.log(e.className)
 						console.log(d[e.name])
-						$(e).val(d[e.name]);
-					
+
 
 						$(e).css('border-bottom', "1px solid #99f")
 					});
@@ -116,8 +137,8 @@
 
 		$(".card-outline button, .card-outline div.card-header").click(function (e) {
 			if (e.currentTarget.tagName.toLowerCase() == 'button') return
-			log1("div.card-header")
-			log1($(e.currentTarget).tagName)
+			// log1("div.card-header")
+			// log1($(e.currentTarget).tagName)
 			console.log($(e.currentTarget))
 			let cards = $(this).parents('.card').first();
 			let that = this
@@ -148,9 +169,9 @@
 			// log1("fTxt-----"+fTxt)
 
 			let target1 = $(e.currentTarget).parents("div.row div:has(> .card-info)").first();
-			// target1.addClass("col-lg-12")
-			log1("target1")
-			log1(target1)
+			// // target1.addClass("col-lg-12")
+			// log1("target1")
+			// log1(target1)
 			if (fTxt === "]&nbsp;[") { // max opened
 				target1.removeClass("col-lg-12")
 				$(e.currentTarget).html("[&nbsp;&nbsp;]")
@@ -168,7 +189,7 @@
 
 		$("#relayoutPage").click(function (e) {
 			let keysToRemove = [];
-			log1("scan1:" + page_name)
+			// log1("scan1:" + page_name)
 			for (let i = 0; i < localStorage.length; i++) {
 				let key = localStorage.key(i);
 				log1(key)

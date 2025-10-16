@@ -1,20 +1,21 @@
 <?php
 
-function widget_flash($table_name)
+function widget_flash($table_name, $tipe = '')
 {
 	$CI = &get_instance();
 	$html = '';
 
-	$d1=$CI->session->flashdata();
+	$d1 = $CI->session->flashdata();
 	// log2(serialize($d1));
-	if ($CI->session->flashdata('success---' . $table_name)) {
-		$html .= '<div class="alert alert-success">' . $CI->session->flashdata('success---' . $table_name) . '</div>';
+	$tipe = $tipe == '' ? '' : "---$tipe";
+	if ($CI->session->flashdata('success---' . $table_name . $tipe)) {
+		$html .= '<div class="alert alert-success">' . $CI->session->flashdata('success---' . $table_name . $tipe) . '</div>';
 	}
-	if ($CI->session->flashdata('error---' . $table_name)) {
-		$html .= '<div class="alert alert-danger">' . $CI->session->flashdata('error---' . $table_name) . '</div>';
+	if ($CI->session->flashdata('error---' . $table_name . $tipe)) {
+		$html .= '<div class="alert alert-danger">' . $CI->session->flashdata('error---' . $table_name . $tipe) . '</div>';
 	}
-	if ($CI->session->flashdata('dlgsuccess---' . $table_name)) {
-		$msg=$CI->session->flashdata('dlgsuccess---' . $table_name);
+	if ($CI->session->flashdata('dlgsuccess---' . $table_name . $tipe)) {
+		$msg = $CI->session->flashdata('dlgsuccess---' . $table_name . $tipe);
 		$html .= <<<EEE
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
@@ -58,6 +59,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<!-- DataTables cdn-->
 	<!-- <link rel="stylesheet" href="cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css"> -->
+	<link rel="stylesheet" href="../../AdminLTE-3.1.0/plugins/summernote/summernote-bs4.min.css">
+
 
 </head>
 <!-- <body class="hold-transition layout-top-nav layout-navbar-fixed"> -->
@@ -70,7 +73,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<nav class="main-header navbar navbar-expand-md navbar-dark bg-dark">
 			<div class="container-fluid">
 				<a href="./" class="navbar-brand">
-					<img src="assets/AdminLTE-3.1.0/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+					<img src="assets/AdminLTE-3.1.0/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+						style="opacity: .8">
 					<span class="brand-text font-weight-light"><b>Simela-Gen2</b></span>
 				</a>
 
@@ -86,7 +90,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							<a href="dashboard" class="nav-link">Home</a>
 						</li>
 						<li class="nav-item dropdown">
-							<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Operator</a>
+							<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+								class="nav-link dropdown-toggle">Operator</a>
 							<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
 								<li><a href="oprmaster" class="dropdown-item">Master </a></li>
 								<li><a href="oprinputdata" class="dropdown-item">Input Data</a></li>
@@ -94,7 +99,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-							<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Mitra</a>
+							<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+								class="nav-link dropdown-toggle">Mitra</a>
 							<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
 								<li><a href="mitravermaster" class="dropdown-item">Verifikasi Master </a></li>
 								<li><a href="mitraverdata" class="dropdown-item">Verifikasi Data</a></li>
@@ -102,7 +108,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-							<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Monev</a>
+							<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+								class="nav-link dropdown-toggle">Monev</a>
 							<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
 								<li><a href="monevevaldata" class="dropdown-item">Evaluasi Data</a></li>
 								<li><a href="monevlaporan" class="dropdown-item">Laporan</a></li>
@@ -139,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									}
 								}
 
-								document.addEventListener("DOMContentLoaded", function() {
+								document.addEventListener("DOMContentLoaded", function () {
 									const cb = document.getElementById("auto_reload");
 									if (cb) {
 										cb.checked = localStorage.getItem("auto_reload") === "1";

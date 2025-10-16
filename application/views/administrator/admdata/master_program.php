@@ -15,7 +15,6 @@ $table_name = "program";
 		</div>
 	</div>
 	<div class="card-body">
-
 		<?= widget_flash($table_name) ?>
 
 		<div id="form-<?= $table_name ?>">
@@ -37,7 +36,7 @@ $table_name = "program";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Urusan</label>
 				<div class="col-sm-10">
-				<?= expandFieldAttrSelectActive("urusan___id___nama") ?>
+					<?= expandFieldAttrSelectActive("urusan___id___nama") ?>
 				</div>
 			</div>
 			<div class="form-group row">

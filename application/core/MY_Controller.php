@@ -2,7 +2,6 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class MY_Controller extends CI_Controller
 {
-	protected $defaultName = 'xxx';
 	public function __construct()
 	{
 		parent::__construct();
@@ -30,42 +29,14 @@ class MY_Controller extends CI_Controller
 		$this->load->library('user_agent');
 
 	}
-
 	public function flash($key, $val)
 	{
 		$this->session->set_flashdata($key, $val);
 	}
-
 	public function redirectBack()
 	{
 		redirect($this->agent->referrer());
 	}
-	// function getFullTableName($partialName, $sqlContent)
-	// {
-	// 	// Initialize variable to store the full table name
-	// 	$fullTableName = null;
-
-	// 	// Split the SQL content into lines
-	// 	$lines = explode("\n", $sqlContent);
-
-	// 	// Regular expression to match CREATE TABLE statements
-	// 	$pattern = "/CREATE TABLE\s+`?([^`]+)`?\s*\(/i";
-
-	// 	// Iterate through each line to find CREATE TABLE statements
-	// 	foreach ($lines as $line) {
-	// 		if (preg_match($pattern, $line, $matches)) {
-	// 			$tableName = trim($matches[1]);
-	// 			// Check if the partial name is contained in the table name
-	// 			if (stripos($tableName, $partialName) !== false) {
-	// 				$fullTableName = $tableName;
-	// 				break;
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return $fullTableName;
-	// }
-
 	public function columns($table_name = '')
 	{
 		// Check if table name is provided
@@ -154,7 +125,6 @@ class MY_Controller extends CI_Controller
 				->set_output(json_encode($response));
 		}
 	}
-
 	protected function generateValidationRules($show_columns)
 	{
 		$rules = [];
@@ -195,14 +165,15 @@ class MY_Controller extends CI_Controller
 		return $rules;
 	}
 
-	function tabel_fk_display($f,$val){
+	function tabel_fk_display($f, $val)
+	{
 		$val2 = "*" . $val;
 		$table2 = substr($f, 0, strpos($f, '___'));
 		$table_id2 = real_table_name($table2);
 		$rows2 = $GLOBALS[$table_id2];
 
 		$pos2 = strrpos($f, '___');
-		$nameField = substr($f, $pos2 +3);
+		$nameField = substr($f, $pos2 + 3);
 
 		foreach ($rows2 as $r2) {
 			if ($r2['id'] == $val) {
@@ -213,32 +184,98 @@ class MY_Controller extends CI_Controller
 		return ___("fk:" . $table_id2) . $val2;
 
 	}
-	function expandTableCard($table_name)
+	function expandTableCard($table_name, $select_fields = "", $mods = [])
 	{
+		$table_name_old = $table_name;
+		if (!isset($mods['width_class_edit_dlg']))
+			$mods['width_class_edit_dlg'] = 'modal-md';
+
+		$pos1 = strpos($table_name, '::');
+		$filter1 = '';
+		if ($pos1 != false) {
+			$filter1 = substr($table_name, $pos1 + 2);
+			$table_name = substr($table_name, 0, $pos1);
+		}
 		$table_id = real_table_name($table_name);
-		$rows = $GLOBALS[$table_id];
+		$rows = [];
+		if ($filter1 != '') {
+			$filter1_ = explode('=', $filter1);
+			$rows = $this->db->get_where($table_id, [$filter1_[0] => $filter1_[1]])->result_array();
+		} else {
+			$rows = $GLOBALS[$table_id];
+		}
+
 		?>
-		<?=___($table_name)?>
+		<?= ___($table_name) ?>
 		<?php if (!empty($rows)):
 			foreach ($rows as $r): ?>
-				
+
 				<tr>
 					<?php
-					foreach ($r as $k => $col) {
-						if ($k == "id")
-							continue;
-						?>
-						<td><?= ___($k) ?>
-							<?php
-							if (strpos($k, '___') == false) {
-								echo $col;
-
-							} else {
-								echo $this->tabel_fk_display($k,$col);
-							}
+					if ($select_fields == "") {
+						foreach ($r as $k => $col) {
+							if ($k == "id")
+								continue;
 							?>
-						</td>
-						<?php
+							<td><?= ___($k) ?>
+								<?php
+								if (strpos($k, '___') == false) {
+									echo $col;
+
+								} else {
+									echo $this->tabel_fk_display($k, $col);
+								}
+								?>
+							</td>
+							<?php
+						}
+					} else {
+						$ar1 = explode(',', $select_fields);
+						foreach ($ar1 as $col_ar) {
+							if ($col_ar == "id")
+								continue;
+							?>
+							<td><?= ___($col_ar) ?>
+								<?php
+								if (strpos($col_ar, '___') !== false) {
+									$v1 = $r[$col_ar];
+									echo $this->tabel_fk_display($col_ar, $v1);
+
+								} elseif (strpos($col_ar, '::') !== false) {
+									$pos3 = strpos($col_ar, '::');
+									$pos4 = strrpos($col_ar, '::');
+
+									$field3 = substr($col_ar, 0, $pos3);
+									$master3 = substr($col_ar, $pos3 + 2, $pos4 - 6);
+									$display3 = substr($col_ar, $pos4 + 2);
+
+									$val3 = $r[$field3];
+									$table_id2 = real_table_name($master3);
+									$rows2 = $GLOBALS[$table_id2];
+
+									foreach ($rows2 as $r3) {
+										if ($r3['id'] == $val3) {
+											$val3 = $r3[$display3];
+											break;
+										}
+									}
+									echo ___("fk:" . $table_id2) . $val3;
+
+
+								} else {
+									$v1 = $r[$col_ar];
+									echo $v1;
+								}
+								?>
+							</td>
+							<?php
+
+						}
+					}
+
+					$modal_size = "";
+					if (isset($mods['width_class_edit_dlg'])) {
+						$modal_size = ",'" . $mods['width_class_edit_dlg'] . "'";
 					}
 					?>
 					<td>
@@ -248,7 +285,8 @@ class MY_Controller extends CI_Controller
 								<span class="sr-only"></span>
 							</button>
 							<div class="dropdown-menu" role="menu">
-								<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra" onclick="editModal('<?= $table_name ?>',<?= $r['id'] ?>)">Edit</a>
+								<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra"
+									onclick="editModal('<?= $table_name ?>',<?= $r['id'] ?><?= $modal_size ?>)">Edit</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="<?= site_url('handler/set_status/' . $table_name . '/' . $r['id']) ?>">Ubah Status</a>
 							</div>
@@ -262,7 +300,6 @@ class MY_Controller extends CI_Controller
 				</td>
 			</tr>
 		<?php endif;
-
 	}
 
 }
