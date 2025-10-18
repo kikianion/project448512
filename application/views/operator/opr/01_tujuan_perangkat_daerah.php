@@ -19,7 +19,7 @@ $table_name = "tujuan_perangkat_daerah";
 
 		<div id="form-<?= $table_name ?>">
 			<?php echo form_open("handler/save/$table_name"); ?>
-			<input type="hidden" <?= expandFieldAttr('id') ?>>
+			<input type="hidden" <?= expandFieldAttr('id') ?> />
 
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>

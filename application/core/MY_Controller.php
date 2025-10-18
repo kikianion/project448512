@@ -198,9 +198,11 @@ class MY_Controller extends CI_Controller
 		}
 		$table_id = real_table_name($table_name);
 		$rows = [];
+		$tag1 = '';
 		if ($filter1 != '') {
 			$filter1_ = explode('=', $filter1);
 			$rows = $this->db->get_where($table_id, [$filter1_[0] => $filter1_[1]])->result_array();
+			$tag1 = $filter1_[1];
 		} else {
 			$rows = $GLOBALS[$table_id];
 		}
@@ -301,7 +303,7 @@ class MY_Controller extends CI_Controller
 								<a class="dropdown-item" data-toggle="modal" xdata-target="#edit-mitra"
 									onclick="editModal('<?= $table_name ?>',<?= $r['id'] ?><?= $modal_size ?>)">Edit</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="<?= site_url('handler/set_status/' . $table_name . '/' . $r['id']) ?>">Ubah Status</a>
+								<a class="dropdown-item" href="<?= site_url('handler/set_status/' . $table_name . '/' . $r['id']."/$tag1") ?>">Ubah Status</a>
 							</div>
 						</div>
 					</td>

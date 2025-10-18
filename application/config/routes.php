@@ -9,13 +9,14 @@ $route['logout'] = 'login/logout';
 
 $route['admsistem'] = 'cAdmSistem';
 
-$objs = ['Visi', 'Misi', 'User', 'Mitra', 'Opd', 'Periode', 'Groupperiode'];
-foreach ($objs as $obj) {
-	$lobj = strtolower($obj);
-	$route["admsistem/$lobj/save"] = "cMaster$obj/save";
-	$route["admsistem/$lobj/byId/(:num)"] = "cMaster$obj/byId/$1";
-	$route["admsistem/$lobj/setStatus/(:num)"] = "cMaster$obj/setStatus/$1";
-}
+// $objs = ['Visi', 'Misi', 'User', 'Mitra', 'Opd', 'Periode', 'Groupperiode'];
+// foreach ($objs as $obj) {
+// 	$lobj = strtolower($obj);
+// 	$route["admsistem/$lobj/save"] = "cMaster$obj/save";
+// 	$route["admsistem/$lobj/byId/(:num)"] = "cMaster$obj/byId/$1";
+// 	$route["admsistem/$lobj/setStatus/(:num)"] = "cMaster$obj/setStatus/$1";
+// 	$route["admsistem/$lobj/setStatus/(:num)/(:any)"] = "cMaster$obj/setStatus/$1/$2";
+// }
 
 $route['admsistem/user/resetpassword'] = 'cMasterUser/resetpassword';
 
@@ -34,13 +35,12 @@ $route['admsistem/branding/save'] = 'cMasterBranding/save';
 
 $route['admdata'] = 'cAdmData';
 
-$objs = ['Fungsi', 'Urusan', 'Program'];
-foreach ($objs as $obj) {
-	$lobj = strtolower($obj);
-	$route["admdata/$lobj/save"] = "cMaster$obj/save";
-	$route["admdata/$lobj/byId/(:num)"] = "cMaster$obj/byId/$1";
-	$route["admdata/$lobj/setStatus/(:num)"] = "cMaster$obj/setStatus/$1";
-}
+// $objs = ['Fungsi', 'Urusan', 'Program'];
+// foreach ($objs as $obj) {
+// 	$lobj = strtolower($obj);
+// 	$route["admdata/$lobj/save"] = "cMaster$obj/save";
+// 	$route["admdata/$lobj/byId/(:num)"] = "cMaster$obj/byId/$1";
+// }
 
 
 // Periode RPJMD CRUD routes
@@ -49,12 +49,12 @@ foreach ($objs as $obj) {
 // $route['admdata/setStatus_periode_rpjmd/(:num)'] = 'admData/setStatus_periode_rpjmd/$1';
 // $route['admdata/delete_periode_rpjmd/(:num)'] = 'admData/delete_periode_rpjmd/$1';
 
-$objs = ['periode', 'tujuan', 'sasaran', 'indikatortujuan', 'indikatorsasaran'];
-foreach ($objs as $obj) {
-	$route["admdata/rpjmd$obj/save"] = "crpjmd$obj/save";
-	$route["admdata/rpjmd$obj/byId/(:num)"] = "crpjmd$obj/byId/$1";
-	$route["admdata/rpjmd$obj/setStatus/(:num)"] = "crpjmd$obj/setStatus/$1";
-}
+// $objs = ['periode', 'tujuan', 'sasaran', 'indikatortujuan', 'indikatorsasaran'];
+// foreach ($objs as $obj) {
+// 	$route["admdata/rpjmd$obj/save"] = "crpjmd$obj/save";
+// 	$route["admdata/rpjmd$obj/byId/(:num)"] = "crpjmd$obj/byId/$1";
+// 	$route["admdata/rpjmd$obj/setStatus/(:num)"] = "crpjmd$obj/setStatus/$1";
+// }
 
 
 // Tujuan RPJMD CRUD routes
@@ -102,10 +102,10 @@ $route['admdata/delete_grouping_periode/(:num)'] = 'admData/delete_grouping_peri
 
 
 $route['oprmaster'] = 'cOprMaster';
-$route['oprmaster/users'] = 'oprmaster/users';
-$route['oprmaster/users/create'] = 'oprmaster/create_user';
-$route['oprmaster/users/edit/(:num)'] = 'oprmaster/edit_user/$1';
-$route['oprmaster/users/delete/(:num)'] = 'oprmaster/delete_user/$1';
+// $route['oprmaster/users'] = 'oprmaster/users';
+// $route['oprmaster/users/create'] = 'oprmaster/create_user';
+// $route['oprmaster/users/edit/(:num)'] = 'oprmaster/edit_user/$1';
+// $route['oprmaster/users/delete/(:num)'] = 'oprmaster/delete_user/$1';
 
 $route['oprinputdata'] = 'oprInputData';
 
@@ -115,15 +115,16 @@ $route['mitraverdata'] = 'mitraVerData';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['test1'] = 'test/hi';
-$route['__listtables'] = 'CTools/list_tables';
+// $route['test1'] = 'test/hi';
+// $route['__listtables'] = 'CTools/list_tables';
 
 $route['handler/save/(:any)'] = 'CHandler/save/$1';
 $route['handler/by_id/(:any)/(:any)'] = 'CHandler/by_id/$1/$2';
 $route['handler/set_status/(:any)/(:any)'] = 'CHandler/set_status/$1/$2';
-$route['handler/columns/(:any)'] = 'CHandler/columns/$1';
+$route['handler/set_status/(:any)/(:any)/(:any)'] = 'CHandler/set_status/$1/$2/$3';
+// $route['handler/columns/(:any)'] = 'CHandler/columns/$1';
 // $route['handler/columns/(:any)'] = 'CHandler/card1';
-$route['card1'] = 'CHandler/card1';
+// $route['card1'] = 'CHandler/card1';
 
 
 define("DEBUG1", 1);

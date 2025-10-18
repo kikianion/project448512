@@ -39,12 +39,12 @@ $tipe = "Tujuan";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Satuan</label>
 				<div class="col-sm-4">
-					<input type="text" name="satuan" class="form-control" xid="satuan" placeholder="Satuan Indikator"
+					<input type="text" name="satuan" class="form-control" placeholder="Satuan Indikator"
 						value="<?php echo isset($edit_indikator_tujuan->satuan) ? htmlspecialchars($edit_indikator_tujuan->satuan) : ''; ?>" maxlength="50">
 				</div>
 				<label class="col-sm-2 col-form-label">Awal</label>
 				<div class="col-sm-4">
-					<input type="number" name="kondisi_awal" class="form-control" xid="kondisi_awal" placeholder="Kondisi Awal Periode"
+					<input type="number" name="kondisi_awal" class="form-control" placeholder="Kondisi Awal Periode"
 						value="<?php echo isset($edit_indikator_tujuan->kondisi_awal) ? htmlspecialchars($edit_indikator_tujuan->kondisi_awal) : ''; ?>"
 						step="0.01">
 				</div>

@@ -8,15 +8,15 @@ class CHandler extends MY_Controller
 		$this->load->view('test/card1');
 	}
 
-	public function set_status($table_name, $id)
+	public function set_status($table_name, $id, $tag1 = '')
 	{
 		$table_id = real_table_name($table_name);
 		$r = $this->db->get_where($table_id, array('id' => $id), 1)->row();
 
-		$tipe = $this->input->post('tipe') ?"---".$this->input->post('tipe'): '';
+		$tipe = $this->input->post('tipe') ? "---" . $this->input->post('tipe') : ($tag1 != '' ? '---' . $tag1 : '');
 
 		if (!$r) {
-			$this->flash('error---' . $table_name.$tipe, $table_name . ' not found.');
+			$this->flash('error---' . $table_name . $tipe, $table_name . ' not found.');
 			redirect($this->agent->referrer());
 			return;
 		}
@@ -26,10 +26,10 @@ class CHandler extends MY_Controller
 		$ok = $this->db->update($table_id, ['status' => $new_status], ['id' => $id]);
 
 		if ($ok) {
-			$this->flash('dlgsuccess---' . $table_name.$tipe, 'Status ' . $table_name . ' berhasil diubah menjadi "' . $new_status . '".');
+			$this->flash('dlgsuccess---' . $table_name . $tipe, "Status $table_name $tag1 berhasil diubah menjadi $new_status");
 			// log2("setStatus " . $ok);
 		} else {
-			$this->flash('error---' . $table_name.$tipe, 'Gagal mengubah status ' . $table_name . '.');
+			$this->flash('error---' . $table_name . $tipe, "Gagal mengubah status $table_name $tag1");
 		}
 
 		$this->redirectBack();
@@ -92,9 +92,9 @@ class CHandler extends MY_Controller
 			$this->form_validation->set_rules(...$rule);
 		}
 
-		$tipe = $this->input->post('tipe') ?"---".$this->input->post('tipe'): '';
+		$tipe = $this->input->post('tipe') ? "---" . $this->input->post('tipe') : '';
 		if ($this->form_validation->run() === FALSE) {
-			$this->flash('error---' . $table_name.$tipe, validation_errors());
+			$this->flash('error---' . $table_name . $tipe, validation_errors());
 			$this->session->set_flashdata($post_data);
 
 			$this->redirectBack();
@@ -107,9 +107,9 @@ class CHandler extends MY_Controller
 			$this->cut_section_array_compare($post_data, $cols);
 			$ok = $this->db->update($table_id, $post_data, ['id' => $id]);
 			if ($ok) {
-				$this->flash('success---' . $table_name.$tipe, $table_name . ' updated.');
+				$this->flash('success---' . $table_name . $tipe, $table_name . ' updated.');
 			} else {
-				$this->flash('error---' . $table_name.$tipe, 'Failed to update ' . $table_name . '.');
+				$this->flash('error---' . $table_name . $tipe, 'Failed to update ' . $table_name . '.');
 			}
 		} else {
 			$post_data['urut'] = isset($post_data['urut']) ? $post_data['urut'] : 0;
@@ -119,9 +119,9 @@ class CHandler extends MY_Controller
 
 			$ok = $this->db->insert($table_id, $post_data);
 			if ($ok) {
-				$this->flash('success---' . $table_name.$tipe, $table_name . ' created.');
+				$this->flash('success---' . $table_name . $tipe, $table_name . ' created.');
 			} else {
-				$this->flash('error---' . $table_name.$tipe, 'Failed to create ' . $table_name . '.');
+				$this->flash('error---' . $table_name . $tipe, 'Failed to create ' . $table_name . '.');
 			}
 		}
 

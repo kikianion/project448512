@@ -21,4 +21,4 @@
 <script src="assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 
-<script src="assets/AdminLTE-3.1.0/plugins/select2/js/select2.full.min.js"></script>
+<!-- <script src="assets/AdminLTE-3.1.0/plugins/select2/js/select2.full.min.js"></script> -->

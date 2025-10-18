@@ -19,7 +19,6 @@ $table_name = "sasaran_perangkat_daerah";
 
 		<div id="form-<?= $table_name ?>">
 			<?php echo form_open("handler/save/$table_name"); ?>
-
 			<input type="hidden" <?= expandFieldAttr('id') ?> />
 
 			<div class="form-group row">

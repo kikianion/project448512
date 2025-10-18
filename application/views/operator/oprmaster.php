@@ -19,23 +19,23 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-6">
-					<?php $this->load->view('operator/opr/tujuan_perangkat_daerah'); ?>
+					<?php $this->load->view('operator/opr/01_tujuan_perangkat_daerah'); ?>
 				</div>
 				<div class="col-lg-6">
-					<?php $this->load->view('operator/opr/indikator_tujuan_perangkat_daerah'); ?>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-6">
-					<?php $this->load->view('operator/opr/sasaran_perangkat_daerah'); ?>
-				</div>
-				<div class="col-lg-6">
-					<?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah'); ?>
+					<?php $this->load->view('operator/opr/02_indikator_tujuan_perangkat_daerah'); ?>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-6">
-					<?php $this->load->view('operator/opr/program'); ?>
+					<?php $this->load->view('operator/opr/03_sasaran_perangkat_daerah'); ?>
+				</div>
+				<div class="col-lg-6">
+					<?php $this->load->view('operator/opr/04_indikator_sasaran_perangkat_daerah'); ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<?php $this->load->view('operator/opr/05_program_perangkat_daerah.php'); ?>
 				</div>
 				<div class="col-lg-6">
 					<?php $this->load->view('operator/opr/indikator_program_perangkat_daerah'); ?>
@@ -43,10 +43,12 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-6">
-					<?php $this->load->view('operator/opr/sasaran_perangkat_daerah'); ?>
+					sasaran xxxxxxxxxxxxxxxxxxxxxxxxxx
+					<?php //$this->load->view('operator/opr/sasaran_perangkat_daerah'); ?>
 				</div>
 				<div class="col-lg-6">
-					<?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah'); ?>
+					indikator sasaran xxxxxxxxxxxxxxxxxxxxxxxxxx
+					<?php //$this->load->view('operator/opr/indikator_sasaran_perangkat_daerah'); ?>
 				</div>
 			</div>
 			<div class="row">
@@ -54,7 +56,7 @@
 					<?php $this->load->view('operator/opr/sub_kegiatan'); ?>
 				</div>
 				<div class="col-lg-6">
-					<?php $this->load->view('operator/opr/indikator_sasaran_perangkat_daerah'); ?>
+					<?php //$this->load->view('operator/opr/indikator_sasaran_perangkat_daerah'); ?>
 				</div>
 			</div>
 		</div><!-- /.container-fluid -->
@@ -188,12 +190,12 @@
 <script>
 	$(function () {
 		//Initialize Select2 Elements
-		$('.select2').select2()
+		// $('.select2').select2()
 
 		//Initialize Select2 Elements
-		$('.select2bs4').select2({
-			theme: 'bootstrap4'
-		})
+		// $('.select2bs4').select2({
+		// 	theme: 'bootstrap4'
+		// })
 
 		//Datemask dd/mm/yyyy
 		// $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })

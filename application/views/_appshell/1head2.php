@@ -55,8 +55,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 	<link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 	<!-- Select2 -->
-	<link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/select2/css/select2.min.css">
-	<link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+	<!-- <link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/select2/css/select2.min.css"> -->
+	<!-- <link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"> -->
 	<!-- DataTables cdn-->
 	<!-- <link rel="stylesheet" href="cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css"> -->
 	<link rel="stylesheet" href="../../AdminLTE-3.1.0/plugins/summernote/summernote-bs4.min.css">
