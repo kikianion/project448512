@@ -262,6 +262,19 @@ class MY_Controller extends CI_Controller
 									echo ___("fk:" . $table_id2) . $val3;
 
 
+								} elseif (strpos($col_ar, '[') !== false && strpos($col_ar, ']') !== false) {
+									$col_ar1 = trim($col_ar);
+									$col_ar1 = substr($col_ar1, 1, strlen($col_ar1) - 2);
+
+									preg_match_all('/\{(.+?)\}/', $col_ar1, $matches);
+									$captured_names = $matches[1];
+									$to_display = '';
+									foreach ($captured_names as $name1) {
+										// $to_display .= $r[$name1]."xxx";
+										$col_ar1 = str_replace('{' . $name1 . '}', $r[$name1], $col_ar1);
+									}
+									echo $col_ar1;
+									$a = 1;
 								} else {
 									$v1 = $r[$col_ar];
 									echo $v1;

@@ -20,17 +20,17 @@ foreach ($objs as $obj) {
 $route['admsistem/user/resetpassword'] = 'cMasterUser/resetpassword';
 
 // Branding CRUD
-$route['admsistem/branding/save'] = 'CMasterBranding/save';
+$route['admsistem/branding/save'] = 'cMasterBranding/save';
 
 // Master periode CRUD
-$route['admsistem/save_periode'] = 'admSistem/save_periode';
-$route['admsistem/periodeById/(:num)'] = 'admSistem/periodeById/$1';
-$route['admsistem/setStatus_periode/(:num)'] = 'admSistem/setStatus_periode/$1';
+// $route['admsistem/save_periode'] = 'admSistem/save_periode';
+// $route['admsistem/periodeById/(:num)'] = 'admSistem/periodeById/$1';
+// $route['admsistem/setStatus_periode/(:num)'] = 'admSistem/setStatus_periode/$1';
 
 // Master grouping periode CRUD
-$route['admsistem/save_grouping_periode'] = 'admSistem/save_grouping_periode';
-$route['admsistem/groupingPeriodeById/(:num)'] = 'admSistem/groupingPeriodeById/$1';
-$route['admsistem/setStatus_grouping_periode/(:num)'] = 'admSistem/setStatus_grouping_periode/$1';
+// $route['admsistem/save_grouping_periode'] = 'admSistem/save_grouping_periode';
+// $route['admsistem/groupingPeriodeById/(:num)'] = 'admSistem/groupingPeriodeById/$1';
+// $route['admsistem/setStatus_grouping_periode/(:num)'] = 'admSistem/setStatus_grouping_periode/$1';
 
 $route['admdata'] = 'cAdmData';
 
@@ -94,11 +94,12 @@ $route['admdata/setStatus_grouping_periode/(:num)'] = 'admData/setStatus_groupin
 $route['admdata/delete_grouping_periode/(:num)'] = 'admData/delete_grouping_periode/$1';
 
 // Master Branding CRUD routes
-$route['admdata/branding/save_nama'] = 'cBranding/save_branding_nama';
-$route['admdata/branding/save_subnote'] = 'cBranding/save_branding_subnote';
-$route['admdata/branding/save_background'] = 'cBranding/save_branding_background';
-$route['admdata/branding/save_logo'] = 'cBranding/save_branding_logo';
-$route['admdata/branding/save_favicon'] = 'cBranding/save_branding_favicon';
+// $route['admdata/branding/save_nama'] = 'cBranding/save_branding_nama';
+// $route['admdata/branding/save_subnote'] = 'cBranding/save_branding_subnote';
+// $route['admdata/branding/save_background'] = 'cBranding/save_branding_background';
+// $route['admdata/branding/save_logo'] = 'cBranding/save_branding_logo';
+// $route['admdata/branding/save_favicon'] = 'cBranding/save_branding_favicon';
+
 
 $route['oprmaster'] = 'cOprMaster';
 $route['oprmaster/users'] = 'oprmaster/users';

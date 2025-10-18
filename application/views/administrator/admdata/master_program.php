@@ -23,9 +23,7 @@ $table_name = "program";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Program</label>
 				<div class="col-sm-8">
-					<input type="text" name="namaprogram" class="form-control" id="namaprogram" placeholder="Masukan Nama Program"
-						value="<?php echo isset($edit_master_program->namaprogram) ? htmlspecialchars($edit_master_program->namaprogram) : ''; ?>" required
-						maxlength="50" />
+					<input type="text" class="form-control" placeholder="Masukan Nama Program" <?= expandFieldAttr('program') ?> required maxlength="50" />
 				</div>
 				<div class="col-sm-2">
 					<input type="text" name="kode" class="form-control" id="kodeprogram" placeholder="Kode"
@@ -36,7 +34,7 @@ $table_name = "program";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Urusan</label>
 				<div class="col-sm-10">
-					<?= expandFieldAttrSelectActive("urusan___id___nama") ?>
+					<?= expandFieldAttrSelectActive("urusan___id___urusan") ?>
 				</div>
 			</div>
 			<div class="form-group row">

@@ -3,14 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class CMasterBranding extends MY_Controller
 {
-	protected $defaultModel = 'MBranding';
-	protected $defaultName = 'Branding';
-	protected $tag1 = "branding";
-
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
-		$this->load->model('MBranding');
+		// $this->load->model('MMasterBranding');
 	}
+
 	public function save()
 	{
 		if ($this->input->method() !== 'post') {
@@ -18,17 +16,18 @@ class CMasterBranding extends MY_Controller
 			return;
 		}
 
+		$table_name = 'branding';
+
 		// Determine which form was submitted
-		$tag1 = $this->input->post('tag1');
 		$form = $this->input->post('form_name');
 
-		// Always operate on row id = 1
-		$branding_id = 1;
-		$existing = $this->MBranding->byId($branding_id);
+		$table_id = real_table_name('branding');
+		$id1 = 1;
+		$existing = $this->db->get_where($table_id, array('id' => 1), $id1)->row();
+
 		if (!$existing) {
-			$this->session->set_flashdata('error-' . $tag1, 'Branding record (id=1) not found. Cannot update.');
-			redirect('admsistem');
-			return;
+			$this->flash('error---' . $table_name, 'Branding record (id=1) not found. Cannot update.');
+			$this->redirectBack();
 		}
 
 		// Ensure upload directory exists for file forms
@@ -39,38 +38,33 @@ class CMasterBranding extends MY_Controller
 			@mkdir($upload_path, 0755, TRUE);
 		}
 
-		// Branch per form
 		switch ($form) {
 			case 'form_nama':
-				$this->load->library('form_validation');
 				$this->form_validation->set_rules('nama', 'Nama', 'required|max_length[255]');
 				if ($this->form_validation->run() === FALSE) {
-					$this->session->set_flashdata('error-' . $tag1, validation_errors());
-					redirect('admsistem');
-					return;
+					$this->flash('error---' . $table_name, validation_errors());
+					$this->redirectBack();
 				}
 				$data = ['nama' => $this->input->post('nama')];
-				$ok = $this->MBranding->update_by_id($branding_id, $data);
+				$ok = $this->db->update($table_id, $data, ['id' => $id1]);
 				if ($ok)
-					$this->session->set_flashdata('success-' . $tag1, 'Nama branding updated.');
+					$this->flash('success---' . $table_name, 'Nama branding updated.');
 				else
-					$this->session->set_flashdata('error-' . $tag1, 'Failed to update nama.');
+					$this->flash('error---' . $table_name, 'Failed to update nama.');
 				break;
 
 			case 'form_subnote':
-				$this->load->library('form_validation');
 				$this->form_validation->set_rules('subnote', 'Subnote', 'required|max_length[255]');
 				if ($this->form_validation->run() === FALSE) {
-					$this->session->set_flashdata('error-' . $tag1, validation_errors());
-					redirect('admsistem');
-					return;
+					$this->flash('error---' . $table_name, validation_errors());
+					$this->redirectBack();
 				}
 				$data = ['subnote' => $this->input->post('subnote')];
-				$ok = $this->MBranding->update_by_id($branding_id, $data);
+				$ok = $this->db->update($table_id, $data, ['id' => $id1]);
 				if ($ok)
-					$this->session->set_flashdata('success-' . $tag1, 'Subnote updated.');
+					$this->flash('success---' . $table_name, 'Subnote updated.');
 				else
-					$this->session->set_flashdata('error-' . $tag1, 'Failed to update subnote.');
+					$this->flash('error---' . $table_name, 'Failed to update subnote.');
 				break;
 
 			case 'form_background':
@@ -86,20 +80,9 @@ class CMasterBranding extends MY_Controller
 				$this->upload->initialize($config);
 
 				if (!isset($_FILES[$field]) || empty($_FILES[$field]['name'])) {
-					$this->session->set_flashdata('error-' . $tag1, 'No file uploaded for ' . $field . '.');
-					redirect('admsistem');
-					return;
+					$this->flash('error---' . $table_name, 'No file uploaded for ' . $field . '.');
+					$this->redirectBack();
 				}
-
-				if (!$this->upload->do_upload($field)) {
-					$err = $this->upload->display_errors('', '');
-					$this->session->set_flashdata('error-' . $tag1, 'Upload failed: ' . $err);
-					redirect('admsistem');
-					return;
-				}
-
-				$file = $this->upload->data();
-				$new_path = $upload_rel . '/' . $file['file_name'];
 
 				// delete old file if it's inside our upload dir
 				$old = isset($existing->{$field}) ? $existing->{$field} : null;
@@ -112,21 +95,29 @@ class CMasterBranding extends MY_Controller
 					}
 				}
 
+				if (!$this->upload->do_upload($field)) {
+					$err = $this->upload->display_errors('', '');
+					$this->flash('error---' . $table_name, 'Upload failed: ' . $err);
+					$this->redirectBack();
+				}
+
+				$file = $this->upload->data();
+				$new_path = $upload_rel . '/' . $file['file_name'];
+
 				$data = [$field => $new_path];
-				$ok = $this->MBranding->update_by_id($branding_id, $data);
+				$ok = $this->db->update($table_id, $data, ['id' => $id1]);
 				if ($ok)
-					$this->session->set_flashdata('success-' . $tag1, ucfirst($field) . ' updated.');
+					$this->flash('success---' . $table_name, ucfirst($field) . ' updated.');
 				else
-					$this->session->set_flashdata('error-' . $tag1, 'Failed to update ' . $field . '.');
+					$this->flash('error---' . $table_name, 'Failed to update ' . $field . '.');
 				break;
 
 			default:
-				$this->session->set_flashdata('error-' . $tag1, 'Unknown form submitted.');
+				$this->flash('error---' . $table_name, 'Unknown form submitted.');
 				break;
 		}
 
-		redirect('admsistem');
+		$this->redirectBack();
 	}
+
 }
-
-

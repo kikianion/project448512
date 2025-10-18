@@ -1,15 +1,17 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class CBranding extends MY_Controller
+class CMasterBranding extends MY_Controller
 {
-	public function __construct()
-	{
-		parent::__construct();
-		// $this->load->model('MMasterBranding');
-	}
+	protected $defaultModel = 'MBranding';
+	protected $defaultName = 'Branding';
+	protected $tag1 = "branding";
 
-	public function save_branding()
+	public function __construct(){
+		parent::__construct();
+		$this->load->model('MBranding');
+	}
+	public function save()
 	{
 		if ($this->input->method() !== 'post') {
 			show_error('Method not allowed', 405);
@@ -22,7 +24,7 @@ class CBranding extends MY_Controller
 
 		// Always operate on row id = 1
 		$branding_id = 1;
-		$existing = $this->MMasterBranding->get_by_id($branding_id);
+		$existing = $this->MBranding->byId($branding_id);
 		if (!$existing) {
 			$this->session->set_flashdata('error-' . $tag1, 'Branding record (id=1) not found. Cannot update.');
 			redirect('admsistem');
@@ -48,7 +50,7 @@ class CBranding extends MY_Controller
 					return;
 				}
 				$data = ['nama' => $this->input->post('nama')];
-				$ok = $this->MMasterBranding->update_by_id($branding_id, $data);
+				$ok = $this->MBranding->update_by_id($branding_id, $data);
 				if ($ok)
 					$this->session->set_flashdata('success-' . $tag1, 'Nama branding updated.');
 				else
@@ -64,7 +66,7 @@ class CBranding extends MY_Controller
 					return;
 				}
 				$data = ['subnote' => $this->input->post('subnote')];
-				$ok = $this->MMasterBranding->update_by_id($branding_id, $data);
+				$ok = $this->MBranding->update_by_id($branding_id, $data);
 				if ($ok)
 					$this->session->set_flashdata('success-' . $tag1, 'Subnote updated.');
 				else
@@ -111,7 +113,7 @@ class CBranding extends MY_Controller
 				}
 
 				$data = [$field => $new_path];
-				$ok = $this->MMasterBranding->update_by_id($branding_id, $data);
+				$ok = $this->MBranding->update_by_id($branding_id, $data);
 				if ($ok)
 					$this->session->set_flashdata('success-' . $tag1, ucfirst($field) . ' updated.');
 				else
@@ -125,5 +127,6 @@ class CBranding extends MY_Controller
 
 		redirect('admsistem');
 	}
-
 }
+
+

@@ -24,12 +24,10 @@ $table_name = "fungsi";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama Fungsi</label>
 				<div class="col-sm-8">
-					<input type="text" name="namafungsi" class="form-control" id="namafungsi" placeholder="Masukan Nama Fungsi"
-						value="<?php echo isset($edit_master_fungsi->namafungsi) ? htmlspecialchars($edit_master_fungsi->namafungsi) : ''; ?>" required
-						maxlength="50" />
+					<input type="text" class="form-control" placeholder="Masukan Nama Fungsi" <?= expandFieldAttr('fungsi') ?> required maxlength="50" />
 				</div>
 				<div class="col-sm-2">
-					<input type="number" name="urut" class="form-control" id="urutanfungsi" placeholder="urut"
+					<input type="number" name="urut" class="form-control" placeholder="urut"
 						value="<?php echo isset($edit_master_fungsi->urut) ? htmlspecialchars($edit_master_fungsi->urut) : ''; ?>">
 
 				</div>

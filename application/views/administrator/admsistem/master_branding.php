@@ -1,9 +1,28 @@
 <?php
 $table_name = "branding";
 $real_name = real_table_name('branding');
-$master_branding=$GLOBALS[$real_name];
-$a=1;
+$master_branding = $GLOBALS[$real_name];
+$a = 1;
 
+$ctrl = 'admsistem/branding/save';
+
+function check_empty($obj, $field, $type = '')
+{
+	if (!isset($obj))
+		return 'xxx-x';
+	if (count($obj) < 1)
+		return 'xxx-xx';
+	if (!isset($obj[$field]))
+		return 'xxx-xxx';
+	if ($type == 'img') {
+		$base_url = base_url(htmlspecialchars($obj[$field]));
+		return <<<EOD
+			<img src="$base_url" width="500" alt="Backgroud" class="img-thumbnail">
+	EOD;
+	}
+
+	return htmlspecialchars($obj[$field]);
+}
 ?>
 
 <div class="card card-info card-outline collapsed-card" id="branding">
@@ -34,21 +53,18 @@ $a=1;
 			</thead>
 			<tbody>
 				<!--  #region form nama  -->
-				<?php echo form_open('admsistem/branding/save'); ?>
+				<?php echo form_open($ctrl); ?>
 				<tr>
 					<td>
 						<b>Nama</b>
 					</td>
 					<td>
-						<?php
-						echo isset($master_branding) && count($master_branding) ? htmlspecialchars($master_branding[0]['nama']) : '-';
-						?>
+						<?= check_empty($master_branding[0], 'nama') ?>
 					</td>
 					<td>
 						<input type="text" name="nama" class="form-control" id="nama-aplikasi" placeholder="Nama Aplikasi">
 					</td>
 					<td>
-
 						<input type="hidden" name="form_name" value="form_nama">
 						<button type="submit" class="btn btn-primary">Simpan</button>
 					</td>
@@ -57,19 +73,16 @@ $a=1;
 				<!--  #endregion  -->
 
 				<!-- #region form subnote -->
-				<?php echo form_open('admsistem/branding/save'); ?>
+				<?php echo form_open($ctrl); ?>
 				<tr>
 					<td><b>Subnote</b></td>
 					<td>
-						<?php
-						echo isset($master_branding[0]['subnote']) ? htmlspecialchars($master_branding[0]['subnote']) : '-';
-						?>
+						<?= check_empty($master_branding[0], 'subnote') ?>
 					</td>
 					<td>
 						<input type="text" name="subnote" class="form-control" id="subnote" placeholder="Subnote Aplikasi">
 					</td>
 					<td>
-
 						<input type="hidden" name="form_name" value="form_subnote">
 						<button type="submit" class="btn btn-primary">Simpan</button>
 					</td>
@@ -79,15 +92,11 @@ $a=1;
 				<!--  #endregion  -->
 
 				<!--  #region form background -->
-				<?php echo form_open_multipart('admsistem/branding/save'); ?>
+				<?php echo form_open_multipart($ctrl); ?>
 				<tr>
 					<td><b>Background</b></td>
 					<td>
-						<?php if (isset($master_branding[0]['background']) && $master_branding[0]['background']): ?>
-							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]['background'])); ?>" width="500" alt="Backgroud" class="img-thumbnail">
-						<?php else: ?>
-							<img src="<?php echo base_url('assets/img/background.jpg'); ?>" width="500" alt="Backgroud" class="img-thumbnail">
-						<?php endif; ?>
+						<?= check_empty($master_branding[0], 'background','img') ?>
 					</td>
 					<td>
 						<input class="form-control" type="file" name="background" id="background" accept="image/*">
@@ -103,22 +112,17 @@ $a=1;
 				<!--  #endregion  -->
 
 				<!-- #region form logo -->
-				<?php echo form_open_multipart('admsistem/branding/save'); ?>
+				<?php echo form_open_multipart($ctrl); ?>
 				<tr>
 					<td><b>Logo</b></td>
 					<td>
-						<?php if (isset($master_branding[0]['logo']) && $master_branding[0]['logo']): ?>
-							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]['logo'])); ?>" width="200" alt="Logo" class="img-thumbnail">
-						<?php else: ?>
-							<img src="<?php echo base_url('assets/img/background.jpg'); ?>" width="200" alt="Logo" class="img-thumbnail">
-						<?php endif; ?>
+						<?= check_empty($master_branding[0], 'logo','img') ?>
 					</td>
 					<td>
 						<input class="form-control" type="file" name="logo" id="logo" accept="image/*">
 					</td>
 					<td>
 						<input type="hidden" name="form_name" value="form_logo">
-
 						<button type="submit" class="btn btn-primary">Simpan</button>
 					</td>
 				</tr>
@@ -127,15 +131,11 @@ $a=1;
 				<!--  #endregion  -->
 
 				<!--  #region form fav  -->
-				<?php echo form_open_multipart('admsistem/branding/save'); ?>
+				<?php echo form_open_multipart($ctrl); ?>
 				<tr>
 					<td><b>favicon</b></td>
 					<td>
-						<?php if (isset($master_branding[0]['favicon']) && $master_branding[0]['favicon']): ?>
-							<img src="<?php echo base_url(htmlspecialchars($master_branding[0]['favicon'])); ?>" width="100" alt="Favicon" class="img-thumbnail">
-						<?php else: ?>
-							<img src="<?php echo base_url('assets/img/background.jpg'); ?>" width="100" alt="Favicon" class="img-thumbnail">
-						<?php endif; ?>
+						<?= check_empty($master_branding[0], 'favicon','img') ?>
 					</td>
 					<td>
 						<input class="form-control" type="file" name="favicon" id="favicon" accept="image/*">

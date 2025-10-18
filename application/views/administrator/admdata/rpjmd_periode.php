@@ -24,24 +24,18 @@ $table_name = "periode_RPJMD";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama</label>
 				<div class="col-sm-10">
-					<input type="text" name="namaperiode" class="form-control" xid="namaperiode" placeholder="Nama Periode RPJMD"
-						value="<?php echo isset($edit_periode_rpjmd->namaperiode) ? htmlspecialchars($edit_periode_rpjmd->namaperiode) : ''; ?>" required
-						maxlength="100" />
+					<input type="text" class="form-control" placeholder="Nama Periode RPJMD" <?= expandFieldAttr('nama') ?> required maxlength="100" />
 
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Awal</label>
 				<div class="col-sm-4">
-					<input type="number" name="tahun_awal" class="form-control" id="awalperiode" placeholder="Tahun awal RPJMD"
-						value="<?php echo isset($edit_periode_rpjmd->tahun_awal) ? htmlspecialchars($edit_periode_rpjmd->tahun_awal) : ''; ?>" min="2020"
-						max="2050">
+					<input type="number" class="form-control" placeholder="Tahun awal RPJMD" <?= expandFieldAttr('awal') ?> min="2020" max="2050">
 				</div>
 				<label class="col-sm-2 col-form-label">Akhir</label>
 				<div class="col-sm-4">
-					<input type="number" name="tahun_akhir" class="form-control" id="akhirperiode" placeholder="Tahun akhir RPJMD"
-						value="<?php echo isset($edit_periode_rpjmd->tahun_akhir) ? htmlspecialchars($edit_periode_rpjmd->tahun_akhir) : ''; ?>" min="2020"
-						max="2050">
+					<input type="number" class="form-control" placeholder="Tahun akhir RPJMD" <?= expandFieldAttr('akhir') ?> min="2020" max="2050">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -67,7 +61,7 @@ $table_name = "periode_RPJMD";
 				</tr>
 			</thead>
 			<tbody>
-				<?= $f_expandTableCard($table_name) ?>
+				<?php echo $f_expandTableCard($table_name, "id,nama,[{awal}-{akhir}],status") ?>
 			</tbody>
 		</table>
 	</div>

@@ -24,19 +24,16 @@ $table_name = "sasaran_RPJMD";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Tujuan RPJMD</label>
 				<div class="col-sm-10">
-					<?= expandFieldAttrSelectActive("tujuan___id___nama") ?>
+					<?= expandFieldAttrSelectActive("tujuan_RPJMD___id___tujuan") ?>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Sasaran RPJMD</label>
 				<div class="col-sm-8">
-					<input type="text" name="sasaran" class="form-control" id="sasaranrpjmd" placeholder="Sasaran RPJMD"
-						value="<?php echo isset($edit_sasaran_rpjmd->sasaran) ? htmlspecialchars($edit_sasaran_rpjmd->sasaran) : ''; ?>" required
-						maxlength="200" />
+					<input type="text" class="form-control" placeholder="Sasaran RPJMD" <?= expandFieldAttr('sasaran') ?> required maxlength="200" />
 				</div>
 				<div class="col-sm-2">
-					<input type="number" name="urut" class="form-control" id="urutansasaran" placeholder="urut"
-						value="<?php echo isset($edit_sasaran_rpjmd->urut) ? htmlspecialchars($edit_sasaran_rpjmd->urut) : ''; ?>">
+					<input type="number" class="form-control" placeholder=" urut" <?= expandFieldAttr('urut') ?>>
 				</div>
 			</div>
 			<div class="form-group row">

@@ -24,7 +24,7 @@ $table_name = "urusan";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nama Urusan</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" placeholder="Masukan Nama Urusan" required maxlength="100" <?= expandFieldAttr('nama') ?>/>
+					<input type="text" class="form-control" placeholder="Masukan Nama Urusan" required maxlength="100" <?= expandFieldAttr('urusan') ?>/>
 				</div>
 				<div class="col-sm-2">
 					<input type="text" class="form-control"  placeholder="Kode" maxlength="20" <?= expandFieldAttr('kode') ?>/>
@@ -33,7 +33,7 @@ $table_name = "urusan";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fungsi</label>
 				<div class="col-sm-10">
-					<?= expandFieldAttrSelectActive("fungsi___id___nama") ?>
+					<?= expandFieldAttrSelectActive("fungsi___id___fungsi") ?>
 				</div>
 			</div>
 			<div class="form-group row">
