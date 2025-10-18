@@ -51,17 +51,17 @@
 					<?php $this->load->view('administrator/admdata/rpjmd_indikator_sasaran'); ?>
 				</div>
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admdata/master_periode_anggaran'); ?>
+					<?php //$this->load->view('administrator/admdata/master_periode_anggaran'); ?>
 				</div>
 			</div>
 
 			<!-- Fourth Row: Master Grouping Periode and Master Branding -->
 			<div class="row">
 				<div class="col-lg-4">
-					<?php $this->load->view('administrator/admdata/master_grouping_periode'); ?>
+					<?php //$this->load->view('administrator/admdata/master_grouping_periode'); ?>
 				</div>
 				<div class="col-lg-8">
-					<?php $this->load->view('administrator/admdata/master_branding'); ?>
+					<?php //$this->load->view('administrator/admdata/master_branding'); ?>
 				</div>
 			</div>
 		</div><!-- /.container-fluid -->

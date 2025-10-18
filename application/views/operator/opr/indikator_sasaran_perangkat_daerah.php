@@ -100,7 +100,7 @@ $tipe = "Sasaran";
 				</tr>
 			</thead>
 			<tbody>
-				<?= $f_expandTableCard($table_name."::tipe=Sasaran", 'id,kode::sasaran_perangkat_daerah::nama,indikator,satuan,kondisiawal,formulasi,status', ['width_class_edit_dlg' => 'modal-lg']) ?>
+				<?= $f_expandTableCard($table_name."::tipe=".$tipe, 'id,kode::sasaran_perangkat_daerah::nama,indikator,satuan,kondisiawal,formulasi,status', ['width_class_edit_dlg' => 'modal-lg']) ?>
 			</tbody>
 		</table>
 	</div>

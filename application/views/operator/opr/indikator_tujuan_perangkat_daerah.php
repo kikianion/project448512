@@ -102,7 +102,7 @@ $tipe = "Tujuan";
 				</tr>
 			</thead>
 			<tbody>
-				<?= $f_expandTableCard($table_name."::tipe=Tujuan", 'id,kode::tujuan_perangkat_daerah::nama,indikator,satuan,kondisiawal,formulasi,status', ['width_class_edit_dlg' => 'modal-lg']) ?>
+				<?= $f_expandTableCard($table_name."::tipe=".$tipe, 'id,kode::tujuan_perangkat_daerah::nama,indikator,satuan,kondisiawal,formulasi,status', ['width_class_edit_dlg' => 'modal-lg']) ?>
 			</tbody>
 		</table>
 	</div>
