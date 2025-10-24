@@ -1,11 +1,11 @@
 <?php
 $table_name = "indikator_perangkat_daerah";
-$tipe = "Tujuan";
+$tipe = "Program";
 ?>
 
 <div class="card card-info card-outline collapsed-card">
 	<div class="card-header" data-card-widget="collapse">
-		<h5 class="card-title m-0"><b>Indikator Tujuan Perangkat Daerah</b></h5>
+		<h5 class="card-title m-0"><b>Indikator Program Perangkat Daerah</b></h5>
 		<div class="card-tools">
 			<button type="button" class="btn btn-tool btn-fs" xdata-card-widget="collapse">
 				[&nbsp;&nbsp;]
@@ -30,46 +30,45 @@ $tipe = "Tujuan";
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">Tujuan</label>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Program</label>
 				<div class="col-sm-10">
-					<?= expandFieldAttrSelectActive("kode", 'tujuan_perangkat_daerah', 'nama') ?>
+					<?= expandFieldAttrSelectActive("kode", 'program_perangkat_daerah', 'nama') ?>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Satuan</label>
 				<div class="col-sm-4">
-					<input class="form-control" placeholder="Satuan Indikator" <?= expandFieldAttr('satuan') ?>>
+					<input class="form-control" id="satuan" placeholder="Satuan Indikator">
 				</div>
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Awal</label>
 				<div class="col-sm-4">
-					<input class="form-control" placeholder="Kondisi Awal Periode" <?= expandFieldAttr('kondisiawal') ?>>
+					<input class="form-control" id="satuan" placeholder="Kondisi Awal Periode">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Formulasi</label>
-				<div class="col-sm-10">
-					<?php $prev_val = 'x' ?>
-					<textarea class='summernote' rows="4" <?= expandFieldAttr('formulasi', null, $prev_val) ?>>
+				<?php $prev_val = 'x' ?>
+				<textarea class='summernote' rows="4" <?= expandFieldAttr('formulasi', null, $prev_val) ?>>
 						<?= $prev_val ?>
-					</textarea>
-				</div>
+				</textarea>
+
 			</div>
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Target</label>
 				<div class="col-sm-2">
-					<input class="form-control" placeholder="Tahun-1" <?= expandFieldAttr('target1') ?>>
+					<input class="form-control" placeholder="Tahun-1">
 				</div>
 				<div class="col-sm-2">
-					<input class="form-control" placeholder="Tahun-2" <?= expandFieldAttr('target2') ?>>
+					<input class="form-control" placeholder="Tahun-2">
 				</div>
 				<div class="col-sm-2">
-					<input class="form-control" placeholder="Tahun-3" <?= expandFieldAttr('target3') ?>>
+					<input class="form-control" placeholder="Tahun-3">
 				</div>
 				<div class="col-sm-2">
-					<input class="form-control" placeholder="Tahun-4" <?= expandFieldAttr('target4') ?>>
+					<input class="form-control" placeholder="Tahun-4">
 				</div>
 				<div class="col-sm-2">
-					<input class="form-control" placeholder="Tahun-5" <?= expandFieldAttr('target5') ?>>
+					<input class="form-control" placeholder="Tahun-5">
 				</div>
 
 			</div>
@@ -85,13 +84,12 @@ $tipe = "Tujuan";
 			</div>
 			<?php echo form_close(); ?>
 		</div>
-
 		<hr class="hr hr-blurry">
 		</hr>
-		<table  class="table table-bordered table-responsive">
+		<table class="table table-bordered table-responsive">
 			<thead>
 				<tr>
-					<th>Tujuan</th>
+					<th>Program</th>
 					<th>Indikator</th>
 					<th>Satuan</th>
 					<th>Kondisi Awal</th>
@@ -101,9 +99,9 @@ $tipe = "Tujuan";
 				</tr>
 			</thead>
 			<tbody>
-				<?= $f_expandTableCard($table_name."::tipe=".$tipe, 'id,kode::tujuan_perangkat_daerah::nama,indikator,satuan,kondisiawal,formulasi,status', ['width_class_edit_dlg' => 'modal-lg']) ?>
+				<?= $f_expandTableCard($table_name . "::tipe=" . $tipe, 'id,kode::program_perangkat_daerah::nama,indikator,satuan,kondisiawal,formulasi,status', ['width_class_edit_dlg' => 'modal-lg']) ?>
 			</tbody>
 		</table>
 	</div>
-</div>
+
 </div>

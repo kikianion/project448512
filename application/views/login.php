@@ -36,7 +36,7 @@
           $a=set_value('email');
           $b=1;
           ?>
-          <input type="email" name="email" class="form-control" placeholder="Email" value="<?=set_value('email')==''?'a@a.com':set_value('email')?>" required>
+          <input  name="email" class="form-control" placeholder="Email" value="<?=set_value('email')==''?'a@a.com':set_value('email')?>" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>

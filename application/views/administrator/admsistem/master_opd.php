@@ -71,7 +71,7 @@ $table_name = "opd";
 		</div>
 		<hr class="hr hr-blurry">
 		</hr>
-		<table id="tabelopd" class="table table-bordered table-responsive table-data-init">
+		<table class="table table-bordered table-responsive table-data-init">
 			<thead>
 				<tr>
 					<th>Urut</th>

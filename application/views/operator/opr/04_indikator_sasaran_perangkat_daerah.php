@@ -86,7 +86,7 @@ $tipe = "Sasaran";
 		</div>
 		<hr class="hr hr-blurry">
 		</hr>
-		<table id="tabelopd" class="table table-bordered table-responsive">
+		<table  class="table table-bordered table-responsive">
 			<thead>
 				<tr>
 					<th>Sasaran</th>

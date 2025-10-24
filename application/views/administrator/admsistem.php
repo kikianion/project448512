@@ -172,7 +172,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="form-group"><input type="email" class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
+				<div class="form-group"><input  class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
 				<div class="modal-footer pull-right">
 					<button type="button" class="btn btn-warning">Terapkan Password Baru</button>
 				</div>

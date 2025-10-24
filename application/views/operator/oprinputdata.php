@@ -30,7 +30,7 @@
                         </div>
                         <div class="card-body">
                             <p>warna kuning terinput belum terverifikasi (bisa diedit). warna putih/transparant sudah terverifikasi (tidak bisa diedit) warna biru belum bisa diisi karena periodenya belum selesai </p>
-                            <table id="tabelopd" class="table table-bordered table-fit">
+                            <table  class="table table-bordered table-fit">
                                 <thead>
                                     <tr>
                                         <th>Indikator</th>
@@ -360,7 +360,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group"><input type="email" class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
+                <div class="form-group"><input  class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
                 <div class="modal-footer pull-right">
                     <button type="button" class="btn btn-warning">Terapkan Password Baru</button>
                 </div>
@@ -446,17 +446,17 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="namaperiode" placeholder="Nama Peiode RPJMD">
+                        <input  class="form-control" id="namaperiode" placeholder="Nama Peiode RPJMD">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Awal</label>
                     <div class="col-sm-4">
-                        <input type="email" class="form-control" id="awalperiode" placeholder="Tahun awal RPJMD">
+                        <input  class="form-control" id="awalperiode" placeholder="Tahun awal RPJMD">
                     </div>
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Akhir</label>
                     <div class="col-sm-4">
-                        <input type="email" class="form-control" id="awalperiode" placeholder="Tahun akhir RPJMD">
+                        <input  class="form-control" id="awalperiode" placeholder="Tahun akhir RPJMD">
                     </div>
                 </div>
                 <hr class="hr hr-blurry">
@@ -502,10 +502,10 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Tujuan</label>
                     <div class="col-sm-8">
-                        <input type="email" class="form-control" id="TujuanRPJMD" placeholder="Tujuan RPJMD">
+                        <input  class="form-control" id="TujuanRPJMD" placeholder="Tujuan RPJMD">
                     </div>
                     <div class="col-sm-2">
-                        <input type="email" class="form-control" id="urutanpd" placeholder="urut">
+                        <input  class="form-control"  placeholder="urut">
                     </div>
                 </div>
                 <hr class="hr hr-blurry">
@@ -582,7 +582,7 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="fungsi" placeholder="Tuliskan Nama Fungsi">
+                        <input  class="form-control" id="fungsi" placeholder="Tuliskan Nama Fungsi">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -620,7 +620,7 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Indikator</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="fungsi" placeholder="Tuliskan Nama Indikator">
+                        <input  class="form-control" id="fungsi" placeholder="Tuliskan Nama Indikator">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -638,11 +638,11 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Satuan</label>
                     <div class="col-sm-4">
-                        <input type="email" class="form-control" id="satuan" placeholder="Satuan Indikator">
+                        <input  class="form-control" id="satuan" placeholder="Satuan Indikator">
                     </div>
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Awal</label>
                     <div class="col-sm-4">
-                        <input type="email" class="form-control" id="satuan" placeholder="Kondisi Awal Periode">
+                        <input  class="form-control" id="satuan" placeholder="Kondisi Awal Periode">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -674,31 +674,31 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Mitra</label>
                     <div class="col-sm-8">
-                        <input type="email" class="form-control" id="namapd" placeholder="Masukan Nama Perangkat Daerah">
+                        <input  class="form-control" id="namapd" placeholder="Masukan Nama Perangkat Daerah">
                     </div>
                     <div class="col-sm-2">
-                        <input type="email" class="form-control" id="urutanpd" placeholder="urut">
+                        <input  class="form-control"  placeholder="urut">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Pimpinan</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="pimpinan" placeholder="Nama Pimpinan">
+                        <input  class="form-control" id="pimpinan" placeholder="Nama Pimpinan">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">NIP/Pang</label>
                     <div class="col-sm-5">
-                        <input type="email" class="form-control" id="nip-pimpinan" placeholder="NIP (196xxxxxxxxxxxx)">
+                        <input  class="form-control" id="nip-pimpinan" placeholder="NIP (196xxxxxxxxxxxx)">
                     </div>
                     <div class="col-sm-5">
-                        <input type="email" class="form-control" id="pangkat-pimpinan" placeholder="Pangkat (Pembina dll)">
+                        <input  class="form-control" id="pangkat-pimpinan" placeholder="Pangkat (Pembina dll)">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="jabatan-pimpinan" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)">
+                        <input  class="form-control" id="jabatan-pimpinan" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)">
                     </div>
                 </div>
                 <div class="modal-footer pull-right">
