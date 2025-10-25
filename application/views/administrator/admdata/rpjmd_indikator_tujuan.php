@@ -52,7 +52,7 @@ $tipe = "Tujuan";
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Formulasi</label>
 				<div class="col-sm-10">
-					<textarea name="formulasi" class="form-control" rows="3"
+					<textarea name="formulasi" class="form-control summernote" rows="3"
 						placeholder="Formulasi perhitungan indikator"><?php echo isset($edit_indikator_tujuan->formulasi) ? htmlspecialchars($edit_indikator_tujuan->formulasi) : ''; ?></textarea>
 				</div>
 			</div>

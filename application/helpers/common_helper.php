@@ -44,9 +44,13 @@ if (!function_exists('expandFieldAttrSelectActive')) {
 		$currentVal = isset($flash[$f]) ? $flash[$f] : "";
 
 		if ($table != '') {
+			$title2 = "$fieldDisplay $table";
+			if ($fieldDisplay == $table) {
+				$title2 = $fieldDisplay;
+			}
 			$res = <<<EOD
 				<select name="$f" class="form-control" required>
-					<option value="">Pilih salah satu $fieldDisplay $table yang Aktif</option>
+					<option value="">- Pilih salah satu $title2 yang Aktif -</option>
 			EOD;
 			$real1 = real_table_name($table);
 			$objs = $GLOBALS[$real1];
@@ -77,9 +81,15 @@ if (!function_exists('expandFieldAttrSelectActive')) {
 			$master_table = substr($f, 0, strpos($f, '___'));
 			$real1 = real_table_name($master_table);
 			$objs = $GLOBALS[$real1];
+
+			$title2 = "$nameField $master_table";
+			if ($nameField == $master_table) {
+				$title2 = $nameField;
+			}
+
 			$res = <<<EOD
 				<select name="$f" class="form-control" required>
-					<option value="">Pilih salah satu $nameField $master_table yang Aktif</option>
+					<option value="">- Pilih salah satu $title2 yang Aktif -</option>
 			EOD;
 
 			if (!empty($objs)) {

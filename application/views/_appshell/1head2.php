@@ -61,16 +61,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- <link rel="stylesheet" href="cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css"> -->
 	<link rel="stylesheet" href="../../AdminLTE-3.1.0/plugins/summernote/summernote-bs4.min.css">
 
-
+	<style>
+		.col-lg-4,
+		.card {
+			transition: all 0.4s ease-in-out;
+		}
+	</style>
 </head>
 <!-- <body class="hold-transition layout-top-nav layout-navbar-fixed"> -->
 
-<body class="hold-transition layout-top-nav layout-navbar-fixed dark-mode">
+<body class="hold-transition layout-top-nav layout-navbar-fixed xdark-mode">
 	<div class="wrapper">
 
 		<!-- Navbar -->
 		<!-- <nav class="main-header navbar navbar-expand-md navbar-light navbar-white"> -->
-		<nav class="main-header navbar navbar-expand-md navbar-dark bg-dark">
+		<nav class="main-header navbar navbar-expand-md xtext-secondary xbg-secondary xnavbar-white navbar-light">
 			<div class="container-fluid">
 				<a href="./" class="navbar-brand">
 					<img src="assets/AdminLTE-3.1.0/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -162,6 +167,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<!-- Right navbar links -->
 				<ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 					<!-- Messages Dropdown Menu -->
+					<li class="nav-item">
+						<span class="nav-link" xdata-toggle="dropdown" href="#">
+							<input type="checkbox" id="dark-toggle" data-toggle="toggle" data-style="border" data-onstyle="outline-light" data-size="xs"
+								data-on="&lt;i class='fa fa-sun text-warning'&gt;&lt;/i&gt;" data-off="&lt;i class='fa fa-moon text-dark'&gt;&lt;/i&gt; ">
+						</span>
+
+					</li>
+
 					<li class="nav-item dropdown">
 						<a class="nav-link" data-toggle="dropdown" href="#">
 							<i class="fas fa-user"></i>
@@ -192,3 +205,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			</div>
 		</nav>
 		<!-- /.navbar -->
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				$('#dark-toggle').change(function () {
+					// $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+					$('body').toggleClass('dark-mode')
+
+					//save dark mode to localStorage
+					if ($(this).prop('checked')) {
+						// $('div.main-header.navbar').removeClass('navbar-white')
+						$('.main-header.navbar').addClass('navbar-light')
+						$('.main-header.navbar').removeClass('navbar-dark')
+						// $('div.main-header.navbar').addClass('bg-dark')
+
+						localStorage.setItem("dark_mode", "1");
+						console.log("11111111111")
+					} else {
+						$('.main-header.navbar').removeClass('navbar-light')
+						$('.main-header.navbar').addClass('navbar-dark')
+						localStorage.setItem("dark_mode", "0");
+						console.log("000000011111111111")
+
+					}
+				})
+				//load dark mode from localStorages
+				console.log("11111111111")
+				if (localStorage.getItem("dark_mode") === "1") {
+					$('#dark-toggle').bootstrapToggle('on')
+					$('body').removeClass('dark-mode')
+				}
+				else {
+					$('#dark-toggle').bootstrapToggle('off')
+					$('body').addClass('dark-mode')
+
+				}
+
+			});
+
+		</script>

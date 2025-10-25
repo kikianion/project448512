@@ -173,17 +173,37 @@
 			// log1("target1")
 			// log1(target1)
 			if (fTxt === "]&nbsp;[") { // max opened
-				target1.removeClass("col-lg-12")
+				// target1.removeClass("col-lg-12")
 				$(e.currentTarget).html("[&nbsp;&nbsp;]")
 				localStorage.setItem(lsKeyMaxed, 0);
 			} else if (fTxt === "[&nbsp;&nbsp;]") { // max closed
-				target1.addClass("col-lg-12")
+				// target1.addClass("col-lg-12")
 				$(e.currentTarget).html("]&nbsp;[")
 				localStorage.setItem(lsKeyMaxed, 1);
 			}
 
+			target1.toggleClass("col-lg-12")
+			log1("target1--------")
+			console.log(target1)
+
+			// if closed card then open
+			$tgtChild1 = $(target1).children(':first')
+			if ($tgtChild1.hasClass("collapsed-card")) {
+				
+				setTimeout(() => {
+					$tgtChild1.toggleClass("collapsed-card")
+				}, 2000);
+
+			}
+
 			e.preventDefault()
 			e.stopPropagation()
+
+			const topPosition = target1.offset().top;
+			// $('html, body').animate({
+			// 	scrollTop: topPosition // Scroll to the element's position
+			// }, 800);
+			// $(target1).find('input').first().focus()
 			return false
 		});
 
@@ -233,6 +253,14 @@
 
 		}
 	};
+</script>
+
+<script src="assets/AdminLTE-3.1.0/plugins/summernote/summernote-bs4.min.js"></script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		$('.summernote').summernote();
+	});
 </script>
 </body>
 

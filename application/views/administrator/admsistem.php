@@ -3,17 +3,8 @@
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<div class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0"> Administrasi Sistem <a style="font-size: .6em" href="#" id="relayoutPage"><i class="fa fa-sync"></i></a></h1>
-				</div><!-- /.col -->
-			</div><!-- /.row -->
-		</div><!-- /.container-fluid -->
-	</div>
-	<!-- /.content-header -->
+
+	<?php $this->load->view('_appshell/page_head', ["page_title" => "Administrasi Sistem",]); ?>
 
 	<!-- Main content -->
 	<div class="content">
@@ -57,6 +48,12 @@
 				<div class="col-lg-8">
 					<?php $this->load->view('administrator/admsistem/master_branding'); ?>
 				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<?php $this->load->view('administrator/admsistem/master_berita'); ?>
+				</div>
+
 			</div>
 		</div><!-- /.container-fluid -->
 	</div>
@@ -172,7 +169,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="form-group"><input  class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
+				<div class="form-group"><input class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
 				<div class="modal-footer pull-right">
 					<button type="button" class="btn btn-warning">Terapkan Password Baru</button>
 				</div>

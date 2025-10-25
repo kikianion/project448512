@@ -19,7 +19,7 @@ class CAdmSistem extends MY_Controller
 
 	public function index()
 	{
-		$load_tables = ["mitra", "opd", 'user', 'visi', 'misi', 'periode_anggaran', 'grup_periode', 'branding'];
+		$load_tables = ["mitra", "opd", 'user', 'visi', 'misi', 'periode_anggaran', 'grup_periode', 'branding', 'berita'];
 		foreach ($load_tables as $table) {
 			$real_name = real_table_name($table);
 			$GLOBALS[$real_name] = $this->db->get($real_name)->result_array();

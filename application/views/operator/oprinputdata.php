@@ -29,8 +29,9 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p>warna kuning terinput belum terverifikasi (bisa diedit). warna putih/transparant sudah terverifikasi (tidak bisa diedit) warna biru belum bisa diisi karena periodenya belum selesai </p>
-                            <table  class="table table-bordered table-fit">
+                            <p>warna kuning terinput belum terverifikasi (bisa diedit). warna putih/transparant sudah terverifikasi (tidak bisa diedit) warna
+                                biru belum bisa diisi karena periodenya belum selesai </p>
+                            <table class="table table-bordered table-fit">
                                 <thead>
                                     <tr>
                                         <th>Indikator</th>
@@ -160,7 +161,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p>warna kuning terinput belum terverifikasi (bisa diedit). warna putih/transparant sudah terverifikasi (tidak bisa diedit) warna biru belum bisa diisi karena periodenya belum selesai </p>
+                            <p>warna kuning terinput belum terverifikasi (bisa diedit). warna putih/transparant sudah terverifikasi (tidak bisa diedit) warna
+                                biru belum bisa diisi karena periodenya belum selesai </p>
                             <table id="tabeluser" class="table table-bordered table-fit">
                                 <thead>
                                     <tr>
@@ -295,31 +297,36 @@
                 <h5 class="text-bold">Judul Pengumuman 1</h5>
                 <h6 class="text-monospace">Tanggal : 25 Mei 2025</h>
                     <p></p>
-                    <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang ditampilkan.</p>
+                    <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+                        Pengumumanyang ditampilkan.</p>
                     <hr class="hr">
                     </hr>
                     <h5 class="text-bold">Judul Pengumuman 2</h5>
                     <h6 class="text-monospace">Tanggal : 24 Mei 2025</h>
                         <p></p>
-                        <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang ditampilkan.</p>
+                        <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+                            Pengumumanyang ditampilkan.</p>
                         <hr class="hr">
                         </hr>
                         <h5 class="text-bold">Judul Pengumuman 3</h5>
                         <h6 class="text-monospace">Tanggal : 23 Mei 2025</h>
                             <p></p>
-                            <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang ditampilkan.</p>
+                            <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+                                Pengumumanyang ditampilkan.</p>
                             <hr class="hr">
                             </hr>
                             <h5 class="text-bold">Judul Pengumuman 4</h5>
                             <h6 class="text-monospace">Tanggal : 22 Mei 2025</h>
                                 <p></p>
-                                <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang ditampilkan.</p>
+                                <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5
+                                    Pengumumanyang ditampilkan.</p>
                                 <hr class="hr">
                                 </hr>
                                 <h5 class="text-bold">Judul Pengumuman 5</h5>
                                 <h6 class="text-monospace">Tanggal : 21 Mei 2025</h>
                                     <p></p>
-                                    <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas maksimal 5 Pengumumanyang ditampilkan.</p>
+                                    <p>Pengumuman akan ditampilkan kepada seluruh user, dengan urutan Pengumuman paling baru ada di paling atas dan batas
+                                        maksimal 5 Pengumumanyang ditampilkan.</p>
             </div>
             <div class="modal-footer pull-right">
                 <button type="button" class="btn btn-info">Oke</button>
@@ -360,7 +367,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group"><input  class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
+                <div class="form-group"><input class="form-control" id="password-baru" placeholder="Masukan password baru"></div>
                 <div class="modal-footer pull-right">
                     <button type="button" class="btn btn-warning">Terapkan Password Baru</button>
                 </div>
@@ -396,6 +403,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Form Input Capaian</h4>
+                <h4 class="modal-title">Form Input Capaian</h4>
+                <div>
+                    nilai
+                    <input>
+                </div>
+                <div>target periode
+                    <input>
+                </div>
+                <div>catatan
+                    <input>
+                </div>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -446,17 +465,17 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input  class="form-control" id="namaperiode" placeholder="Nama Peiode RPJMD">
+                        <input class="form-control" id="namaperiode" placeholder="Nama Peiode RPJMD">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Awal</label>
                     <div class="col-sm-4">
-                        <input  class="form-control" id="awalperiode" placeholder="Tahun awal RPJMD">
+                        <input class="form-control" id="awalperiode" placeholder="Tahun awal RPJMD">
                     </div>
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Akhir</label>
                     <div class="col-sm-4">
-                        <input  class="form-control" id="awalperiode" placeholder="Tahun akhir RPJMD">
+                        <input class="form-control" id="awalperiode" placeholder="Tahun akhir RPJMD">
                     </div>
                 </div>
                 <hr class="hr hr-blurry">
@@ -502,10 +521,10 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Tujuan</label>
                     <div class="col-sm-8">
-                        <input  class="form-control" id="TujuanRPJMD" placeholder="Tujuan RPJMD">
+                        <input class="form-control" id="TujuanRPJMD" placeholder="Tujuan RPJMD">
                     </div>
                     <div class="col-sm-2">
-                        <input  class="form-control"  placeholder="urut">
+                        <input class="form-control" placeholder="urut">
                     </div>
                 </div>
                 <hr class="hr hr-blurry">
@@ -582,7 +601,7 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input  class="form-control" id="fungsi" placeholder="Tuliskan Nama Fungsi">
+                        <input class="form-control" id="fungsi" placeholder="Tuliskan Nama Fungsi">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -620,7 +639,7 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Indikator</label>
                     <div class="col-sm-10">
-                        <input  class="form-control" id="fungsi" placeholder="Tuliskan Nama Indikator">
+                        <input class="form-control" id="fungsi" placeholder="Tuliskan Nama Indikator">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -638,11 +657,11 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Satuan</label>
                     <div class="col-sm-4">
-                        <input  class="form-control" id="satuan" placeholder="Satuan Indikator">
+                        <input class="form-control" id="satuan" placeholder="Satuan Indikator">
                     </div>
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Awal</label>
                     <div class="col-sm-4">
-                        <input  class="form-control" id="satuan" placeholder="Kondisi Awal Periode">
+                        <input class="form-control" id="satuan" placeholder="Kondisi Awal Periode">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -674,31 +693,31 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Mitra</label>
                     <div class="col-sm-8">
-                        <input  class="form-control" id="namapd" placeholder="Masukan Nama Perangkat Daerah">
+                        <input class="form-control" id="namapd" placeholder="Masukan Nama Perangkat Daerah">
                     </div>
                     <div class="col-sm-2">
-                        <input  class="form-control"  placeholder="urut">
+                        <input class="form-control" placeholder="urut">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Pimpinan</label>
                     <div class="col-sm-10">
-                        <input  class="form-control" id="pimpinan" placeholder="Nama Pimpinan">
+                        <input class="form-control" id="pimpinan" placeholder="Nama Pimpinan">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">NIP/Pang</label>
                     <div class="col-sm-5">
-                        <input  class="form-control" id="nip-pimpinan" placeholder="NIP (196xxxxxxxxxxxx)">
+                        <input class="form-control" id="nip-pimpinan" placeholder="NIP (196xxxxxxxxxxxx)">
                     </div>
                     <div class="col-sm-5">
-                        <input  class="form-control" id="pangkat-pimpinan" placeholder="Pangkat (Pembina dll)">
+                        <input class="form-control" id="pangkat-pimpinan" placeholder="Pangkat (Pembina dll)">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Jabatan</label>
                     <div class="col-sm-10">
-                        <input  class="form-control" id="jabatan-pimpinan" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)">
+                        <input class="form-control" id="jabatan-pimpinan" placeholder="Jabatan Pimpinan (Kepala / Plt / dst)">
                     </div>
                 </div>
                 <div class="modal-footer pull-right">
@@ -719,7 +738,7 @@
 <!-- Summernote -->
 <script src="../../AdminLTE-3.1.0/plugins/summernote/summernote-bs4.min.js"></script>
 <script>
-    $(function() {
+    $(function () {
         // Summernote
         $('#summernote').summernote();
         $('#summernote2').summernote();
@@ -729,7 +748,7 @@
     })
 </script>
 <script>
-    $(function() {
+    $(function () {
         $("#tabeluser").DataTable();
         $("#tabeluser1").DataTable({
             "responsive": true,
@@ -771,7 +790,7 @@
     });
 </script>
 <script>
-    $(function() {
+    $(function () {
         //Initialize Select2 Elements
         // $('.select2').select2()
 
@@ -815,18 +834,18 @@
         })
         //Date range as a button
         $('#daterange-btn').daterangepicker({
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             },
-            function(start, end) {
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment()
+        },
+            function (start, end) {
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
             }
         )
@@ -844,17 +863,17 @@
         //color picker with addon
         $('.my-colorpicker2').colorpicker()
 
-        $('.my-colorpicker2').on('colorpickerChange', function(event) {
+        $('.my-colorpicker2').on('colorpickerChange', function (event) {
             $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
         })
 
-        $("input[data-bootstrap-switch]").each(function() {
+        $("input[data-bootstrap-switch]").each(function () {
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
         })
 
     })
     // BS-Stepper Init
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         window.stepper = new Stepper(document.querySelector('.bs-stepper'))
     })
 
@@ -878,19 +897,19 @@
         clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
     })
 
-    myDropzone.on("addedfile", function(file) {
+    myDropzone.on("addedfile", function (file) {
         // Hookup the start button
-        file.previewElement.querySelector(".start").onclick = function() {
+        file.previewElement.querySelector(".start").onclick = function () {
             myDropzone.enqueueFile(file)
         }
     })
 
     // Update the total progress bar
-    myDropzone.on("totaluploadprogress", function(progress) {
+    myDropzone.on("totaluploadprogress", function (progress) {
         document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
     })
 
-    myDropzone.on("sending", function(file) {
+    myDropzone.on("sending", function (file) {
         // Show the total progress bar when upload starts
         document.querySelector("#total-progress").style.opacity = "1"
         // And disable the start button
@@ -898,17 +917,17 @@
     })
 
     // Hide the total progress bar when nothing's uploading anymore
-    myDropzone.on("queuecomplete", function(progress) {
+    myDropzone.on("queuecomplete", function (progress) {
         document.querySelector("#total-progress").style.opacity = "0"
     })
 
     // Setup the buttons for all transfers
     // The "add files" button doesn't need to be setup because the config
     // `clickable` has already been specified.
-    document.querySelector("#actions .start").onclick = function() {
+    document.querySelector("#actions .start").onclick = function () {
         myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
     }
-    document.querySelector("#actions .cancel").onclick = function() {
+    document.querySelector("#actions .cancel").onclick = function () {
         myDropzone.removeAllFiles(true)
     }
     // DropzoneJS Demo Code End

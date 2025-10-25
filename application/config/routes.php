@@ -131,7 +131,9 @@ define("DEBUG1", 1);
 function ___($s)
 {
 	if (DEBUG1 == 1)
-		return $s . ": ";
+		return <<<EOF
+		<span style="color: yellow; font-size:.7rem">$s:</span>
+		EOF;
 
 	return "";
 }
